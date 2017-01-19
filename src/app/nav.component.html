@@ -1,0 +1,36 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" (click)="isCollapsed = !isCollapsed" >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            <!-- <img src="/logo.png" /> -->
+            <p>Banker's Toolbox Clue</p>
+        </a>
+    </div>
+
+    <div id="navbar" class="navbar-collapse collapse" [collapse]="isCollapsed">
+        <ul class="nav navbar-nav navbar-left">
+            <li><a [routerLink]="['/']">Home</a></li>
+        	<li><a [routerLink]="['/tasks']">Tasks</a></li>
+        </ul>
+    <!--     <ul class="nav navbar-nav navbar-right">
+        	<span dropdown>
+			  <a href id="simple-dropdown" dropdownToggle>
+			    UserName
+			  </a>
+			  <ul class="dropdown-menu" dropdownMenu aria-labelledby="simple-dropdown">
+			  	<li><a class="dropdown-item" href="#">Hi, UserName</a></li>
+			  	<li><a class="dropdown-item" href="#">Options</a></li>
+			  	<li class="divider dropdown-divider"></li>
+        		<li><a class="dropdown-item" href="#">Log Out</a></li>
+			  </ul>
+			</span>
+        </ul> -->
+    </div>
+</div>

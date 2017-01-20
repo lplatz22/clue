@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { TaskService } from './task.service';
+import { TaskService, TASK_STATUS_CODES } from './task.service';
 
 @Component({
   moduleId: module.id,
@@ -11,6 +11,8 @@ import { TaskService } from './task.service';
 export class TaskComponent implements OnInit {
 	private task: any = [];
 	private complete: boolean = false;
+	private loading: boolean = false;
+	private error: string;
 
 	constructor(private router: Router,
 				private route: ActivatedRoute,
@@ -18,10 +20,16 @@ export class TaskComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.loading = true;
+		this.error = null;
+
 		let id = +this.route.snapshot.params['task_id'];
-		console.log(id);
 		this.taskService.getTaskById(id).subscribe(task => {
+			this.loading = false;
 			this.task = task;
+		}, error => {
+			this.loading = false;
+			this.error = TASK_STATUS_CODES[error.status] || TASK_STATUS_CODES[500];
 		});
 	}
 

@@ -10,7 +10,8 @@
 	    <input type="password" class="form-control" required placeholder="password"  [(ngModel)]="user.password" name="password" id="password">
 	  </div>
 	  <button type="submit" [disabled]="!loginForm.form.valid" class="btn btn-primary">Log In</button>
+	  <p *ngIf="submitted" style="color:green;"><i>logging in...</i></p>
 	</form>
 	<br>
-	<p *ngIf="failMessage" style="color:red;"><i>{{failMessage}}</i></p>
+	<p *ngIf="error" style="color:red;"><i>{{error}}</i></p>
 </div>

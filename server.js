@@ -3,23 +3,32 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
-
-// Get our API routes
-const api = require('./server/routes/api');
+const passport = require('passport');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const flash    = require('connect-flash');
 
 const app = express();
 
 // Parsers for POST data
 app.use(bodyParser.json());
+app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.urlencoded({ extended: false }));
+
+
+app.use(session({ secret: '321sessionverysecretsecret123' })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
 
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist')));
 
-// Set our api routes
-app.use('/api', api);
 app.use('/lib', express.static(path.join(__dirname, './node_modules')));
 app.use('/assets', express.static(path.join(__dirname, './src/assets')));
+
+// Get our API routes
+const api = require('./server/routes/api')(app, passport);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
@@ -40,4 +49,4 @@ const server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-server.listen(port, () => console.log(`API running on localhost:${port}`));
+server.listen(port, () => console.log(`Running on localhost:${port}`));

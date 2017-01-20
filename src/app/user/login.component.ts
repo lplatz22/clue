@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from './user.service';
+import { USER_STATUS_CODES } from './user.service';
 
 @Component({
   moduleId: module.id,
@@ -9,7 +10,8 @@ import { UserService } from './user.service';
 })
 export class LoginComponent implements OnInit {
 	private user: any = {};
-	private failMessage: string = '';
+	private error: string;
+	private submitted: boolean = false;
 
 	constructor(private router: Router,
 				private userService: UserService) {
@@ -20,16 +22,15 @@ export class LoginComponent implements OnInit {
 	}
 
 	login() {
-		console.log(this.user);
-		//this.user.email
-		//this.user.password
-		this.userService.login(this.user).subscribe(response => {
-			console.log(response);
-			if(response.message == "ok"){
-				this.failMessage = '';
-			} else {
-				this.failMessage = response.message;
-			}
-		});
+		this.submitted = true;
+		this.error = null;
+
+		this.userService.login(this.user).subscribe(data => {
+				this.router.navigate(['/tasks']); //success
+			},
+			error => {
+				this.submitted = false;
+				this.error = USER_STATUS_CODES[error.status] || USER_STATUS_CODES[500];
+			});
 	}
 }

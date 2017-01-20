@@ -1,6 +1,9 @@
 
 import { Injectable } from '@angular/core';
-import { Headers, Http, URLSearchParams } from '@angular/http';
+import { Headers, Http, Response, RequestOptions, RequestOptionsArgs } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class UserService {
@@ -9,21 +12,41 @@ export class UserService {
   };
 
   login(user) {
-    return this.http.post('/api/login', { user: user })
-      .map(res => res.json());
+    let body = JSON.stringify(user);
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.post('/api/login', body, <RequestOptionsArgs> {headers: headers, withCredentials: true})
+                    .map((res: Response) => res)
+                    .catch(this.handleError);
   }
 
   register(newUser) {
-    return this.http.post('/api/register', { user: newUser })
-      .map(res => res.json());
+    let body = JSON.stringify(newUser);
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.post('/api/register', body, <RequestOptionsArgs>{ headers: headers, withCredentials: true })
+                    .map((res: Response) => res)
+                    .catch(this.handleError);
   }
 
- //  getTaskById(id) {
-  	
- //  	let params: URLSearchParams = new URLSearchParams();
-	// params.set('task_id', id);
+  getProfile() {
+    return this.http.get('/api/profile', <RequestOptionsArgs> { withCredentials: true })
+            .map((res: Response) => res.json())
+            .catch(this.handleError);
+  }
 
- //  	return this.http.get('/api/task', { search: params })
- //      .map(res => res.json());
- //  }
+  private handleError(error: Response) {
+    console.log('error handled by handleError');
+    console.log(error);
+
+    return Observable.throw(error || "Server Error");
+  }
+}
+
+export var USER_STATUS_CODES = {
+  400: "User already exists",
+  401: "Invalid credentials",
+  500: "Oops.. Something went wrong"
 }

@@ -1,78 +1,78 @@
-const express = require('express');
-const router = express.Router();
 
-var db_creds = {
-  "username": "0bf7cb07-f110-4646-b2a7-a61709497bb8-bluemix",
-  "password": "028c5283dfbe04348bc8afc24c7284e34a312b8810fb666231f21d78484d670a",
-  "host": "0bf7cb07-f110-4646-b2a7-a61709497bb8-bluemix.cloudant.com",
-  "port": 443,
-  "url": "https://0bf7cb07-f110-4646-b2a7-a61709497bb8-bluemix:028c5283dfbe04348bc8afc24c7284e34a312b8810fb666231f21d78484d670a@0bf7cb07-f110-4646-b2a7-a61709497bb8-bluemix.cloudant.com"
-}
+
+var configDB = require('../config/database');
 
 // Load the Cloudant library.
 var Cloudant = require('cloudant');
 
 // Initialize Cloudant with settings from .env
-var username = db_creds.username;
-var password = db_creds.password;
+var username = configDB.db_creds.username;
+var password = configDB.db_creds.password;
 var cloudant = Cloudant({account:username, password:password});
 
-var tasksDB = cloudant.db.use('tasks');
+var tasksDB = cloudant.db.use(configDB.db_creds.tasksDBName);
 
-/* GET api listing. */
-router.get('/', (req, res) => {
-  	res.status(200).send('api works');
-});
+module.exports = function(app, passport) {
 
-router.get('/tasks', (req, res) => {
-	var getAllQuery = {
-		selector: {
-			"_id": {
-				"$gt": 0
+
+	// PROFILE SECTION =========================
+	app.post('/api/login', function(req, res) {
+    	//req.user
+        //return user info
+        console.log(req.body.user);
+        res.status(401).send(req.body.user);
+    });
+
+    app.get('/api/profile', isLoggedIn, function(req, res) {
+    	//req.user
+        //return user info
+        res.status(200).send(req.user);
+    });
+
+    // LOGOUT ==============================
+    app.get('/api/logout', function(req, res) {
+        req.logout();
+        res.redirect('/');
+    });
+
+
+	//========== API Routes Below =============
+
+	app.get('/api/tasks', (req, res) => {
+		var getAllQuery = {
+			selector: {
+				"_id": {
+					"$gt": 0
+				}
 			}
 		}
-	}
-	tasksDB.find(getAllQuery, function(err, data) {
-		if (err) {
-			res.status(500).send(err.message);
-		} else {
-			res.status(200).send(data.docs);
-		}
+		tasksDB.find(getAllQuery, function(err, data) {
+			if (err) {
+				res.status(500).send(err.message);
+			} else {
+				res.status(200).send(data.docs);
+			}
+		});
 	});
-});
 
-router.get('/task', (req, res) => {
+	app.get('/api/task', isLoggedIn, (req, res) => {
 
-	var id = req.query.task_id;
+		var id = req.query.task_id;
 
-	tasksDB.get(id, function(err, data) {
-		if (err) {
-			res.status(500).send(err.message);
-		} else {
-			res.status(200).send(data);
-		}
+		tasksDB.get(id, function(err, data) {
+			if (err) {
+				res.status(500).send(err.message);
+			} else {
+				res.status(200).send(data);
+			}
+		});
 	});
-});
+}
 
+// route middleware to ensure user is logged in
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+        return next();
 
-router.post('/login', (req, res) => {
-	// console.log(req.body.user); //email and password fields exist
-	if(req.body.user.email == "luke@example.com" && req.body.user.password == "pass"){
-		res.status(200).send({message: "ok"});
-	} else {
-		res.status(200).send({message: "incorrect username"});
-		//TODO: send new status and have app accept that
-	}
-});
-
-router.post('/register', (req, res) => {
-	// console.log(req.body.user); //email and password fields exist
-	if(req.body.user.email === "luke@example.com" && req.body.user.passwordConfirm === "pass" && req.body.user.password === "pass" && req.body.user.company === "IBM"){
-		res.status(200).send({message: "ok"});
-	} else {
-		res.status(200).send({message: "invalid register"});
-		//TODO: send new status and have app accept that
-	}
-});
-
-module.exports = router;
+    res.status(401).send('unauthenticated');
+}

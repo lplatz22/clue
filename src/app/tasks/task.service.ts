@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { Headers, Http, URLSearchParams } from '@angular/http';
+import { Headers, Http, URLSearchParams, Response } from '@angular/http';
 
 @Injectable()
 export class TaskService {
@@ -14,7 +14,7 @@ export class TaskService {
   }
 
   getTaskById(id) {
-  	
+
   	let params: URLSearchParams = new URLSearchParams();
 	params.set('task_id', id);
 

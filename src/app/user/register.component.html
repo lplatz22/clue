@@ -1,0 +1,24 @@
+<div class="jumbotron">
+  <h1 class="display-3">Register</h1>
+  	<form #registerForm="ngForm" (ngSubmit)="register()">
+	  <div class="form-group">
+	    <label for="email">Email address</label>
+	    <input type="email" class="form-control" required placeholder="luke@BankersToolbox.com" [(ngModel)]="newUser.email" name="email" id="email">
+	  </div>
+	  <div class="form-group">
+	    <label for="password">Password</label>
+	    <input type="password" class="form-control" required placeholder="password"  [(ngModel)]="newUser.password" name="password" id="password">
+	  </div>
+	  <div class="form-group">
+	    <label for="password_confirm">Confirm Password</label>
+	    <input [(ngModel)]="newUser.passwordConfirm" type="password" class="form-control" required placeholder="password" name="password_confirm" id="password_confirm">
+	  </div>
+	  <div class="form-group">
+	    <label for="company">Company</label>
+	    <input type="company" class="form-control" required  [(ngModel)]="newUser.company" placeholder="company" name="company" id="company">
+	  </div>
+	  <button type="submit" [disabled]="!registerForm.form.valid || !(newUser.password === newUser.passwordConfirm)" class="btn btn-primary">Register</button>
+	</form>
+	<br>
+	<p *ngIf="failMessage" style="color:red;"><i>{{failMessage}}</i></p>
+</div>

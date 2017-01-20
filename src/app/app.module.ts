@@ -6,6 +6,7 @@ import { RoutingModule } from './routing/routing.module';
 
 import { CollapseModule } from 'ng2-bootstrap';
 import { TaskModule } from './tasks/task.module';
+import { UserModule } from './user/user.module';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav.component';
@@ -24,6 +25,7 @@ import { HomeComponent } from './home.component';
     HttpModule,
     RoutingModule,
     TaskModule,
+    UserModule,
     CollapseModule.forRoot()
   ],
   providers: [],

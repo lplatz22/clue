@@ -54,4 +54,25 @@ router.get('/task', (req, res) => {
 	});
 });
 
+
+router.post('/login', (req, res) => {
+	// console.log(req.body.user); //email and password fields exist
+	if(req.body.user.email == "luke@example.com" && req.body.user.password == "pass"){
+		res.status(200).send({message: "ok"});
+	} else {
+		res.status(200).send({message: "incorrect username"});
+		//TODO: send new status and have app accept that
+	}
+});
+
+router.post('/register', (req, res) => {
+	// console.log(req.body.user); //email and password fields exist
+	if(req.body.user.email === "luke@example.com" && req.body.user.passwordConfirm === "pass" && req.body.user.password === "pass" && req.body.user.company === "IBM"){
+		res.status(200).send({message: "ok"});
+	} else {
+		res.status(200).send({message: "invalid register"});
+		//TODO: send new status and have app accept that
+	}
+});
+
 module.exports = router;

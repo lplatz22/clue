@@ -19,6 +19,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 // Set our api routes
 app.use('/api', api);
 app.use('/lib', express.static(path.join(__dirname, './node_modules')));
+app.use('/assets', express.static(path.join(__dirname, './src/assets')));
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {

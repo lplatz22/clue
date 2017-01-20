@@ -68,6 +68,9 @@ module.exports = function(app, passport) {
     				company: user.company
     			}
 
+    			//CHECK IF USER EXISTS FIRST!
+    			//store user.email in lowercase
+
     			usersDB.insert(protectedUser, function (er, body, headers) {
 				  if (er) {
 				    console.log('Failed to insert into users database: ' + er.message);

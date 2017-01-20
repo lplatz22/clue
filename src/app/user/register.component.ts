@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from './user.service';
+import { UserService, USER_STATUS_CODES } from './user.service';
 
 @Component({
   moduleId: module.id,
@@ -9,7 +9,8 @@ import { UserService } from './user.service';
 })
 export class RegisterComponent implements OnInit {
 	private newUser: any = {};
-	private failMessage: string = '';
+	private error: string;
+	private submitted: boolean = false;
 
 	constructor(private router: Router,
 				private userService: UserService) {
@@ -20,14 +21,17 @@ export class RegisterComponent implements OnInit {
 	}
 
 	register() {
-		this.userService.register(this.newUser).subscribe(response => {
-			console.log(response);
-			if(response.message == "ok"){
-				this.failMessage = '';
-			} else {
-				this.failMessage = response.message;
-			}
-		});
+		this.submitted = true;
+		this.error = null;
+		this.userService.register(this.newUser).subscribe(data => {
+				
+				console.log('Registered!!');
+				this.router.navigate(['/login']); //success
+			},
+			error => {
+				this.submitted = false;
+				this.error = USER_STATUS_CODES[error.status] || USER_STATUS_CODES[500];
+			});
 	}
 
 	passwordChange() {

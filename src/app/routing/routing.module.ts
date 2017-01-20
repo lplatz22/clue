@@ -6,11 +6,12 @@ import { TaskListComponent } from '../tasks/task-list.component';
 import { TaskComponent } from '../tasks/task.component';
 import { LoginComponent } from '../user/login.component';
 import { RegisterComponent } from '../user/register.component';
+import { RoutingGuard } from './router.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'tasks', component: TaskListComponent },
-  { path: 'task/:task_id', component: TaskComponent },
+  { path: 'tasks', component: TaskListComponent, canActivate: [RoutingGuard] },
+  { path: 'task/:task_id', component: TaskComponent, canActivate: [RoutingGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
 ]
@@ -19,6 +20,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes)
   ],
+  providers: [RoutingGuard],
   exports: [
     RouterModule
   ]

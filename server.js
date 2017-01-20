@@ -10,6 +10,8 @@ const flash    = require('connect-flash');
 
 const app = express();
 
+require('./server/config/passport')(passport)
+
 // Parsers for POST data
 app.use(bodyParser.json());
 app.use(cookieParser()); // read cookies (needed for auth)

@@ -22,7 +22,9 @@ export class UserService {
   }
 
   register(newUser) {
-    let body = JSON.stringify(newUser);
+    let body = {
+      user: newUser
+    }
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
@@ -35,6 +37,12 @@ export class UserService {
     return this.http.get('/api/profile', <RequestOptionsArgs> { withCredentials: true })
             .map((res: Response) => res.json())
             .catch(this.handleError);
+  }
+
+  authenticated() {
+    return this.http.get('/api/authenticated', <RequestOptionsArgs> {withCredentials: true})
+                    .map((res: Response) => res.json())
+                    .catch(this.handleError);
   }
 
   private handleError(error: Response) {

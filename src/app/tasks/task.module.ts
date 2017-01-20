@@ -6,12 +6,14 @@ import { RoutingModule } from '../routing/routing.module';
 
 import { ProgressbarModule, AccordionModule } from 'ng2-bootstrap';
 
+import { TaskListComponent } from './task-list.component';
 import { TaskComponent } from './task.component';
 import { TaskService } from './task.service';
 
 
 @NgModule({
   declarations: [
+    TaskListComponent,
     TaskComponent
   ],
   imports: [
@@ -19,11 +21,9 @@ import { TaskService } from './task.service';
     FormsModule,
     HttpModule,
     RoutingModule,
-    AccordionModule.forRoot(),
-    ProgressbarModule.forRoot()
+    AccordionModule.forRoot()
   ],
   exports: [
-    // TaskComponent
   ],
   providers: [ TaskService ],
 })

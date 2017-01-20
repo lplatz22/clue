@@ -41,4 +41,17 @@ router.get('/tasks', (req, res) => {
 	});
 });
 
+router.get('/task', (req, res) => {
+
+	var id = req.query.task_id;
+
+	tasksDB.get(id, function(err, data) {
+		if (err) {
+			res.status(500).send(err.message);
+		} else {
+			res.status(200).send(data);
+		}
+	});
+});
+
 module.exports = router;

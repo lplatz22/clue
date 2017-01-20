@@ -1,19 +1,16 @@
 <div class="jumbotron">
-  <h1 class="display-3">Tasks</h1>
-  <p class="lead">Perform the following tasks to get access to clues!</p>
+  <h1 class="display-3">{{task.name}}</h1>
+  <p class="lead">{{task.desc}}</p>
+  <button class="btn btn-warning" type="button" [routerLink]="['/tasks']">Task List</button>
 </div>
 
 <div class="container">
-	<accordion [closeOthers]="true">
-	  <accordion-group *ngFor="let task of tasks">
-	    <div accordion-heading>
-	      {{task.name}}
-	      <i class="pull-right float-xs-right glyphicon glyphicon-remove"></i>
-	    </div>
-	    <p>{{task.desc}}</p>
-	    <button class="btn btn-primary" type="button">Video</button>
-	    <button class="btn" type="button" disabled>Quiz</button>
-	  </accordion-group>
-	</accordion>
+	<h3>This button simulates watching the video or performing the task</h3>
+	<button class="btn btn-primary" type="button" (click)="taskComplete()">Finish</button>
+</div>
+
+<div class="container" *ngIf="complete">
+	<h3>You did it!</h3>
+	<p>You're clue is: <b><i>{{task.clue_id}}</i></b></p>
 </div>
 

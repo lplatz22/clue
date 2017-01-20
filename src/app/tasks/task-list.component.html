@@ -1,0 +1,18 @@
+<div class="jumbotron">
+  <h1 class="display-3">Tasks</h1>
+  <p class="lead">Perform the following tasks to get access to clues!</p>
+</div>
+
+<div class="container">
+	<accordion [closeOthers]="true">
+	  <accordion-group *ngFor="let task of tasks">
+	    <div accordion-heading>
+	      {{task.name}}
+	      <i class="pull-right float-xs-right glyphicon glyphicon-remove"></i>
+	    </div>
+	    <p>{{task.desc}}</p>
+	    <button class="btn btn-primary" type="button" [routerLink]="['/task', task._id]">Go!</button>
+	  </accordion-group>
+	</accordion>
+</div>
+

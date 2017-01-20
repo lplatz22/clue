@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TaskService } from './task.service';
 
 @Component({
@@ -9,15 +9,25 @@ import { TaskService } from './task.service';
   // styleUrls: ['./app.component.css']
 })
 export class TaskComponent implements OnInit {
-	private tasks: any = [];
+	private task: any = [];
+	private complete: boolean = false;
 
 	constructor(private router: Router,
+				private route: ActivatedRoute,
 				private taskService: TaskService) {
 	}
 
 	ngOnInit() {
-		this.taskService.getAllTasks().subscribe(tasks => {
-			this.tasks = tasks;
+		let id = +this.route.snapshot.params['task_id'];
+		console.log(id);
+		this.taskService.getTaskById(id).subscribe(task => {
+			this.task = task;
 		});
+	}
+
+	taskComplete() {
+		//TODO: mark task complete on server - once users implemented
+		//TODO: get clue from server with clue_id - currently the clue is just stored with task
+		this.complete = true;
 	}
 }

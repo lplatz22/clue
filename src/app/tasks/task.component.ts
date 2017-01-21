@@ -36,6 +36,13 @@ export class TaskComponent implements OnInit {
 	taskComplete() {
 		//TODO: mark task complete on server - once users implemented
 		//TODO: get clue from server with clue_id - currently the clue is just stored with task
-		this.complete = true;
+		console.log(this.task);
+		this.taskService.completeTask(this.task._id).subscribe(task => {
+			console.log('completed!');
+			this.complete = true;
+		}, error => {
+			console.log('error completing');
+		});
+		
 	}
 }

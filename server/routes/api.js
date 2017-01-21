@@ -136,6 +136,21 @@ module.exports = function(app, passport) {
 			}
 		});
 	});
+
+	app.post('/api/task/complete', isLoggedIn, (req, res) => {
+		var id = req.body.task_id;
+        console.log(req.body);
+		usersDB.get(req.user._id, function(err, data) {
+			if (err) {
+				res.status(500).send(err.message);
+			} else {
+				console.log(data);
+				//add to data
+				//re - insert
+				console.log('id to mark complete ' + id);
+			}
+		});
+	})
 }
 
 function emailAvaliable(email, next) {

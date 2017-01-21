@@ -17,6 +17,9 @@
         <ul class="nav navbar-nav navbar-left">
             <li><a [routerLink]="['/']">Home</a></li>
         	<li><a [routerLink]="['/tasks']">Tasks</a></li>
+            <li><a href="/api/logout">Logout</a></li>
+            <!-- <li *ngIf="loggedIn"><a href="/api/logout">Logout</a></li>
+            <li *ngIf="!loggedIn"><a [routerLink]="['/login']">Login</a></li> -->
         </ul>
     <!--     <ul class="nav navbar-nav navbar-right">
         	<span dropdown>

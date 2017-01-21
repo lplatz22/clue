@@ -28,15 +28,15 @@ module.exports = function(passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
-        done(null, user.email);
+        done(null, user);
     });
 
     // used to deserialize the user
-    passport.deserializeUser(function(email, done) {
+    passport.deserializeUser(function(user, done) {
         // User.findById(id, function(err, user) {
         //     done(err, user);
         // });
-        done(null, email);
+        done(null, user);
     });
     
     passport.use('local-login', new LocalStrategy({

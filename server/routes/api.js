@@ -31,8 +31,6 @@ module.exports = function(app, passport) {
     // }));
 
     app.post('/api/register', function(req, res) {
-    	console.log('/api/register hit!');
-    	console.log(req.body.user);
     	var errorJson = {};
 
     	if(!req.body){
@@ -50,39 +48,40 @@ module.exports = function(app, passport) {
     	}
 
     	if(errorJson.error){
-    		console.log('passwords dont match');
-    		res.status(400).send(req.body.user);
+    		res.status(400).send(errorJson.error);
     	} else {
-    		console.log(req.body.user);
     		var user = req.body.user;
+    		user.email = user.email.toLowerCase();
 
-    		if(user.password != user.passwordConfirm){
-    			console.log('passwords dont match');
-    			res.status(400).send("Passwords Don't Match");
-    		} else { //passwords match
-    			var hashed_pass = bcrypt.hashSync(user.password, bcrypt.genSaltSync(8), null); //generate password hash
-    			
-    			var protectedUser = {
-    				email: user.email,
-    				password: hashed_pass,
-    				company: user.company
+    		emailAvaliable(user.email, function (avaliable) {
+    			if(!avaliable) {
+    				console.log('email unavaliable');
+    				res.status(400).send("Email Unavaliable");
+    			} else {
+    				if(user.password != user.passwordConfirm){
+		    			console.log('passwords dont match');
+		    			res.status(400).send("Passwords Don't Match");
+		    		} else { //passwords match
+		    			var hashed_pass = bcrypt.hashSync(user.password, bcrypt.genSaltSync(8), null);
+
+		    			var protectedUser = {
+		    				email: user.email,
+		    				password: hashed_pass,
+		    				company: user.company
+		    			}
+
+		    			usersDB.insert(protectedUser, function (er, body, headers) {
+						  if (er) {
+						    console.log('Failed to insert into users database: ' + er.message);
+						    res.status(500).send("Failed to Register: " + protectedUser.email);
+						  } else {
+						  	res.status(200).send("Successfully Registered: " + protectedUser.email);
+						  }
+						});
+		    		}
     			}
-
-    			//CHECK IF USER EXISTS FIRST!
-    			//store user.email in lowercase
-
-    			usersDB.insert(protectedUser, function (er, body, headers) {
-				  if (er) {
-				    console.log('Failed to insert into users database: ' + er.message);
-				    res.status(500).send("Failed to Register: " + protectedUser.email);
-				  } else {
-				  	res.status(200).send("Successfully Registered: " + protectedUser.email);
-				  }
-				});
-    		}
-    		
+    		});    		
     	}
-        
     });
 
     //
@@ -137,6 +136,18 @@ module.exports = function(app, passport) {
 			}
 		});
 	});
+}
+
+function emailAvaliable(email, next) {
+	usersDB.find({selector: {email: email}}, function(err, result) {
+        if (err){
+            next(false);
+        } else if (result.docs.length == 0){
+            next(true); // avaliable!
+        } else {
+        	next(false); // not avaliable
+        }
+    });
 }
 
 // route middleware to ensure user is logged in

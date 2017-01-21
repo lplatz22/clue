@@ -46,6 +46,7 @@ module.exports = function(passport) {
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
       function(req, email, password, done) {
+        email = email.toLowerCase();
         usersDB.find({selector: {email: email}}, function(err, result) {
             if (err){
                 console.log("There was an error finding the user: " + err);

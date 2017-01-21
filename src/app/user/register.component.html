@@ -20,5 +20,5 @@
 	  <button type="submit" [disabled]="!registerForm.form.valid || !(newUser.password === newUser.passwordConfirm)" class="btn btn-primary">Register</button>
 	</form>
 	<br>
-	<p *ngIf="failMessage" style="color:red;"><i>{{failMessage}}</i></p>
+	<p *ngIf="error" style="color:red;"><i>{{error}}</i></p>
 </div>

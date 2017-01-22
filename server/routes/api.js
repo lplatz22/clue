@@ -137,6 +137,20 @@ module.exports = function(app, passport) {
 		});
 	});
 
+    app.get('/api/user/tasks', isLoggedIn, (req, res) => {
+
+        //get ONLY list of tasks from the user instead of everything like this does
+        //Will need to update front end to recieve just task list instead of user
+        usersDB.get(req.user._id, function(err, data) {
+            if (err) {
+                res.status(500).send(err.message);
+            } else {
+                var user = data;
+                res.status(200).send(user);
+            }
+        });
+    });
+
 	app.post('/api/task/complete', isLoggedIn, (req, res) => {
 		var id = req.body.task_id;
 		usersDB.get(req.user._id, function(err, data) {

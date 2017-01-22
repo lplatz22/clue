@@ -16,7 +16,8 @@
 	  <accordion-group *ngFor="let task of tasks">
 	    <div accordion-heading>
 	      {{task.name}}
-	      <i class="pull-right float-xs-right glyphicon glyphicon-remove"></i>
+	      <i *ngIf="!task.complete" class="pull-right float-xs-right glyphicon glyphicon-remove"></i>
+	      <i *ngIf="task.complete" class="pull-right float-xs-right glyphicon glyphicon-ok"></i>
 	    </div>
 	    <p>{{task.desc}}</p>
 	    <button class="btn btn-primary" type="button" [routerLink]="['/task', task._id]">Go!</button>

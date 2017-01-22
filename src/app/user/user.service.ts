@@ -39,6 +39,13 @@ export class UserService {
             .catch(this.handleError);
   }
 
+  getCompletedTasks() {
+    
+    return this.http.get('/api/user/tasks', <RequestOptionsArgs>{ withCredentials: true })
+      .map((res: Response) => res.json())
+      .catch(this.handleError);
+  }
+
   authenticated() {
     return this.http.get('/api/authenticated', <RequestOptionsArgs> {withCredentials: true})
                     .map((res: Response) => res.json())

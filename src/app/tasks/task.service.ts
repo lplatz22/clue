@@ -34,7 +34,7 @@ export class TaskService {
     };
 
     return this.http.post('/api/task/complete', body, <RequestOptionsArgs>{ withCredentials: true })
-      .map((res: Response) => res.json())
+      .map((res: Response) => res)
       .catch(this.handleError);
   }
 

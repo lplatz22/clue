@@ -139,15 +139,25 @@ module.exports = function(app, passport) {
 
 	app.post('/api/task/complete', isLoggedIn, (req, res) => {
 		var id = req.body.task_id;
-        console.log(req.body);
 		usersDB.get(req.user._id, function(err, data) {
 			if (err) {
 				res.status(500).send(err.message);
 			} else {
-				console.log(data);
-				//add to data
-				//re - insert
-				console.log('id to mark complete ' + id);
+                var user = data;
+                if(!user.tasksComplete) {
+                    user.tasksComplete = {};
+                }
+                user.tasksComplete[id] = true;
+                console.log(user);
+                usersDB.insert(user, function (er, body, headers) {
+                  if (er) {
+                    console.log('Failed to insert into users database: ' + er.message);
+                    res.status(500).send("Failed to Mark task complete");
+                  } else {
+                    console.log('success!');
+                    res.status(200).send("Successfully Marked Complete");
+                  }
+                });
 			}
 		});
 	})

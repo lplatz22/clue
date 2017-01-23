@@ -2,10 +2,13 @@
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.25.5.
 
-## Developing With Real Server
-Run `npm start`
+## Developing With Real Server - dev mode
+Run `npm run dev`
 
-## Deploying to Bluemix
+## Developing With Real Server - prod mode
+Run `npm run prod`
+
+## Deploying to Bluemix (will deploy in prod mode)
 Under scripts/ run `./deploy.sh`
 
 ## Development server

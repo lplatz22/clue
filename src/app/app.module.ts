@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RoutingModule } from './routing/routing.module';
+import { AuthenticationService } from './authentication.service';
 
 import { CollapseModule } from 'ng2-bootstrap';
 import { TaskModule } from './tasks/task.module';
@@ -28,7 +29,7 @@ import { HomeComponent } from './home.component';
     UserModule,
     CollapseModule.forRoot()
   ],
-  providers: [],
+  providers: [ AuthenticationService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

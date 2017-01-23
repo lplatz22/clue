@@ -19,10 +19,7 @@ module.exports = function(app, passport) {
 
 	// PROFILE SECTION =========================
 	app.post('/api/login', passport.authenticate('local-login', {}), function(req, res) {
-    	//req.user
-        //return user info
-        console.log(req.body.user);
-        res.status(200).send(req.body.user);
+        res.status(200).send({loggedIn: true});
     });
     // app.post('/api/login', passport.authenticate('local-login', {
     //     successRedirect : '/tasks', // redirect to the secure profile section
@@ -45,7 +42,11 @@ module.exports = function(app, passport) {
     		errorJson.error = "No User Password Confirmation found";
     	} else if (!req.body.user.company) {
     		errorJson.error = "No User Company found";
-    	}
+    	} else if (!req.body.user.firstName) {
+            errorJson.error = "No User Company found";
+        } else if (!req.body.user.lastName) {
+            errorJson.error = "No User Company found";
+        }
 
     	if(errorJson.error){
     		res.status(400).send(errorJson.error);
@@ -55,24 +56,24 @@ module.exports = function(app, passport) {
 
     		emailAvaliable(user.email, function (avaliable) {
     			if(!avaliable) {
-    				console.log('email unavaliable');
     				res.status(400).send("Email Unavaliable");
     			} else {
     				if(user.password != user.passwordConfirm){
-		    			console.log('passwords dont match');
 		    			res.status(400).send("Passwords Don't Match");
 		    		} else { //passwords match
 		    			var hashed_pass = bcrypt.hashSync(user.password, bcrypt.genSaltSync(8), null);
 
 		    			var protectedUser = {
 		    				email: user.email,
+                            firstName: user.firstName,
+                            lastName: user.lastName,
 		    				password: hashed_pass,
-		    				company: user.company
+		    				company: user.company,
+                            tasksComplete: {}
 		    			}
 
 		    			usersDB.insert(protectedUser, function (er, body, headers) {
 						  if (er) {
-						    console.log('Failed to insert into users database: ' + er.message);
 						    res.status(500).send("Failed to Register: " + protectedUser.email);
 						  } else {
 						  	res.status(200).send("Successfully Registered: " + protectedUser.email);
@@ -87,27 +88,20 @@ module.exports = function(app, passport) {
     //
 
     app.get('/api/authenticated', isLoggedIn, function(req, res) {
-    	// console.log(req.user);
-    	console.log('/api/authenticated passed!');
         res.status(200).json({"authenticated": true});
     });
 
-    app.get('/api/profile', isLoggedIn, function(req, res) {
-    	//req.user
-        //return user info
-        res.status(200).send(req.user);
-    });
 
     // LOGOUT ==============================
     app.get('/api/logout', function(req, res) {
         req.logout();
-        res.redirect('/');
+        res.status(200).send({loggedOut: true});
     });
 
 
 	//========== API Routes Below =============
 
-	app.get('/api/tasks', (req, res) => {
+	app.get('/api/tasks', isLoggedIn, (req, res) => {
 		var getAllQuery = {
 			selector: {
 				"_id": {
@@ -119,7 +113,21 @@ module.exports = function(app, passport) {
 			if (err) {
 				res.status(500).send(err.message);
 			} else {
-				res.status(200).send(data.docs);
+                var tasks = data.docs;
+                if(tasks.length > 0) {
+                    usersDB.get(req.user._id, function(err, user) {
+                        if (err) {
+                            res.status(500).send(err.message);
+                        } else {
+                            for (var i = 0; i < tasks.length; i++) {
+                                tasks[i]['complete'] = user.tasksComplete[tasks[i]._id];
+                            }
+                            res.status(200).send(tasks);
+                        }
+                    });
+                } else {
+                    res.status(200).send(tasks); //tasks will be empty
+                }
 			}
 		});
 	});
@@ -128,28 +136,25 @@ module.exports = function(app, passport) {
 
 		var id = req.query.task_id;
 
-		tasksDB.get(id, function(err, data) {
+        //inject req.user info about that task in here
+
+		tasksDB.get(id, function(err, task) {
 			if (err) {
 				res.status(500).send(err.message);
+                
 			} else {
-				res.status(200).send(data);
+                usersDB.get(req.user._id, function(err, user) {
+                    if (err) {
+                        res.status(500).send(err.message);
+                    } else {
+                        task['complete'] = user.tasksComplete[task._id];
+                        res.status(200).send(task);
+                    }
+                });
 			}
 		});
 	});
 
-    app.get('/api/user/tasks', isLoggedIn, (req, res) => {
-
-        //get ONLY list of tasks from the user instead of everything like this does
-        //Will need to update front end to recieve just task list instead of user
-        usersDB.get(req.user._id, function(err, data) {
-            if (err) {
-                res.status(500).send(err.message);
-            } else {
-                var user = data;
-                res.status(200).send(user);
-            }
-        });
-    });
 
 	app.post('/api/task/complete', isLoggedIn, (req, res) => {
 		var id = req.body.task_id;
@@ -162,19 +167,56 @@ module.exports = function(app, passport) {
                     user.tasksComplete = {};
                 }
                 user.tasksComplete[id] = true;
-                console.log(user);
                 usersDB.insert(user, function (er, body, headers) {
                   if (er) {
-                    console.log('Failed to insert into users database: ' + er.message);
                     res.status(500).send("Failed to Mark task complete");
                   } else {
-                    console.log('success!');
                     res.status(200).send("Successfully Marked Complete");
                   }
                 });
 			}
 		});
-	})
+	});
+
+    app.get('/api/user/clues', isLoggedIn, (req, res) => {
+        var getCluesQuery = {
+            selector: {
+                "_id": {
+                    "$or": []
+                }
+            },
+            fields: [
+                "_id",
+                "clue"
+            ],
+            "sort": [
+                {
+                    "_id": "asc"
+                }
+            ]
+        }
+
+        usersDB.get(req.user._id, function(err, user) {
+            if (err) {
+                res.status(500).send(err.message);
+            } else {
+                //user.tasksComplete
+                for (var t in user.tasksComplete) {
+                    if(user.tasksComplete.hasOwnProperty(t)){
+                        getCluesQuery.selector._id.$or.push(t);
+                    }
+                }
+
+                tasksDB.find(getCluesQuery, function(err, data) {
+                    if (err) {
+                        res.status(500).send(err.message);
+                    } else {
+                        res.status(200).send(data.docs);
+                    }
+                });
+            }
+        });
+    });
 }
 
 function emailAvaliable(email, next) {
@@ -193,8 +235,6 @@ function emailAvaliable(email, next) {
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
-
-    console.log('isLoggedIn() stopped you!!');
 
     res.status(401).send('unauthenticated');
 }

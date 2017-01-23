@@ -1,0 +1,21 @@
+<div class="jumbotron">
+  <h1 class="display-3">My Clues</h1>
+  <p class="lead">Here are all of your discovered clues!</p>
+  <p class="lead">Complete more tasks to unlock new ones</p>
+  <button class="btn btn-warning" type="button" [routerLink]="['/tasks']">Task List</button>
+</div>
+
+<div class="container" *ngIf="loading">
+	<p>loading... </p>
+</div>
+
+<div class="container" *ngIf="error">
+	<p>{{error}}</p>
+</div>
+
+<div class="container" *ngIf="clues">
+	<div class="list-group">
+  		<a type="button" [routerLink]="['/task', clue._id]" class="list-group-item" *ngFor="let clue of clues">{{clue.clue}}</a>
+	</div>
+</div>
+

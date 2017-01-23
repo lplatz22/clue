@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TaskService, TASK_STATUS_CODES } from './task.service';
 
+import { UserService, USER_STATUS_CODES } from '../user/user.service';
+
 @Component({
   moduleId: module.id,
   selector: 'task',
@@ -13,10 +15,12 @@ export class TaskComponent implements OnInit {
 	private complete: boolean = false;
 	private loading: boolean = false;
 	private error: string;
+	private completionError: string;
 
 	constructor(private router: Router,
 				private route: ActivatedRoute,
-				private taskService: TaskService) {
+				private taskService: TaskService,
+				private userService: UserService) {
 	}
 
 	ngOnInit() {
@@ -36,12 +40,11 @@ export class TaskComponent implements OnInit {
 	taskComplete() {
 		//TODO: mark task complete on server - once users implemented
 		//TODO: get clue from server with clue_id - currently the clue is just stored with task
-		console.log(this.task);
-		this.taskService.completeTask(this.task._id).subscribe(task => {
-			console.log('completed!');
+		this.task.complete = true;
+		this.userService.completeTask(this.task._id).subscribe(task => {
 			this.complete = true;
 		}, error => {
-			console.log('error completing');
+			this.completionError = USER_STATUS_CODES[error.status] || USER_STATUS_CODES[500];
 		});
 		
 	}

@@ -14,6 +14,14 @@
 	    <input [(ngModel)]="newUser.passwordConfirm" type="password" class="form-control" required placeholder="password" name="password_confirm" id="password_confirm">
 	  </div>
 	  <div class="form-group">
+	    <label for="firstName">First Name</label>
+	    <input type="firstName" class="form-control" required placeholder="First Name" [(ngModel)]="newUser.firstName" name="firstName" id="firstName">
+	  </div>
+	  <div class="form-group">
+	    <label for="lastName">Last Name</label>
+	    <input type="lastName" class="form-control" required placeholder="Last Name" [(ngModel)]="newUser.lastName" name="lastName" id="lastName">
+	  </div>
+	  <div class="form-group">
 	    <label for="company">Company</label>
 	    <input type="company" class="form-control" required  [(ngModel)]="newUser.company" placeholder="company" name="company" id="company">
 	  </div>

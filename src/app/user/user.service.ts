@@ -11,16 +11,6 @@ export class UserService {
   constructor(private http: Http){
   };
 
-  login(user) {
-    let body = JSON.stringify(user);
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-
-    return this.http.post('/api/login', body, <RequestOptionsArgs> {headers: headers, withCredentials: true})
-                    .map((res: Response) => res)
-                    .catch(this.handleError);
-  }
-
   register(newUser) {
     let body = {
       user: newUser
@@ -33,23 +23,20 @@ export class UserService {
                     .catch(this.handleError);
   }
 
-  getProfile() {
-    return this.http.get('/api/profile', <RequestOptionsArgs> { withCredentials: true })
-            .map((res: Response) => res.json())
-            .catch(this.handleError);
-  }
+  completeTask(id) {
+    let body = {
+      task_id: id
+    };
 
-  getCompletedTasks() {
-    
-    return this.http.get('/api/user/tasks', <RequestOptionsArgs>{ withCredentials: true })
-      .map((res: Response) => res.json())
+    return this.http.post('/api/task/complete', body, <RequestOptionsArgs>{ withCredentials: true })
+      .map((res: Response) => res)
       .catch(this.handleError);
   }
 
-  authenticated() {
-    return this.http.get('/api/authenticated', <RequestOptionsArgs> {withCredentials: true})
-                    .map((res: Response) => res.json())
-                    .catch(this.handleError);
+  getClues() {
+    return this.http.get('/api/user/clues', <RequestOptionsArgs>{ withCredentials: true })
+      .map((res: Response) => res.json())
+      .catch(this.handleError);
   }
 
   private handleError(error: Response) {

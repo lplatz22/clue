@@ -28,16 +28,6 @@ export class TaskService {
       .catch(this.handleError);
   }
 
-  completeTask(id){
-    let body = {
-      task_id: id
-    };
-
-    return this.http.post('/api/task/complete', body, <RequestOptionsArgs>{ withCredentials: true })
-      .map((res: Response) => res)
-      .catch(this.handleError);
-  }
-
   private handleError(error: Response) {
     console.log('error handled by handleError');
     console.log(error);

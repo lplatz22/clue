@@ -49,10 +49,8 @@ module.exports = function(passport) {
         email = email.toLowerCase();
         usersDB.find({selector: {email: email}}, function(err, result) {
             if (err){
-                console.log("There was an error finding the user: " + err);
                 return done(null, false, { message : "Internal Server Error" } );
             } else if (result.docs.length == 0){
-                console.log("User was not found");
                 return done(null, false, { message : "Incorrect email" } );
             }
 
@@ -60,10 +58,8 @@ module.exports = function(passport) {
 
             //User found
             if (bcrypt.compareSync(password, user.password)) {
-                console.log("Password matches");
                 return done(null, user); // all is well, return successful user
             } else {
-                console.log("Password is not correct");
                 return done(null, false, { message :"Incorrect password"} );
             }  
         });

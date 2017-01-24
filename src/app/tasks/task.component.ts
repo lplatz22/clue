@@ -59,7 +59,7 @@ export class TaskComponent implements OnInit {
 		for (var i = 0; i < this.task.quiz.length; ++i) {
 			var question = this.task.quiz[i];
 			var answer = values[i];
-			if(question.answer != answer) {
+			if(question.answer.toLowerCase() != answer.toLowerCase()) {
 				pass = false;
 				break;
 			}
@@ -67,6 +67,7 @@ export class TaskComponent implements OnInit {
 		console.log("passed: " + pass);
 		if(pass) {
 			this.taskComplete();
+			this.failedQuiz = null;
 		} else {
 			this.failedQuiz = "Sorry, thats not right";
 		}

@@ -65,13 +65,13 @@
       </div>
       <div class="modal-body">
         <p *ngIf="failedQuiz">{{failedQuiz}}</p>
-        <p *ngIf="task.complete">YAY! You passed! Now claim your clue!</p>
+        <p *ngIf="!failedQuiz">YAY! You passed! Now claim your clue!</p>
       </div>
       <div class="modal-footer">
-      	<button *ngIf="task.complete" type="button" class="btn btn-success pull-right" (click)="modal.hide()">
+      	<button *ngIf="!failedQuiz" type="button" class="btn btn-success pull-right" (click)="modal.hide()">
           Claim
         </button>
-        <button *ngIf="failedQuiz && !task.complete" type="button" class="btn btn-danger pull-right" (click)="modal.hide()">
+        <button *ngIf="failedQuiz" type="button" class="btn btn-danger pull-right" (click)="modal.hide()">
           Try Again
         </button>
       </div>

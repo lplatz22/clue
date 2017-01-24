@@ -202,7 +202,7 @@ module.exports = function(app, passport) {
             } else {
                 //user.tasksComplete
                 for (var t in user.tasksComplete) {
-                    if(user.tasksComplete.hasOwnProperty(t)){
+                    if(user.tasksComplete[t]){
                         getCluesQuery.selector._id.$or.push(t);
                     }
                 }

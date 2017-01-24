@@ -27,6 +27,7 @@ export class CluesComponent implements OnInit {
 		this.userService.getClues().subscribe(clues => {
 			this.loading = false;
 			this.clues = clues;
+			console.log(this.clues);
 		}, error => {
 			this.loading = false;
 			this.error = USER_STATUS_CODES[error.status] || USER_STATUS_CODES[500];

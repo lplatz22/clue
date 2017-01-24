@@ -2,7 +2,6 @@
   <h1 class="display-3">{{task.name}}</h1>
   <p class="lead">{{task.desc}}</p>
   <button class="btn btn-warning" type="button" [routerLink]="['/tasks']">Task List</button>
-  <span><button class="btn btn-info" type="button" [routerLink]="['/clues']">My Clues</button></span>
 </div>
 
 <div class="container" *ngIf="loading">
@@ -19,20 +18,19 @@
 		<button class="btn btn-primary" type="button" (click)="taskComplete()">Finish</button>
 	</div> -->
 
-	<div class="container" *ngIf="!task.complete">
+	<div class="container col-md-5 col-md-offset-3" *ngIf="!task.complete">
 		<h3>Complete the following Quiz</h3>
 		<form #form="ngForm" validate (ngSubmit)="checkQuiz(form.value)">
-			<div class="container" *ngFor="let question of task.quiz; let i = index; ">
+			<div class="container col-md-10 col-md-offset-1" *ngFor="let question of task.quiz; let i = index; ">
 				<div class="form-group" *ngIf="!question.answers">
-					<label for="{{i}}">{{question.question}}</label>
-					<input required type="text"  class="form-control"
-         				[(ngModel)]="question.userAnswer" name="{{i}}">
+					<span><label for="{{i}}">{{question.question}}</label>
+					<input required type="text"  class="form-control" ngModel name="{{i}}"></span>
 				</div>
 				<div class="form-group" *ngIf="question.answers">
 					<label for="{{i}}">{{question.question}}</label>
-					<div *ngFor="let answer of question.answers">
+					<div class="radio" *ngFor="let answer of question.answers">
 				        <label>
-				        	<input type="radio" name="{{i}}" [(ngModel)]="question.userAnswer" value="{{answer}}" required>
+				        	<input type="radio" name="{{i}}" value="{{answer}}" ngModel required>
 				        	{{answer}}
 				        </label>
 				    </div>
@@ -50,11 +48,35 @@
 	<div class="container" *ngIf="task.complete">
 		<h3>You did it!</h3>
 		<p>You're clue is: <b><i>{{task.clue}}</i></b></p>
+		<button class="btn btn-info" type="button" [routerLink]="['/clues']">All My Clues</button>
 	</div>
 
 	<div class="container" *ngIf="completionError">
 		<p>{{completionError}}</p>
 	</div>
+</div>
+
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{task.name}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modal.hide()"></button>
+      </div>
+      <div class="modal-body">
+        <p *ngIf="failedQuiz">{{failedQuiz}}</p>
+        <p *ngIf="task.complete">YAY! You passed! Now claim your clue!</p>
+      </div>
+      <div class="modal-footer">
+      	<button *ngIf="task.complete" type="button" class="btn btn-success pull-right" (click)="modal.hide()">
+          Claim
+        </button>
+        <button *ngIf="failedQuiz && !task.complete" type="button" class="btn btn-danger pull-right" (click)="modal.hide()">
+          Try Again
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 
 

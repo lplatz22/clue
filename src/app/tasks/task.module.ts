@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RoutingModule } from '../routing/routing.module';
 
-import { ProgressbarModule, AccordionModule } from 'ng2-bootstrap';
+import { ProgressbarModule, AccordionModule, ModalModule } from 'ng2-bootstrap';
 
 import { TaskListComponent } from './task-list.component';
 import { TaskComponent } from './task.component';
@@ -21,7 +21,9 @@ import { TaskService } from './task.service';
     FormsModule,
     HttpModule,
     RoutingModule,
-    AccordionModule.forRoot()
+    AccordionModule.forRoot(),
+    ModalModule.forRoot(),
+    ProgressbarModule.forRoot()
   ],
   exports: [
   ],

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TaskService, TASK_STATUS_CODES } from './task.service';
-
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { UserService, USER_STATUS_CODES } from '../user/user.service';
+import { ModalDirective } from 'ng2-bootstrap';
 
 @Component({
   moduleId: module.id,
@@ -18,6 +19,7 @@ export class TaskComponent implements OnInit {
 	private completionError: string;
 	private userAnswers: any = {};
 	private failedQuiz: string;
+	@ViewChild('modal') public modal:ModalDirective;
 
 	constructor(private router: Router,
 				private route: ActivatedRoute,
@@ -52,13 +54,11 @@ export class TaskComponent implements OnInit {
 		
 	}
 
-	checkQuiz(quiz) {
+	checkQuiz(values) {
 		var pass = true;
 		for (var i = 0; i < this.task.quiz.length; ++i) {
 			var question = this.task.quiz[i];
-			var answer = quiz[i];
-			console.log(question);
-			console.log(answer);
+			var answer = values[i];
 			if(question.answer != answer) {
 				pass = false;
 				break;
@@ -70,5 +70,6 @@ export class TaskComponent implements OnInit {
 		} else {
 			this.failedQuiz = "Sorry, thats not right";
 		}
+		this.modal.show();
 	}
 }

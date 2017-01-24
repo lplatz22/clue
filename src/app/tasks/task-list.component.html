@@ -12,14 +12,14 @@
 	<p>{{error}}</p>
 </div>
 
-<div class="col-md-4 col-md-offset-4">
-	<small><em>Current Progress</em></small>
-	<progressbar class="progress-striped active" [value]="dynamic" [type]="type">
-	  {{message}}
-	</progressbar>
-</div>
-
 <div class="container" *ngIf="tasks">
+	<div>
+		<small><em>Current Progress</em></small>
+		<progressbar class="progress-striped active" [value]="dynamic" [type]="type">
+		  {{message}}
+		</progressbar>
+	</div>
+	<hr>
 	<accordion [closeOthers]="true">
 	  <accordion-group *ngFor="let task of tasks">
 	    <div accordion-heading>

@@ -14,9 +14,37 @@
 </div>
 
 <div class="container" *ngIf="!error && !loading">
-	<div class="container" *ngIf="!task.complete">
+	<!-- <div class="container" *ngIf="!task.complete">
 		<h3>This button simulates watching the video or performing the task</h3>
 		<button class="btn btn-primary" type="button" (click)="taskComplete()">Finish</button>
+	</div> -->
+
+	<div class="container" *ngIf="!task.complete">
+		<h3>Complete the following Quiz</h3>
+		<form #form="ngForm" validate (ngSubmit)="checkQuiz(form.value)">
+			<div class="container" *ngFor="let question of task.quiz; let i = index; ">
+				<div class="form-group" *ngIf="!question.answers">
+					<label for="{{i}}">{{question.question}}</label>
+					<input required type="text"  class="form-control"
+         				[(ngModel)]="question.userAnswer" name="{{i}}">
+				</div>
+				<div class="form-group" *ngIf="question.answers">
+					<label for="{{i}}">{{question.question}}</label>
+					<div *ngFor="let answer of question.answers">
+				        <label>
+				        	<input type="radio" name="{{i}}" [(ngModel)]="question.userAnswer" value="{{answer}}" required>
+				        	{{answer}}
+				        </label>
+				    </div>
+				</div>
+			</div>
+			<div class="form-group">
+		        <button type="submit" class="btn btn-primary">Submit</button>
+		    </div>
+		</form>
+		<div class="container" *ngIf="failedQuiz">
+			<p>{{failedQuiz}}</p>
+		</div>
 	</div>
 
 	<div class="container" *ngIf="task.complete">

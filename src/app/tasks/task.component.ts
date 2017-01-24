@@ -16,6 +16,8 @@ export class TaskComponent implements OnInit {
 	private loading: boolean = false;
 	private error: string;
 	private completionError: string;
+	private userAnswers: any = {};
+	private failedQuiz: string;
 
 	constructor(private router: Router,
 				private route: ActivatedRoute,
@@ -31,6 +33,7 @@ export class TaskComponent implements OnInit {
 		this.taskService.getTaskById(id).subscribe(task => {
 			this.loading = false;
 			this.task = task;
+			console.log(this.task);
 		}, error => {
 			this.loading = false;
 			this.error = TASK_STATUS_CODES[error.status] || TASK_STATUS_CODES[500];
@@ -47,5 +50,25 @@ export class TaskComponent implements OnInit {
 			this.completionError = USER_STATUS_CODES[error.status] || USER_STATUS_CODES[500];
 		});
 		
+	}
+
+	checkQuiz(quiz) {
+		var pass = true;
+		for (var i = 0; i < this.task.quiz.length; ++i) {
+			var question = this.task.quiz[i];
+			var answer = quiz[i];
+			console.log(question);
+			console.log(answer);
+			if(question.answer != answer) {
+				pass = false;
+				break;
+			}
+		}
+		console.log("passed: " + pass);
+		if(pass) {
+			this.taskComplete();
+		} else {
+			this.failedQuiz = "Sorry, thats not right";
+		}
 	}
 }

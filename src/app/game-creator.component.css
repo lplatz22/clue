@@ -1,0 +1,16 @@
+.hoverable{
+
+}
+
+.edit{
+    display: none;
+}
+
+.hoverable:hover {
+   background-color: #D3D3D3;
+}
+
+.hoverable:hover .edit {
+   display:block;
+}
+

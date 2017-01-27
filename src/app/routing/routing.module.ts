@@ -7,6 +7,7 @@ import { TaskComponent } from '../tasks/task.component';
 import { CluesComponent } from '../user/clues.component';
 import { LoginComponent } from '../user/login.component';
 import { RegisterComponent } from '../user/register.component';
+import { GameCreatorComponent } from '../game-creator.component';
 import { RoutingGuard } from './router.guard';
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'tasks', component: TaskListComponent, canActivate: [RoutingGuard] },
   { path: 'task/:task_id', component: TaskComponent, canActivate: [RoutingGuard] },
   { path: 'clues', component: CluesComponent, canActivate: [RoutingGuard] },
+  { path: 'gamecreator', component: GameCreatorComponent},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
 ]

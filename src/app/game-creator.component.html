@@ -1,0 +1,207 @@
+<div class="row">
+	<div class="col-sm-4">
+		<div class="panel panel-default">
+			<div class="panel-heading"><b>Locations ({{locations.length}})</b>
+			<button (click)="addLocation()" class="btn btn-info btn-xs pull-right"><span class="glyphicon glyphicon-plus"></span></button>
+			</div>
+			<ul class="list-group">
+			  <li *ngFor="let location of locations; let i = index; " class="list-group-item hoverable">
+			  	{{location}}
+			  	<span class="pull-right button-group edit">
+	                <button (click)="editLocation(i)" class="btn btn-primary btn-xs" type="button"><span class="glyphicon glyphicon-edit"></span></button> 
+	                <button (click)="removeLocation(i)" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
+	            </span>
+			  </li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="panel panel-default">
+			<div class="panel-heading"><b>Suspects ({{suspects.length}})</b>
+			<button (click)="addSuspect()" class="btn btn-info btn-xs pull-right"><span class="glyphicon glyphicon-plus"></span></button></div>
+			<ul class="list-group">
+			  <li *ngFor="let suspect of suspects; let i = index; " class="list-group-item hoverable">
+			  	{{suspect}}
+			  	<span class="pull-right button-group edit">
+	                <button (click)="editSuspect(i)" class="btn btn-primary btn-xs" type="button"><span class="glyphicon glyphicon-edit"></span></button> 
+	                <button (click)="removeSuspect(i)" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
+	            </span>
+			  </li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="panel panel-default">
+			<div class="panel-heading"><b>Weapons ({{weapons.length}})</b>
+			<button (click)="addWeapon()" class="btn btn-info btn-xs pull-right"><span class="glyphicon glyphicon-plus"></span></button></div>
+			<ul class="list-group">
+			  <li *ngFor="let weapon of weapons; let i = index; " class="list-group-item hoverable">
+			  	{{weapon}}
+			  	<span class="pull-right button-group edit">
+	                <button (click)="editWeapon(i)" class="btn btn-primary btn-xs" type="button"><span class="glyphicon glyphicon-edit"></span></button> 
+	                <button (click)="removeWeapon(i)" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
+	            </span>
+			  </li>
+			</ul>	
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel panel-info">
+		<div class="panel-heading"><b>Tasks ({{tasks.length}})</b></div>
+			<div class="panel-body">
+				<accordion [closeOthers]="true">
+				  <accordion-group *ngFor="let task of tasks; let t_index = index; " class="hoverable">
+				    <div accordion-heading>
+				      	{{task.name}}
+				      	<span class="pull-right button-group edit"> 
+			                <button (click)="removeTask(t_index, $event)" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
+			            </span>
+				    </div>
+				    <div class="row">
+				    	<div class="col-sm-4">
+				    		<label>Name</label>
+				    		<input class="form-control" type="text" name="thing" [(ngModel)]="task.name">
+				    	</div>
+				    	<div class="col-sm-4">
+				    		 <label>Video URL</label>
+				    		<input class="form-control" type="text" name="thing" [(ngModel)]="task.video_url">
+				    	</div>
+				    	<div class="col-sm-4">
+				    		<label>Clue</label>
+						    <select class="form-control" [(ngModel)]="task.clue">
+						    	<optgroup label="Locations">
+									<option *ngFor="let location of locations" [ngValue]="location">{{location}}</option>
+								</optgroup>
+								<optgroup label="Weapons">
+									<option *ngFor="let weapon of weapons" [ngValue]="weapon">{{weapon}}</option>
+								</optgroup>
+								<optgroup label="Suspects">
+									<option *ngFor="let suspect of suspects" [ngValue]="suspect">{{suspect}}</option>
+								</optgroup>
+							</select>
+				    	</div>
+				    </div>
+				    <br>
+				    <div class="row">
+				    	<div class="col-sm-12">
+				    		<label>Description</label>
+				    		<textarea class="form-control" [(ngModel)]='task.desc'></textarea>
+				    	</div>
+				    </div>
+				    <br>
+				    <div class="panel panel-success">
+						<div class="panel-heading"><b>{{task.name}}'s Quiz ({{task.quiz.length}})</b>
+							<button (click)="addQuestion_Answers(task.quiz)" class="btn btn-info btn-xs pull-right"><span class="glyphicon glyphicon-check"></span> New Multiple Choice</button>
+							<button (click)="addQuestion_NoAnswers(task.quiz)" class="btn btn-info btn-xs pull-right"><span class="glyphicon glyphicon-edit"></span> New Fill in the Blank</button>
+						</div>
+						<ul class="list-group">
+						  <li *ngFor="let q of task.quiz; let i = index; " class="list-group-item hoverable">
+						  	<b>Q:</b> <i>{{q.question}}</i>
+						  	<br>
+						  	<div *ngIf="q.answers">
+						  		<b>Options:</b> <i *ngFor="let a of q.answers">"{{a}}" </i>
+						  	</div>
+						  	<b>A:</b> <i>{{q.answer}}</i>
+						  	<span class="pull-right button-group edit">
+				                <button (click)="editQuestion(task, i)" class="btn btn-primary btn-xs" type="button"><span class="glyphicon glyphicon-edit"></span></button> 
+				                <button (click)="removeQuestion(task, i)" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
+				            </span>
+						  </li>
+						</ul>
+					</div>
+				  </accordion-group>
+				</accordion>
+				<br>
+				<button type="button" (click)="newTask()" class="btn btn-info pull-right">New Task</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div bsModal #locationModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="locationModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Location</h4>
+      </div>
+      <div class="modal-body">
+        <input class="form-control" type="text" name="thing" [(ngModel)]="selected.name">
+      </div>
+      <div class="modal-footer">
+      	<button class="btn btn-default" type="button" (click)="locationModal.hide()">Cancel</button>
+        <button class="btn btn-primary" type="button" (click)="saveLocation()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div bsModal #suspectModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="suspectModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Suspect</h4>
+      </div>
+      <div class="modal-body">
+        <input class="form-control" type="text" name="thing" [(ngModel)]="selected.name">
+      </div>
+      <div class="modal-footer">
+      	<button class="btn btn-default" type="button" (click)="suspectModal.hide()">Cancel</button>
+        <button class="btn btn-primary" type="button" (click)="saveSuspect()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div bsModal #weaponModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="weaponModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Weapon</h4>
+      </div>
+      <div class="modal-body">
+        <input class="form-control" type="text" name="thing" [(ngModel)]="selected.name">
+      </div>
+      <div class="modal-footer">
+      	<button class="btn btn-default" type="button" (click)="weaponModal.hide()">Cancel</button>
+        <button class="btn btn-primary" type="button" (click)="saveWeapon()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div bsModal #questionModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="questionModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Question</h4>
+      </div>
+      <div class="modal-body">
+		  	<label>Question</label>
+		  	<input class="form-control" type="text" name="thing" [(ngModel)]="question.question">
+		  	<br>
+		  	<div *ngIf="question.answers">
+			  	<label>Options</label>
+			  	<input class="form-control" type="text" name="0" [(ngModel)]="question.answers[0]">
+			  	<input class="form-control" type="text" name="1" [(ngModel)]="question.answers[1]">
+			  	<input class="form-control" type="text" name="2" [(ngModel)]="question.answers[2]">
+			  	<input class="form-control" type="text" name="3" [(ngModel)]="question.answers[3]">
+			  	<br>
+			  	<label>Answer</label>
+			  	<select class="form-control" [(ngModel)]="question.answer">
+					<option *ngFor="let q of question.answers" [ngValue]="q">{{q}}</option>
+				</select>
+		  	</div>
+		  	<div *ngIf="!question.answers">
+			  	<label>Answer</label>
+			  	<input class="form-control" type="text" name="answer" [(ngModel)]="question.answer">
+		  	</div>
+      </div>
+      <div class="modal-footer">
+      	<button class="btn btn-default" type="button" (click)="questionModal.hide()">Cancel</button>
+        <button class="btn btn-primary" type="button" (click)="saveQuestion()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

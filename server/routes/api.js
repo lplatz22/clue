@@ -14,6 +14,8 @@ var cloudant = Cloudant({account:username, password:password});
 var tasksDB = cloudant.db.use(configDB.db_creds.tasksDBName);
 var usersDB = cloudant.db.use(configDB.db_creds.usersDBName);
 
+var gameConfig = require('../config/game');
+
 module.exports = function(app, passport) {
 
 
@@ -91,6 +93,22 @@ module.exports = function(app, passport) {
         res.status(200).json({"authenticated": true});
     });
 
+    app.get('/api/admin/fullGame', isLogggedIn, function(req, res) {
+        if(req.user.admin){
+            res.status(200).json(gameConfig);
+        } else {
+            res.status(401).json({'admin': false});
+        }
+    });
+
+    app.post('/api/admin/fullGame', isLogggedIn, function(req, res) {
+        if(req.user.admin){ //OK - update fullgame config file
+            console.log(req.body.fullGame);
+            // res.status(200).json(gameConfig);
+        } else {
+            res.status(401).json({'admin': false});
+        }
+    });
 
     // LOGOUT ==============================
     app.get('/api/logout', function(req, res) {

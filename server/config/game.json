@@ -1,0 +1,88 @@
+{
+	"Description": "You've discovered someone hacked [user company name here] while you out one night downtown Austin - help Bankers find out who it was, where, and how they did it!",
+	"reveal": {
+		"location": "Dogwood",
+		"suspect": "Competing CEO A",
+		"weapon": "Evil Computer Program A"
+	},
+	"locations": [
+		"Dogwood",
+		"Maggie Maes",
+		"Blackheart",
+		"Craft Pride"
+	],
+	"suspects": [
+		"Competing CEO A",
+		"Competing CEO B",
+		"Competing CEO C"
+	],
+	"weapon": [
+		"USB Stick",
+		"Phishing Email",
+		"Evil Computer Program A"
+	],
+	"tasks": [
+		{
+			"name": "Task 1",
+			"desc": "Task 1 information here",
+			"video_url": "https://www.youtube.com/embed/plJe0uDszaY",
+			"quiz": [
+				{
+					"question": "What is Banker's Mascott?",
+					"answers": [
+						"Lion",
+						"Tiger",
+						"Penguin",
+						"Bear"
+					],
+					"answer": "Penguin"
+				}
+			],
+			"clue": "Maggie Maes"
+		},
+		{
+			"name": "Task 2",
+			"desc": "Task 2 information here",
+			"video_url": "https://www.youtube.com/embed/plJe0uDszaY",
+			"quiz": [
+				{
+					"question": "What city is Bankers Toolbox located in?",
+					"answers": [
+						"New York",
+						"Austin",
+						"San Jose",
+						"Seattle"
+					],
+					"answer": "Austin"
+				},
+				{
+					"question": "Write out the following number: 5",
+					"answer": "five"
+				}
+			],
+			"clue": "Competing CEO B"
+		},
+		{
+			"name": "Task 3",
+			"desc": "Task 3 information here",
+			"video_url": "https://www.youtube.com/embed/plJe0uDszaY",
+			"quiz": [
+				{
+					"question": "What is Luke's favorite bar on 6th street?",
+					"answers": [
+						"Blind Pig",
+						"Old School",
+						"Cheers",
+						"Maggie Maes"
+					],
+					"answer": "Maggie Maes"
+				},
+				{
+					"question": "Write out the following number: 10",
+					"answer": "ten"
+				}
+			],
+			"clue": "USB Stick"
+		}
+	]
+}

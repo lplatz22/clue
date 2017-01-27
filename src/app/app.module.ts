@@ -5,20 +5,22 @@ import { HttpModule } from '@angular/http';
 import { RoutingModule } from './routing/routing.module';
 import { AuthenticationService } from './authentication.service';
 
-import { CollapseModule } from 'ng2-bootstrap';
+import { CollapseModule, AccordionModule, ModalModule } from 'ng2-bootstrap';
 import { TaskModule } from './tasks/task.module';
 import { UserModule } from './user/user.module';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav.component';
 import { HomeComponent } from './home.component';
+import { GameCreatorComponent } from './game-creator.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    HomeComponent
+    HomeComponent,
+    GameCreatorComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,9 @@ import { HomeComponent } from './home.component';
     RoutingModule,
     TaskModule,
     UserModule,
-    CollapseModule.forRoot()
+    CollapseModule.forRoot(),
+    AccordionModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [ AuthenticationService ],
   bootstrap: [AppComponent]

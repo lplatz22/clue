@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalDirective } from 'ng2-bootstrap';
+import { TaskService, TASK_STATUS_CODES } from './tasks/task.service';
 
 @Component({
 	moduleId: module.id,
@@ -9,6 +10,9 @@ import { ModalDirective } from 'ng2-bootstrap';
 	styleUrls: ['./game-creator.component.css']
 })
 export class GameCreatorComponent implements OnInit {
+	private error: string;
+	private submitError: string;
+	private submitting: boolean = false;
 
 	private locations: string[] = [];
 	private suspects: string[] = [];
@@ -19,103 +23,40 @@ export class GameCreatorComponent implements OnInit {
 
 	private selected: any = {};
 	private question: any = {};
+	private reveal: any = {};
+	private description: string;
+
 
 	@ViewChild('locationModal') private locationModal: ModalDirective;
 	@ViewChild('weaponModal') private weaponModal: ModalDirective;
 	@ViewChild('suspectModal') private suspectModal: ModalDirective;
 	@ViewChild('questionModal') private questionModal: ModalDirective;
+	@ViewChild('loadModal') private loadingModal: ModalDirective;
 
 
 
-	constructor(private router: Router) {
-		//get game.json from server and load respective parts
+	constructor(private router: Router,
+				private taskService: TaskService) {
 	}
 
 	ngOnInit() {
-		//load this from task service obviously
-		this.locations = [
-			"Dogwood",
-			"Maggie Maes",
-			"Blackheart",
-			"Craft Pride"
-		]
+	}
 
-		this.suspects = [
-			"Competing CEO A",
-			"Competing CEO B",
-			"Competing CEO C"
-		]
-
-		this.weapons = [
-			"USB Stick",
-			"Phishing Email",
-			"Evil Computer Program A"
-		]
-
-		this.tasks = [
-			{
-				"name": "Task 1",
-				"desc": "Task 1 information here",
-				"video_url": "https://www.youtube.com/embed/plJe0uDszaY",
-				"quiz": [
-					{
-						"question": "What is Banker's Mascott?",
-						"answers": [
-							"Lion",
-							"Tiger",
-							"Penguin",
-							"Bear"
-						],
-						"answer": "Penguin"
-					}
-				],
-				"clue": "Maggie Maes"
-			},
-			{
-				"name": "Task 2",
-				"desc": "Task 2 information here",
-				"video_url": "https://www.youtube.com/embed/plJe0uDszaY",
-				"quiz": [
-					{
-						"question": "What city is Bankers Toolbox located in?",
-						"answers": [
-							"New York",
-							"Austin",
-							"San Jose",
-							"Seattle"
-						],
-						"answer": "Austin"
-					},
-					{
-						"question": "Write out the following number: 5",
-						"answer": "five"
-					}
-				],
-				"clue": "Competing CEO B"
-			},
-			{
-				"name": "Task 3",
-				"desc": "Task 3 information here",
-				"video_url": "https://www.youtube.com/embed/plJe0uDszaY",
-				"quiz": [
-					{
-						"question": "What is Luke's favorite bar on 6th street?",
-						"answers": [
-							"Blind Pig",
-							"Old School",
-							"Cheers",
-							"Maggie Maes"
-						],
-						"answer": "Maggie Maes"
-					},
-					{
-						"question": "Write out the following number: 10",
-						"answer": "ten"
-					}
-				],
-				"clue": "USB Stick"
-			}
-		];
+	ngAfterViewInit() {
+		this.loadingModal.show();
+		this.taskService.getFullGame().subscribe(response => {
+			this.tasks = response.tasks;
+			this.locations = response.locations;
+			this.weapons = response.weapons;
+			this.suspects = response.suspects;
+			this.reveal = response.reveal;
+			this.description = response.description;
+			this.loadingModal.hide();
+		}, error => {
+			this.loadingModal.hide();
+			this.error = TASK_STATUS_CODES[error.status] || TASK_STATUS_CODES[500];
+			console.log(this.error);
+		});
 	}
 
 	// ********** Clue Game Elements ***********
@@ -248,6 +189,24 @@ export class GameCreatorComponent implements OnInit {
 	//******************************************
 
 	submitGame(){
-		console.log(this.tasks);
+		var fullGameJSON = {
+			description: this.description,
+			reveal: this.reveal,
+			locations: this.locations,
+			suspects: this.suspects,
+			weapons: this.weapons,
+			tasks: this.tasks
+		}
+		this.loadingModal.show();
+		this.submitting = true;
+		this.taskService.writeGame(fullGameJSON).subscribe(response => {
+			this.loadingModal.hide();
+			this.submitting = false;
+			console.log(response);
+		}, error => {
+			this.loadingModal.hide();
+			this.submitError = TASK_STATUS_CODES[error.status] || TASK_STATUS_CODES[500];
+			console.log(this.submitError);
+		});
 	}
 }

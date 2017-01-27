@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RoutingModule } from './routing/routing.module';
 import { AuthenticationService } from './authentication.service';
 
-import { CollapseModule, AccordionModule, ModalModule } from 'ng2-bootstrap';
+import { CollapseModule, AccordionModule, ModalModule, AlertModule } from 'ng2-bootstrap';
 import { TaskModule } from './tasks/task.module';
 import { UserModule } from './user/user.module';
 
@@ -31,7 +31,8 @@ import { GameCreatorComponent } from './game-creator.component';
     UserModule,
     CollapseModule.forRoot(),
     AccordionModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    AlertModule.forRoot()
   ],
   providers: [ AuthenticationService ],
   bootstrap: [AppComponent]

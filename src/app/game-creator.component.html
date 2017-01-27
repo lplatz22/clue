@@ -1,4 +1,50 @@
+<div *ngIf="error">
+	<alert type="danger">
+	  <strong>Bummer!</strong> Try refreshing - Error: ({{error}})
+	</alert>
+</div>
+
+<div *ngIf="!error">
+	<alert type="warning">
+	  <strong>Warning!</strong> You must click "Submit Game" to save progress on this page!
+	</alert>
+</div>
+
 <div class="row">
+	<div class="col-sm-12">
+		<div class="panel panel-success">
+			<div class="panel-heading"><b>Final Reveal</b></div>
+			<div class="row panel-body">
+				<div class="col-sm-4">
+					<label>Location</label>
+					<select class="form-control" [(ngModel)]="reveal.location">
+						<option *ngFor="let location of locations" [ngValue]="location">{{location}}</option>
+					</select>
+				</div>
+				<div class="col-sm-4">
+					<label>Weapon</label>
+					<select class="form-control" [(ngModel)]="reveal.weapon">
+						<option *ngFor="let weapon of weapons" [ngValue]="weapon">{{weapon}}</option>
+					</select>
+				</div>
+				<div class="col-sm-4">
+					<label>Suspect</label>
+					<select class="form-control" [(ngModel)]="reveal.suspect">
+						<option *ngFor="let suspect of suspects" [ngValue]="suspect">{{suspect}}</option>
+					</select>
+				</div>
+			</div>
+			<div class="row panel-body">
+				<div class="col-sm-12">
+					<label>Description</label>
+					<p><b>Hint:</b> use '**' to use the current user's company name, if desired</p>
+					<textarea class="form-control" rows=3 [(ngModel)]='description'></textarea>
+					<p><i><b>Example:</b> 'Isn't ** is a great company?' -> 'Isn't Bankers Toolbox is a great company?'</i></p>
+				</div>
+			</div>
+			
+		</div>
+	</div>
 	<div class="col-sm-4">
 		<div class="panel panel-default">
 			<div class="panel-heading"><b>Locations ({{locations.length}})</b>
@@ -66,7 +112,7 @@
 				    		<input class="form-control" type="text" name="thing" [(ngModel)]="task.name">
 				    	</div>
 				    	<div class="col-sm-4">
-				    		 <label>Video URL</label>
+				    		<label>Video URL</label>
 				    		<input class="form-control" type="text" name="thing" [(ngModel)]="task.video_url">
 				    	</div>
 				    	<div class="col-sm-4">
@@ -121,8 +167,15 @@
 				<button type="button" (click)="newTask()" class="btn btn-info pull-right">New Task</button>
 			</div>
 		</div>
-		<button type="button" (click)="submitGame()" class="btn btn-danger pull-right">Submit Game</button>
+		<button type="button" (click)="submitGame()" class="btn btn-danger pull-right" [disabled]="submitting">Submit Game</button>
 	</div>
+</div>
+
+<div *ngIf="submitError">
+	<br>
+	<alert type="danger">
+	  <strong>Bummer!</strong> Try refreshing - Error: ({{submitError}})
+	</alert>
 </div>
 
 
@@ -205,6 +258,19 @@
       <div class="modal-footer">
       	<button class="btn btn-default" type="button" (click)="questionModal.hide()">Cancel</button>
         <button class="btn btn-primary" type="button" (click)="saveQuestion()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div bsModal #loadModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="loadModalLabel" aria-hidden="true" [config]="{backdrop: 'static'}">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Loading</h4>
+      </div>
+      <div class="modal-body">
+        Please Wait...
       </div>
     </div>
   </div>

@@ -8,23 +8,24 @@ import { CluesComponent } from '../user/clues.component';
 import { LoginComponent } from '../user/login.component';
 import { RegisterComponent } from '../user/register.component';
 import { GameCreatorComponent } from '../game-creator.component';
-import { RoutingGuard } from './router.guard';
+import { RoutingGuard, AdminRoutingGuard } from './router.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'tasks', component: TaskListComponent, canActivate: [RoutingGuard] },
   { path: 'task/:task_id', component: TaskComponent, canActivate: [RoutingGuard] },
   { path: 'clues', component: CluesComponent, canActivate: [RoutingGuard] },
-  { path: 'gamecreator', component: GameCreatorComponent},
+  { path: 'gamecreator', component: GameCreatorComponent, canActivate: [AdminRoutingGuard]},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: '**', redirectTo: '/', pathMatch: 'full' }
 ]
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes)
   ],
-  providers: [RoutingGuard],
+  providers: [RoutingGuard, AdminRoutingGuard],
   exports: [
     RouterModule
   ]

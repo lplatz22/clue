@@ -14,6 +14,8 @@ var cloudant = Cloudant({account:username, password:password});
 var tasksDB = cloudant.db.use(configDB.db_creds.tasksDBName);
 var usersDB = cloudant.db.use(configDB.db_creds.usersDBName);
 
+const fs = require('fs');
+
 var gameConfig = require('../config/game');
 
 module.exports = function(app, passport) {
@@ -21,13 +23,16 @@ module.exports = function(app, passport) {
 
 	// PROFILE SECTION =========================
 	app.post('/api/login', passport.authenticate('local-login', {}), function(req, res) {
-        res.status(200).send({loggedIn: true});
+        var isAdmin = req.user.admin;
+        if(!isAdmin) {
+            isAdmin = false;
+        }
+        var response = {
+            loggedIn: true,
+            admin: isAdmin
+        }
+        res.status(200).send(response);
     });
-    // app.post('/api/login', passport.authenticate('local-login', {
-    //     successRedirect : '/tasks', // redirect to the secure profile section
-    //     failureRedirect : '/login', // redirect back to the signup page if there is an error
-    //     failureFlash : true // allow flash messages
-    // }));
 
     app.post('/api/register', function(req, res) {
     	var errorJson = {};
@@ -90,21 +95,48 @@ module.exports = function(app, passport) {
     //
 
     app.get('/api/authenticated', isLoggedIn, function(req, res) {
-        res.status(200).json({"authenticated": true});
+        var isAdmin = req.user.admin;
+        if(!isAdmin) {
+            isAdmin = false;
+        }
+        var response = {
+            authenticated: true,
+            admin: isAdmin
+        }
+        res.status(200).json(response);
     });
 
     app.get('/api/admin/fullGame', isLoggedIn, function(req, res) {
         if(req.user.admin){
-            res.status(200).json(gameConfig);
+            fs.readFile('server/config/game.json', 'utf8', (err, data) => {
+                if (err) {
+                    console.log(err);
+                    res.status(400).json(err);
+                } else {
+                    var json = JSON.parse(data);
+                    res.status(200).json(json);
+                }
+            });
         } else {
             res.status(401).json({'admin': false});
         }
     });
 
     app.post('/api/admin/fullGame', isLoggedIn, function(req, res) {
-        if(req.user.admin){ //OK - update fullgame config file
-            console.log(req.body.fullGame);
-            // res.status(200).json(gameConfig);
+        if(req.user.admin){
+            if(!req.body || !req.body.game) {
+                res.status(400).json({error: 'no game found in post body'});
+            } else {
+                fs.writeFile("server/config/game.json", JSON.stringify(req.body.game, null, 4), (err) => {
+                    if (err) {
+                        console.error(err);
+                        res.status(400).json(err);
+                    } else {
+                        console.log("Game Settings Updated!");
+                        res.status(200).json({'saved': true});
+                    }
+                });
+            }
         } else {
             res.status(401).json({'admin': false});
         }

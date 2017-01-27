@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 		// get return url from route parameters or default to '/'
 		this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 		this.authService.setLoggedIn(false);
-
+		this.authService.setAdmin(false);
 		this.authService.logout().subscribe(res => {
 			console.log(res);
 		}, error => {
@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
 
 		this.authService.login(this.user).subscribe(user => {
 			this.authService.setLoggedIn(true);
+			this.authService.setAdmin(user.admin);
 			this.router.navigate([this.returnUrl]);
 		},
 		error => {

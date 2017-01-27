@@ -6,9 +6,11 @@ import 'rxjs/add/operator/map'
 @Injectable()
 export class AuthenticationService {
 	private loggedIn: boolean;
+	private admin: boolean;
 
 	constructor(private http: Http) { 
 		this.loggedIn = false;
+		this.admin = false;
 	}
 
 	login(user) {
@@ -39,6 +41,17 @@ export class AuthenticationService {
 
 	setLoggedIn(bool) {
 		this.loggedIn = bool;
+		if(!this.loggedIn) {
+			this.admin = false;
+		}
+	}
+
+	setAdmin(bool) {
+		this.admin = bool;
+	}
+
+	isAdmin() {
+		return this.admin;
 	}
 
 	private handleError(error: Response) {

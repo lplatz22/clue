@@ -9,6 +9,7 @@ import { AuthenticationService } from './authentication.service';
 export class NavComponent {
   public isCollapsed: boolean = true;
   private loggedIn: boolean = false;
+  private isAdmin: boolean = false;
  
   constructor(private router: Router,
 	  private authService: AuthenticationService) {
@@ -19,6 +20,7 @@ export class NavComponent {
 	    	this.isCollapsed = true;
 	    }
 		this.loggedIn = this.authService.isLoggedIn();
+		this.isAdmin = this.authService.isAdmin();
 	  });
   }
 }

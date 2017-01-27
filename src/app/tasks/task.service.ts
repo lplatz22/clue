@@ -28,6 +28,23 @@ export class TaskService {
       .catch(this.handleError);
   }
 
+  getFullGame() {
+    return this.http.get('/api/admin/fullGame', <RequestOptionsArgs>{ withCredentials: true })
+      .map((res: Response) => res.json())
+      .catch(this.handleError);
+  }
+
+  writeGame(game) {
+    
+    let body = {
+      game: game
+    };
+
+    return this.http.post('/api/admin/fullGame', body, <RequestOptionsArgs>{ withCredentials: true })
+      .map((res: Response) => res)
+      .catch(this.handleError);
+  }
+
   private handleError(error: Response) {
     console.log('error handled by handleError');
     console.log(error);

@@ -246,4 +246,8 @@ export class GameCreatorComponent implements OnInit {
 		this.tasks.splice(index, 1);
 	}
 	//******************************************
+
+	submitGame(){
+		console.log(this.tasks);
+	}
 }

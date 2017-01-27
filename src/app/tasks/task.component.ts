@@ -43,10 +43,8 @@ export class TaskComponent implements OnInit {
 	}
 
 	taskComplete() {
-		//TODO: mark task complete on server - once users implemented
-		//TODO: get clue from server with clue_id - currently the clue is just stored with task
-		this.task.complete = true;
-		this.userService.completeTask(this.task._id).subscribe(task => {
+		this.userService.completeTask(+this.route.snapshot.params['task_id']).subscribe(task => {
+			this.task.complete = true;
 			this.complete = true;
 		}, error => {
 			this.completionError = USER_STATUS_CODES[error.status] || USER_STATUS_CODES[500];

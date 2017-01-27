@@ -11,12 +11,12 @@ var username = configDB.db_creds.username;
 var password = configDB.db_creds.password;
 var cloudant = Cloudant({account:username, password:password});
 
-var tasksDB = cloudant.db.use(configDB.db_creds.tasksDBName);
 var usersDB = cloudant.db.use(configDB.db_creds.usersDBName);
 
 const fs = require('fs');
 
-var gameConfig = require('../config/game');
+var gameConfigPath = 'server/config/game.json'
+
 
 module.exports = function(app, passport) {
 
@@ -108,7 +108,7 @@ module.exports = function(app, passport) {
 
     app.get('/api/admin/fullGame', isLoggedIn, function(req, res) {
         if(req.user.admin){
-            fs.readFile('server/config/game.json', 'utf8', (err, data) => {
+            fs.readFile(gameConfigPath, 'utf8', (err, data) => {
                 if (err) {
                     console.log(err);
                     res.status(400).json(err);
@@ -127,7 +127,7 @@ module.exports = function(app, passport) {
             if(!req.body || !req.body.game) {
                 res.status(400).json({error: 'no game found in post body'});
             } else {
-                fs.writeFile("server/config/game.json", JSON.stringify(req.body.game, null, 4), (err) => {
+                fs.writeFile(gameConfigPath, JSON.stringify(req.body.game, null, 4), (err) => {
                     if (err) {
                         console.error(err);
                         res.status(400).json(err);
@@ -152,57 +152,51 @@ module.exports = function(app, passport) {
 	//========== API Routes Below =============
 
 	app.get('/api/tasks', isLoggedIn, (req, res) => {
-		var getAllQuery = {
-			selector: {
-				"_id": {
-					"$gt": 0
-				}
-			}
-		}
-		tasksDB.find(getAllQuery, function(err, data) {
-			if (err) {
-				res.status(500).send(err.message);
-			} else {
-                var tasks = data.docs;
-                if(tasks.length > 0) {
-                    usersDB.get(req.user._id, function(err, user) {
-                        if (err) {
-                            res.status(500).send(err.message);
-                        } else {
-                            for (var i = 0; i < tasks.length; i++) {
-                                tasks[i]['complete'] = user.tasksComplete[tasks[i]._id];
-                            }
-                            res.status(200).send(tasks);
-                        }
-                    });
-                } else {
-                    res.status(200).send(tasks); //tasks will be empty
-                }
-			}
-		});
-	});
+        fs.readFile(gameConfigPath, 'utf8', (err, data) => {
+            if (err) {
+                console.log(err);
+                res.status(500).json(err);
+            } else {
+                var tasks = JSON.parse(data).tasks;
 
-	app.get('/api/task', isLoggedIn, (req, res) => {
-
-		var id = req.query.task_id;
-
-        //inject req.user info about that task in here
-
-		tasksDB.get(id, function(err, task) {
-			if (err) {
-				res.status(500).send(err.message);
-                
-			} else {
                 usersDB.get(req.user._id, function(err, user) {
                     if (err) {
                         res.status(500).send(err.message);
                     } else {
-                        task['complete'] = user.tasksComplete[task._id];
+                        for (var i = 0; i < tasks.length; i++) {
+                            tasks[i].complete = user.tasksComplete[i];
+                        }
+                        res.status(200).send(tasks);
+                    }
+                });
+            }
+        });
+	});
+
+	app.get('/api/task', isLoggedIn, (req, res) => {
+
+		var task_index = req.query.task_id;
+
+        //inject req.user info about that task in here
+
+        fs.readFile(gameConfigPath, 'utf8', (err, data) => {
+            if (err) {
+                console.log(err);
+                res.status(500).json(err);
+            } else {
+
+                var task = JSON.parse(data).tasks[task_index];
+
+                usersDB.get(req.user._id, function(err, user) {
+                    if (err) {
+                        res.status(500).send(err.message);
+                    } else {
+                        task.complete = user.tasksComplete[task_index];
                         res.status(200).send(task);
                     }
                 });
-			}
-		});
+            }
+        });
 	});
 
 
@@ -229,39 +223,29 @@ module.exports = function(app, passport) {
 	});
 
     app.get('/api/user/clues', isLoggedIn, (req, res) => {
-        var getCluesQuery = {
-            selector: {
-                "_id": {
-                    "$or": []
-                }
-            },
-            fields: [
-                "_id",
-                "clue"
-            ],
-            "sort": [
-                {
-                    "_id": "asc"
-                }
-            ]
-        }
 
         usersDB.get(req.user._id, function(err, user) {
             if (err) {
                 res.status(500).send(err.message);
             } else {
-                //user.tasksComplete
-                for (var t in user.tasksComplete) {
-                    if(user.tasksComplete[t]){
-                        getCluesQuery.selector._id.$or.push(t);
-                    }
-                }
 
-                tasksDB.find(getCluesQuery, function(err, data) {
-                    if (err) {
-                        res.status(500).send(err.message);
+                fs.readFile(gameConfigPath, 'utf8', (error, data) => {
+                    if (error) {
+                        console.log(error);
+                        res.status(500).json(error);
                     } else {
-                        res.status(200).send(data.docs);
+                        var fullGameData = JSON.parse(data);
+                        var clues = [];
+                        for (var t in user.tasksComplete) {
+                            if(user.tasksComplete[t]){
+                                var clueData = {
+                                    clue: fullGameData.tasks[t].clue,
+                                    id: t
+                                };
+                                clues.push(clueData);
+                            }
+                        }
+                        res.status(200).json(clues);
                     }
                 });
             }

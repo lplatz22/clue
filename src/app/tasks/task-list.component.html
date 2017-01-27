@@ -21,14 +21,14 @@
 	</div>
 	<hr>
 	<accordion [closeOthers]="true">
-	  <accordion-group *ngFor="let task of tasks">
+	  <accordion-group *ngFor="let task of tasks; let task_index = index; ">
 	    <div accordion-heading>
 	      {{task.name}}
 	      <i *ngIf="!task.complete" class="pull-right float-xs-right glyphicon glyphicon-remove"></i>
 	      <i *ngIf="task.complete" class="pull-right float-xs-right glyphicon glyphicon-ok"></i>
 	    </div>
 	    <p>{{task.desc}}</p>
-	    <button class="btn btn-primary" type="button" [routerLink]="['/task', task._id]">Go!</button>
+	    <button class="btn btn-primary" type="button" [routerLink]="['/task', task_index]">Go!</button>
 	  </accordion-group>
 	</accordion>
 </div>

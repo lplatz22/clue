@@ -15,7 +15,7 @@
 
 <div class="container" *ngIf="clues">
 	<div class="list-group">
-  		<a type="button" [routerLink]="['/task', clue._id]" class="list-group-item" *ngFor="let clue of clues">{{clue.clue}}</a>
+  		<a type="button" [routerLink]="['/task', clue.id]" class="list-group-item" *ngFor="let clue of clues">{{clue.clue}}</a>
 	</div>
 </div>
 

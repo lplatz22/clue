@@ -84,24 +84,6 @@
                 }
             ],
             "clue": "USB Stick"
-        },
-        {
-            "name": "New Task",
-            "desc": "New Task Description",
-            "video_url": "url here",
-            "clue": "Blackheart",
-            "quiz": [
-                {
-                    "question": "This is a test question",
-                    "answers": [
-                        "Answer 1",
-                        "Select this one",
-                        "Answer 3",
-                        "Answer 4"
-                    ],
-                    "answer": "Select this one"
-                }
-            ]
         }
     ]
 }

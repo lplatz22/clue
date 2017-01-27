@@ -14,6 +14,8 @@ export class GameCreatorComponent implements OnInit {
 	private suspects: string[] = [];
 	private weapons: string[] = [];
 	private tasks: any[] = [];
+	private currentTaskIndex: number;
+	private currentQuestionIndex: number;
 
 	private selected: any = {};
 	private question: any = {};
@@ -185,7 +187,9 @@ export class GameCreatorComponent implements OnInit {
 	}
 	// *****************************************
 
-	addQuestion_Answers() {
+	addQuestion_Answers(task_index) {
+		this.currentTaskIndex = task_index;
+		this.currentQuestionIndex = -1;
 		this.question = {
 			question: "",
 			answers: [
@@ -198,19 +202,29 @@ export class GameCreatorComponent implements OnInit {
 		}
 		this.questionModal.show();
 	}
-	editQuestion(task, q_index) {
-		this.question = task.quiz[q_index];
+	editQuestion(task_index, q_index) {
+		this.question = this.tasks[task_index].quiz[q_index];
+
+		this.currentTaskIndex = task_index;
+		this.currentQuestionIndex = q_index;
+
 		this.questionModal.show();
 	}
-	addQuestion_NoAnswers() {
+	addQuestion_NoAnswers(task_index) {
+		this.currentTaskIndex = task_index;
+		this.currentQuestionIndex = -1;
 		this.question = {};
 		this.questionModal.show();
 	}
-	removeQuestion(task, q_index) {
-		console.log(task);
-		console.log('Remove Question: ' + q_index);
+	removeQuestion(task_index, q_index) {
+		this.tasks[task_index].quiz.splice(q_index, 1);
 	}
 	saveQuestion() {
+		if(this.currentQuestionIndex >= 0) {
+			this.tasks[this.currentTaskIndex].quiz[this.currentQuestionIndex] = this.question;
+		} else {
+			this.tasks[this.currentTaskIndex].quiz.push(this.question);
+		}
 		this.questionModal.hide();
 	}
 

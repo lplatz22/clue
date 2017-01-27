@@ -95,13 +95,13 @@
 				    <div class="panel panel-success">
 						<div class="panel-heading"><b>{{task.name}}'s Quiz ({{task.quiz.length}})</b>
 							<span class="pull-right">
-								<button (click)="addQuestion_Answers(task.quiz)" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-check"></span> New Multiple Choice</button>
+								<button (click)="addQuestion_Answers(t_index)" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-check"></span> New Multiple Choice</button>
 								&nbsp;
-								<button (click)="addQuestion_NoAnswers(task.quiz)" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-edit"></span> New Fill in the Blank</button>
+								<button (click)="addQuestion_NoAnswers(t_index)" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-edit"></span> New Fill in the Blank</button>
 							</span>
 						</div>
 						<ul class="list-group">
-						  <li *ngFor="let q of task.quiz; let i = index; " class="list-group-item hoverable">
+						  <li *ngFor="let q of task.quiz; let q_index = index; " class="list-group-item hoverable">
 						  	<b>Q:</b> <i>{{q.question}}</i>
 						  	<br>
 						  	<div *ngIf="q.answers">
@@ -109,8 +109,8 @@
 						  	</div>
 						  	<b>A:</b> <i>{{q.answer}}</i>
 						  	<span class="pull-right button-group edit">
-				                <button (click)="editQuestion(task, i)" class="btn btn-primary btn-xs" type="button"><span class="glyphicon glyphicon-edit"></span></button> 
-				                <button (click)="removeQuestion(task, i)" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
+				                <button (click)="editQuestion(t_index, q_index)" class="btn btn-primary btn-xs" type="button"><span class="glyphicon glyphicon-edit"></span></button> 
+				                <button (click)="removeQuestion(t_index, q_index)" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
 				            </span>
 						  </li>
 						</ul>

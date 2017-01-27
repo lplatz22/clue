@@ -93,7 +93,7 @@ module.exports = function(app, passport) {
         res.status(200).json({"authenticated": true});
     });
 
-    app.get('/api/admin/fullGame', isLogggedIn, function(req, res) {
+    app.get('/api/admin/fullGame', isLoggedIn, function(req, res) {
         if(req.user.admin){
             res.status(200).json(gameConfig);
         } else {
@@ -101,7 +101,7 @@ module.exports = function(app, passport) {
         }
     });
 
-    app.post('/api/admin/fullGame', isLogggedIn, function(req, res) {
+    app.post('/api/admin/fullGame', isLoggedIn, function(req, res) {
         if(req.user.admin){ //OK - update fullgame config file
             console.log(req.body.fullGame);
             // res.status(200).json(gameConfig);

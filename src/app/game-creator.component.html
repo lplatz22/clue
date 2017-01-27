@@ -94,8 +94,11 @@
 				    <br>
 				    <div class="panel panel-success">
 						<div class="panel-heading"><b>{{task.name}}'s Quiz ({{task.quiz.length}})</b>
-							<button (click)="addQuestion_Answers(task.quiz)" class="btn btn-info btn-xs pull-right"><span class="glyphicon glyphicon-check"></span> New Multiple Choice</button>
-							<button (click)="addQuestion_NoAnswers(task.quiz)" class="btn btn-info btn-xs pull-right"><span class="glyphicon glyphicon-edit"></span> New Fill in the Blank</button>
+							<span class="pull-right">
+								<button (click)="addQuestion_Answers(task.quiz)" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-check"></span> New Multiple Choice</button>
+								&nbsp;
+								<button (click)="addQuestion_NoAnswers(task.quiz)" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-edit"></span> New Fill in the Blank</button>
+							</span>
 						</div>
 						<ul class="list-group">
 						  <li *ngFor="let q of task.quiz; let i = index; " class="list-group-item hoverable">

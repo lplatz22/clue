@@ -172,7 +172,6 @@ export class GameCreatorComponent implements OnInit {
 
 	//************Task Elements ****************
 	newTask() {
-		console.log('New Task');
 		this.tasks.push({
 			name: "New Task",
 			desc: "New Task Description",
@@ -182,7 +181,6 @@ export class GameCreatorComponent implements OnInit {
 		});
 	}
 	removeTask(index, event){
-		console.log('removing task: ' + index);
 		event.stopPropagation();
 		this.tasks.splice(index, 1);
 	}
@@ -202,11 +200,9 @@ export class GameCreatorComponent implements OnInit {
 		this.taskService.writeGame(fullGameJSON).subscribe(response => {
 			this.loadingModal.hide();
 			this.submitting = false;
-			console.log(response);
 		}, error => {
 			this.loadingModal.hide();
 			this.submitError = TASK_STATUS_CODES[error.status] || TASK_STATUS_CODES[500];
-			console.log(this.submitError);
 		});
 	}
 }

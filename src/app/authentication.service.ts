@@ -56,7 +56,6 @@ export class AuthenticationService {
 
 	private handleError(error: Response) {
 		console.log(error);
-		console.log('user logged in: false (due to error)');
 
 		return Observable.throw(error || "Server Error");
 	}

@@ -35,7 +35,6 @@ export class TaskComponent implements OnInit {
 		this.taskService.getTaskById(id).subscribe(task => {
 			this.loading = false;
 			this.task = task;
-			console.log(this.task);
 		}, error => {
 			this.loading = false;
 			this.error = TASK_STATUS_CODES[error.status] || TASK_STATUS_CODES[500];
@@ -62,7 +61,6 @@ export class TaskComponent implements OnInit {
 				break;
 			}
 		}
-		console.log("passed: " + pass);
 		if(pass) {
 			this.taskComplete();
 			this.failedQuiz = null;

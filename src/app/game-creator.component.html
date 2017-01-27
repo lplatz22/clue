@@ -167,7 +167,7 @@
 				<button type="button" (click)="newTask()" class="btn btn-info pull-right">New Task</button>
 			</div>
 		</div>
-		<button type="button" (click)="submitGame()" class="btn btn-danger pull-right" [disabled]="submitting">Submit Game</button>
+		<button type="button" (click)="confirmSubmitModal.show()" class="btn btn-danger pull-right" [disabled]="submitting">Submit Game</button>
 	</div>
 </div>
 
@@ -271,6 +271,24 @@
       </div>
       <div class="modal-body">
         Please Wait...
+      </div>
+    </div>
+  </div>
+</div>
+
+<div bsModal #confirmSubmitModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirmSubmitModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Are You Sure?</h4>
+      </div>
+      <div class="modal-body">
+        <p>Changing the game can break all of the current user's progress.</p>
+        <p><b>Make sure you really want to do this!</b></p>
+      </div>
+      <div class="modal-footer">
+      	<button class="btn btn-primary" type="button" (click)="confirmSubmitModal.hide()">Cancel</button>
+        <button class="btn btn-danger" type="button" (click)="confirmSubmitModal.hide(); submitGame();">OK</button>
       </div>
     </div>
   </div>

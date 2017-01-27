@@ -12,10 +12,47 @@
 <div class="container" *ngIf="error">
 	<p>{{error}}</p>
 </div>
-
+<!-- 
 <div class="container" *ngIf="clues">
 	<div class="list-group">
   		<a type="button" [routerLink]="['/task', clue.id]" class="list-group-item" *ngFor="let clue of clues">{{clue.clue}}</a>
 	</div>
+</div> -->
+
+<div class="row">
+	<div class="col-sm-4">
+		<div class="panel panel-default">
+			<div class="panel-heading"><b>Locations</b></div>
+			<ul class="list-group">
+			  <li *ngFor="let location of locations; let i = index; " class="list-group-item">
+			  	<s *ngIf="check(location)"><i>{{location}}</i></s>
+			  	<span *ngIf="!check(location)">{{location}}</span>
+			  </li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="panel panel-default">
+			<div class="panel-heading"><b>Weapons</b></div>
+			<ul class="list-group">
+			  <li *ngFor="let weapon of weapons; let i = index; " class="list-group-item">
+			  	<s *ngIf="check(weapon)"><i>{{weapon}}</i></s>
+			  	<span *ngIf="!check(weapon)">{{weapon}}</span>
+			  </li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="panel panel-default">
+			<div class="panel-heading"><b>Suspects</b></div>
+			<ul class="list-group">
+			  <li *ngFor="let suspect of suspects; let i = index; " class="list-group-item">
+			  	<s *ngIf="check(suspect)"><i>{{suspect}}</i></s>
+			  	<span *ngIf="!check(suspect)">{{suspect}}</span>
+			  </li>
+			</ul>
+		</div>
+	</div>
 </div>
+
 

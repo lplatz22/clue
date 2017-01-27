@@ -245,7 +245,13 @@ module.exports = function(app, passport) {
                                 clues.push(clueData);
                             }
                         }
-                        res.status(200).json(clues);
+                        var responseJSON = {
+                            clues: clues,
+                            locations: fullGameData.locations,
+                            suspects: fullGameData.suspects,
+                            weapons: fullGameData.weapons
+                        }
+                        res.status(200).json(responseJSON);
                     }
                 });
             }

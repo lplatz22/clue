@@ -17,8 +17,12 @@
 		<h3>This button simulates watching the video or performing the task</h3>
 		<button class="btn btn-primary" type="button" (click)="taskComplete()">Finish</button>
 	</div> -->
-
 	<div class="col-md-8 col-md-offset-2" *ngIf="!task.complete">
+		<video id="video" [src]="task.video_url" controls muted (seeking)="videoSeeking($event.srcElement)" (timeupdate)="videoTimeUpdate($event.srcElement)" (ended)="videoEnded($event.srcElement)" autoplay style="width: 100%;">
+		</video>
+	</div>
+
+	<div class="col-md-8 col-md-offset-2" *ngIf="!task.complete && videoWatched">
 		<h3>Complete the Quiz</h3>
 		<form #form="ngForm" validate (ngSubmit)="checkQuiz(form.value)">
 			<div class="row">

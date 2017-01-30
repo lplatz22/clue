@@ -21,6 +21,10 @@ export class TaskComponent implements OnInit {
 	private userAnswers: any = {};
 	private failedQuiz: string;
 
+	private videoWatched: boolean;
+
+	private supposedCurrentTime: number = 0;
+
 	private quizForm: FormGroup;
 
 	@ViewChild('modal') public modal:ModalDirective;
@@ -77,5 +81,25 @@ export class TaskComponent implements OnInit {
 			this.failedQuiz = "Sorry, thats not right";
 		}
 		this.modal.show();
+	}
+
+	videoSeeking(video) {
+		var delta = video.currentTime - this.supposedCurrentTime;
+		if (Math.abs(delta) > 0.01) {
+			console.log("Seeking is disabled");
+			video.currentTime = this.supposedCurrentTime;
+		}
+	}
+
+	videoTimeUpdate(video) {
+		if (!video.seeking) {
+			this.supposedCurrentTime = video.currentTime;
+		}
+	}
+
+	videoEnded(video){
+		console.log('video ended');
+		this.supposedCurrentTime = 0;
+		this.videoWatched = true;
 	}
 }

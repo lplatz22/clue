@@ -34,6 +34,12 @@ export class TaskService {
       .catch(this.handleError);
   }
 
+  getGameDescription() {
+    return this.http.get('/api/admin/game/description', <RequestOptionsArgs>{ withCredentials: true })
+      .map((res: Response) => res.json())
+      .catch(this.handleError);
+  }
+
   writeGame(game) {
     
     let body = {

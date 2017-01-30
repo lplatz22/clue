@@ -106,6 +106,19 @@ module.exports = function(app, passport) {
         res.status(200).json(response);
     });
 
+    app.get('/api/admin/game/description', function(req, res) {
+    
+        fs.readFile(gameConfigPath, 'utf8', (err, data) => {
+            if (err) {
+                console.log(err);
+                res.status(400).json(err);
+            } else {
+                var json = JSON.parse(data);
+                res.status(200).json(json.description);
+            }
+        });
+    });
+
     app.get('/api/admin/fullGame', isLoggedIn, function(req, res) {
         if(req.user.admin){
             fs.readFile(gameConfigPath, 'utf8', (err, data) => {

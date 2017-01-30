@@ -14,6 +14,8 @@ export class TaskListComponent implements OnInit {
 	private loading: boolean = false;
 	private error: string;
 
+	private completed: boolean = false;
+
 	public dynamic: number;
   	public type: string;
   	public message: string;
@@ -54,6 +56,7 @@ export class TaskListComponent implements OnInit {
 		}else if (this.dynamic <= 100) {
 			if(this.dynamic == 100){
 				this.type = "success";
+				this.completed = true;
 			} else {
 				this.type = "info";
 			}

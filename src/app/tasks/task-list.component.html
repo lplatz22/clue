@@ -13,6 +13,11 @@
 </div>
 
 <div class="row" *ngIf="tasks">
+	<div *ngIf="completed" class="col-xs-10 col-xs-offset-1">
+		<h4>You did it! Check your <i><a type="button" [routerLink]="['/clues']">clue book</a></i> to solve the mystery!</h4>
+	</div>
+	<div *ngIf="completed" class="col-xs-1">
+	</div>
 	<div class="col-xs-10 col-xs-offset-1">
 		<small><em>Current Progress</em></small>
 		<progressbar class="progress-striped active" [value]="dynamic" [type]="type">

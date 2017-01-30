@@ -64,4 +64,8 @@ export class TaskListComponent implements OnInit {
 		}
 
 	}
+
+	getClass(task){
+		console.log(task);
+	}
 }

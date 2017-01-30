@@ -13,15 +13,16 @@
 </div>
 
 <div class="row" *ngIf="tasks">
-	<div class="col-sm-12">
+	<div class="col-xs-10 col-xs-offset-1">
 		<small><em>Current Progress</em></small>
 		<progressbar class="progress-striped active" [value]="dynamic" [type]="type">
 		  {{message}}
 		</progressbar>
 	</div>
-	<hr>
-	<accordion class="col-sm-12" [closeOthers]="true">
-	  <accordion-group *ngFor="let task of tasks; let task_index = index; ">
+	<div class="col-xs-1">
+	</div>
+	<accordion class="col-xs-10 col-xs-offset-1" [closeOthers]="true">
+	  <accordion-group *ngFor="let task of tasks; let task_index = index; " [panelClass]="{'panel-success':task.complete, 'panel-danger':!task.complete}">
 	    <div accordion-heading>
 	      {{task.name}}
 	      <i *ngIf="!task.complete" class="pull-right float-xs-right glyphicon glyphicon-remove"></i>

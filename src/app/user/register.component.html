@@ -1,32 +1,44 @@
-<div class="jumbotron">
-  <h1 class="display-3">Register</h1>
-  	<form #registerForm="ngForm" (ngSubmit)="register()">
-	  <div class="form-group">
-	    <label for="email">Email address</label>
-	    <input type="email" class="form-control" required placeholder="luke@BankersToolbox.com" [(ngModel)]="newUser.email" name="email" id="email">
-	  </div>
-	  <div class="form-group">
-	    <label for="password">Password</label>
-	    <input type="password" class="form-control" required placeholder="password"  [(ngModel)]="newUser.password" name="password" id="password">
-	  </div>
-	  <div class="form-group">
-	    <label for="password_confirm">Confirm Password</label>
-	    <input [(ngModel)]="newUser.passwordConfirm" type="password" class="form-control" required placeholder="password" name="password_confirm" id="password_confirm">
-	  </div>
-	  <div class="form-group">
-	    <label for="firstName">First Name</label>
-	    <input type="firstName" class="form-control" required placeholder="First Name" [(ngModel)]="newUser.firstName" name="firstName" id="firstName">
-	  </div>
-	  <div class="form-group">
-	    <label for="lastName">Last Name</label>
-	    <input type="lastName" class="form-control" required placeholder="Last Name" [(ngModel)]="newUser.lastName" name="lastName" id="lastName">
-	  </div>
-	  <div class="form-group">
-	    <label for="company">Company</label>
-	    <input type="company" class="form-control" required  [(ngModel)]="newUser.company" placeholder="company" name="company" id="company">
-	  </div>
-	  <button type="submit" [disabled]="!registerForm.form.valid || !(newUser.password === newUser.passwordConfirm)" class="btn btn-primary">Register</button>
-	</form>
+<div class="row">
+  	<div class="col-md-6 col-md-offset-3">
+		<div class="jumbotron">
+  			<h1 class="display-3">Register</h1>
+  			<form [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
+			  <div class="form-group" [ngClass]="{'has-error':!registerForm.controls['email'].valid && registerForm.controls['email'].touched}">
+			    <label for="email">Email address</label>
+			    <input type="email" class="form-control" placeholder="John.Doe@company.com" [formControl]="registerForm.controls['email']" name="email" id="email">
+			   	<div *ngIf="registerForm.controls['email'].hasError('required') && registerForm.controls['email'].touched" class="alert alert-danger">You must specify an email address</div>
+			   	<div *ngIf="registerForm.controls['email'].hasError('pattern') && registerForm.controls['email'].touched" class="alert alert-danger">Please use a valid email</div>
+			  </div>
+			  <div class="form-group" [ngClass]="{'has-error':!registerForm.controls['password'].valid && registerForm.controls['password'].touched}">
+			    <label for="password">Password</label>
+			    <input type="password" class="form-control" placeholder="Password" [formControl]="registerForm.controls['password']" name="password" id="password">
+			    <div *ngIf="registerForm.controls['password'].hasError('required') && registerForm.controls['password'].touched" class="alert alert-danger">You must provide a password</div>
+			  </div>
+			  <div class="form-group">
+			    <label for="password_confirm">Confirm Password</label>
+			    <input type="password" class="form-control" placeholder="Password" [formControl]="registerForm.controls['passwordConfirm']" name="passwordConfirm" id="passwordConfirm">
+			    <div *ngIf="registerForm.hasError('mismatchedPasswords') && registerForm.controls['passwordConfirm'].touched" class="alert alert-danger">Passwords don't match</div>
+			  </div>
+			  <div class="form-group" >
+			    <label for="firstName">First Name</label>
+			    <input type="text" class="form-control" placeholder="John" [formControl]="registerForm.controls['firstName']" name="firstName" id="firstName">
+			    <div *ngIf="registerForm.controls['firstName'].hasError('required') && registerForm.controls['firstName'].touched" class="alert alert-danger">You must provide a first Name</div>
+			  </div>
+			  <div class="form-group" >
+			    <label for="lastName">Last Name</label>
+			    <input type="text" class="form-control" placeholder="Doe" [formControl]="registerForm.controls['lastName']" name="lastName" id="lastName">
+			    <div *ngIf="registerForm.controls['lastName'].hasError('required') && registerForm.controls['lastName'].touched" class="alert alert-danger">You must provide a last Name</div>
+			  </div>
+			  <div class="form-group" >
+			    <label for="company">Company</label>
+			    <input type="text" class="form-control" placeholder="Company" [formControl]="registerForm.controls['company']" name="company" id="company">
+			    <div *ngIf="registerForm.controls['company'].hasError('required') && registerForm.controls['company'].touched" class="alert alert-danger">You must provide a Company Name</div>
+			  </div>
+			  <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Register</button>
+			</form>
+			<br>
+			<p *ngIf="error" style="color:red; font-size: 16"><i>{{error}}</i></p>
+			<p>Already have an account? <a [routerLink]="['/login']">Login</a></p>
+  		</div>
 	<br>
-	<p *ngIf="error" style="color:red;"><i>{{error}}</i></p>
 </div>

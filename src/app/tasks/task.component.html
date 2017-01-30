@@ -12,46 +12,49 @@
 	<p>{{error}}</p>
 </div>
 
-<div class="container" *ngIf="!error && !loading">
+<div class="row" *ngIf="!error && !loading">
 	<!-- <div class="container" *ngIf="!task.complete">
 		<h3>This button simulates watching the video or performing the task</h3>
 		<button class="btn btn-primary" type="button" (click)="taskComplete()">Finish</button>
 	</div> -->
 
-	<div class="container col-md-5 col-md-offset-3" *ngIf="!task.complete">
-		<h3>Complete the following Quiz</h3>
+	<div class="col-md-8 col-md-offset-2" *ngIf="!task.complete">
+		<h3>Complete the Quiz</h3>
 		<form #form="ngForm" validate (ngSubmit)="checkQuiz(form.value)">
-			<div class="container col-md-10 col-md-offset-1" *ngFor="let question of task.quiz; let i = index; ">
-				<div class="form-group" *ngIf="!question.answers">
-					<span><label for="{{i}}">{{question.question}}</label>
-					<input required type="text"  class="form-control" ngModel name="{{i}}"></span>
+			<div class="row">
+				<div class="col-xs-10 col-xs-offset-1" *ngFor="let question of task.quiz; let i = index; ">
+					<div class="form-group" *ngIf="!question.answers">
+						<span><label for="{{i}}">{{question.question}}</label>
+						<input required type="text"  class="form-control" ngModel name="{{i}}"></span>
+					</div>
+					<div class="form-group" *ngIf="question.answers">
+						<label for="{{i}}">{{question.question}}</label>
+						<div class="radio" *ngFor="let answer of question.answers">
+					        <label>
+					        	<input type="radio" name="{{i}}" value="{{answer}}" ngModel required>
+					        	{{answer}}
+					        </label>
+					    </div>
+					</div>
 				</div>
-				<div class="form-group" *ngIf="question.answers">
-					<label for="{{i}}">{{question.question}}</label>
-					<div class="radio" *ngFor="let answer of question.answers">
-				        <label>
-				        	<input type="radio" name="{{i}}" value="{{answer}}" ngModel required>
-				        	{{answer}}
-				        </label>
-				    </div>
+				<div class="col-xs-1">
+				</div>
+				<div class="col-xs-10 col-xs-offset-1">
+					<button type="submit" class="btn btn-primary pull-right">Submit</button>
 				</div>
 			</div>
-			<div class="form-group">
-		        <button type="submit" class="btn btn-primary">Submit</button>
-		    </div>
 		</form>
-		<div class="container" *ngIf="failedQuiz">
-			<p>{{failedQuiz}}</p>
-		</div>
+		<br>
+		<div *ngIf="failedQuiz" class="alert alert-danger">Try Again</div>
 	</div>
 
-	<div class="container" *ngIf="task.complete">
+	<div class="col-md-8 col-md-offset-2" *ngIf="task.complete">
 		<h3>You did it!</h3>
-		<p>You're clue is: <b><i>{{task.clue}}</i></b></p>
+		<p>You Discovered its not: <b><i>{{task.clue}}</i></b></p>
 		<button class="btn btn-info" type="button" [routerLink]="['/clues']">All My Clues</button>
 	</div>
 
-	<div class="container" *ngIf="completionError">
+	<div class="col-md-8 col-md-offset-2" *ngIf="completionError">
 		<p>{{completionError}}</p>
 	</div>
 </div>

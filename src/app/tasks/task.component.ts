@@ -1,15 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TaskService, TASK_STATUS_CODES } from './task.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService, USER_STATUS_CODES } from '../user/user.service';
 import { ModalDirective } from 'ng2-bootstrap';
+
 
 @Component({
   moduleId: module.id,
   selector: 'task',
   templateUrl: './task.component.html',
-  // styleUrls: ['./app.component.css']
+  styleUrls: ['../app.component.css']
 })
 export class TaskComponent implements OnInit {
 	private task: any = [];
@@ -19,12 +20,20 @@ export class TaskComponent implements OnInit {
 	private completionError: string;
 	private userAnswers: any = {};
 	private failedQuiz: string;
+
+	private quizForm: FormGroup;
+
 	@ViewChild('modal') public modal:ModalDirective;
 
 	constructor(private router: Router,
 				private route: ActivatedRoute,
 				private taskService: TaskService,
-				private userService: UserService) {
+				private userService: UserService,
+				private fb: FormBuilder) {
+
+		this.quizForm = fb.group({
+			'question': [null, Validators.required]
+		});
 	}
 
 	ngOnInit() {
@@ -56,7 +65,7 @@ export class TaskComponent implements OnInit {
 		for (var i = 0; i < this.task.quiz.length; ++i) {
 			var question = this.task.quiz[i];
 			var answer = values[i];
-			if(question.answer.toLowerCase() != answer.toLowerCase()) {
+			if(question.answer.toLowerCase().trim() != answer.toLowerCase().trim()) {
 				pass = false;
 				break;
 			}

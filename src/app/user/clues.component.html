@@ -12,19 +12,13 @@
 <div class="container" *ngIf="error">
 	<p>{{error}}</p>
 </div>
-<!-- 
-<div class="container" *ngIf="clues">
-	<div class="list-group">
-  		<a type="button" [routerLink]="['/task', clue.id]" class="list-group-item" *ngFor="let clue of clues">{{clue.clue}}</a>
-	</div>
-</div> -->
 
 <div class="row">
 	<div class="col-sm-4">
-		<div class="panel panel-default">
+		<div class="panel panel-primary">
 			<div class="panel-heading"><b>Locations</b></div>
 			<ul class="list-group">
-			  <li *ngFor="let location of locations; let i = index; " class="list-group-item">
+			  <li *ngFor="let location of locations; let i = index; " class="list-group-item" [ngClass]="{'list-group-item-success':!check(location), 'list-group-item-danger':check(location)}">
 			  	<s *ngIf="check(location)"><i>{{location}}</i></s>
 			  	<span *ngIf="!check(location)">{{location}}</span>
 			  </li>
@@ -32,10 +26,10 @@
 		</div>
 	</div>
 	<div class="col-sm-4">
-		<div class="panel panel-default">
+		<div class="panel panel-primary">
 			<div class="panel-heading"><b>Weapons</b></div>
 			<ul class="list-group">
-			  <li *ngFor="let weapon of weapons; let i = index; " class="list-group-item">
+			  <li *ngFor="let weapon of weapons; let i = index; " class="list-group-item" [ngClass]="{'list-group-item-success':!check(weapon), 'list-group-item-danger':check(weapon)}">
 			  	<s *ngIf="check(weapon)"><i>{{weapon}}</i></s>
 			  	<span *ngIf="!check(weapon)">{{weapon}}</span>
 			  </li>
@@ -43,10 +37,10 @@
 		</div>
 	</div>
 	<div class="col-sm-4">
-		<div class="panel panel-default">
+		<div class="panel panel-primary">
 			<div class="panel-heading"><b>Suspects</b></div>
 			<ul class="list-group">
-			  <li *ngFor="let suspect of suspects; let i = index; " class="list-group-item">
+			  <li *ngFor="let suspect of suspects; let i = index; " class="list-group-item" [ngClass]="{'list-group-item-success':!check(suspect), 'list-group-item-danger':check(suspect)}">
 			  	<s *ngIf="check(suspect)"><i>{{suspect}}</i></s>
 			  	<span *ngIf="!check(suspect)">{{suspect}}</span>
 			  </li>

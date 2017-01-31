@@ -27,7 +27,7 @@
 	<div class="col-xs-1">
 	</div>
 	<accordion class="col-xs-10 col-xs-offset-1" [closeOthers]="true">
-	  <accordion-group *ngFor="let task of tasks; let task_index = index; " [panelClass]="{'panel-success':task.complete, 'panel-danger':!task.complete}">
+	  <accordion-group *ngFor="let task of tasks; let task_index = index; " [panelClass]="{'panel-success':task.complete, 'panel-info':!task.complete}">
 	    <div accordion-heading>
 	      {{task.name}}
 	      <i *ngIf="!task.complete" class="pull-right float-xs-right glyphicon glyphicon-remove"></i>

@@ -291,3 +291,11 @@ function isLoggedIn(req, res, next) {
 
     res.status(401).send('unauthenticated');
 }
+
+// function ensureSec(req, res, next){
+//     if (req.headers["X-Forwarded-Proto"] === "https"){
+//        return next();
+//     }
+//     var fullUrl_Secure = "https://" + req.headers.host + req.url;
+//     res.redirect(fullUrl_Secure);  
+// };

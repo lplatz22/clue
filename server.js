@@ -37,6 +37,15 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
+// function ensureSec(req, res, next){
+//     if (req.headers["X-Forwarded-Proto"] === "https"){
+//        return next();
+//     }
+//     var fullUrl_Secure = "https://" + req.headers.host + req.url;
+//     console.log(fullUrl_Secure);
+//     res.redirect(fullUrl_Secure);  
+// };
+
 /**
  * Get port from environment and store in Express.
  */

@@ -8,7 +8,7 @@ import { TaskService, TASK_STATUS_CODES } from './tasks/task.service';
 	moduleId: module.id,
 	selector: 'user-progress',
 	templateUrl: './user-progress.component.html',
-	// styleUrls: ['./user-progress.component.css']
+	styleUrls: ['./app.component.css']
 })
 export class UserProgressComponent {
 	private users: any[] = [];

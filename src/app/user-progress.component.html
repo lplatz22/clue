@@ -1,0 +1,40 @@
+<div *ngIf="error">
+	<alert type="danger">
+	  <strong>Bummer!</strong> Try refreshing - Error: ({{error}})
+	</alert>
+</div>
+
+<div class="row" *ngIf="users && tasks">
+	<div class="col-xs-12">
+		<!-- <div *ngFor="let user of users">
+			{{user.email}}
+		</div> -->
+		<div class="panel panel-default">
+		  <!-- Default panel contents -->
+		  <div class="panel-heading"><b>All User's Progress</b></div>
+		  <!-- Table -->
+		  <table class="table table-bordered table-striped">
+		    <tr>
+		    	<th width="20%"><a role="button" (click)="sortBy('email')">Email</a></th>
+		    	<th width="20%"><a role="button" (click)="sortBy('firstName')">First Name</a></th>
+		    	<th width="20%"><a role="button" (click)="sortBy('lastName')">Last Name</a></th>
+		    	<th width="20%"><a role="button" (click)="sortBy('company')">Company</a></th>
+		    	<th width="20%"><a role="button" (click)="sortBy('progress')">Progress</a></th>
+		    </tr>
+		    <tr *ngFor="let user of users">
+		    	<td>{{user.email}}</td>
+		    	<td>{{user.firstName}}</td>
+		    	<td>{{user.lastName}}</td>
+		    	<td>{{user.company}}</td>
+		    	<td>
+		    		<progressbar *ngIf="(getNumCompleted(user) > 0)" class="progress-striped active" [value]="(getNumCompleted(user) / tasks.length) * 100">
+					  	{{getNumCompleted(user)}} / {{tasks.length}}
+					</progressbar>
+					<div *ngIf="getNumCompleted(user) == 0">Not Started</div>
+		    	</td>
+		    </tr>
+		  </table>
+		</div>
+	</div>
+</div>
+

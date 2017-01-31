@@ -23,13 +23,18 @@ module.exports = function(app, passport) {
 
 	// PROFILE SECTION =========================
 	app.post('/api/login', passport.authenticate('local-login', {}), function(req, res) {
-        var isAdmin = req.user.admin;
-        if(!isAdmin) {
-            isAdmin = false;
+        var isAd = req.user.admin;
+        var isPriv = req.user.privileged;
+        if(!isAd) {
+            isAd = false;
+        }
+        if(!isPriv) {
+            isPriv = false;
         }
         var response = {
             loggedIn: true,
-            admin: isAdmin
+            admin: isAd,
+            privileged: isPriv
         }
         res.status(200).send(response);
     });
@@ -95,18 +100,23 @@ module.exports = function(app, passport) {
     //
 
     app.get('/api/authenticated', isLoggedIn, function(req, res) {
-        var isAdmin = req.user.admin;
-        if(!isAdmin) {
-            isAdmin = false;
+        var isAd = req.user.admin;
+        var isPriv = req.user.privileged;
+        if(!isAd) {
+            isAd = false;
+        }
+        if(!isPriv) {
+            isPriv = false;
         }
         var response = {
             authenticated: true,
-            admin: isAdmin
+            admin: isAd,
+            privileged: isPriv
         }
         res.status(200).json(response);
     });
 
-    app.get('/api/admin/game/description', function(req, res) {
+    app.get('/api/game/description', function(req, res) {
     
         fs.readFile(gameConfigPath, 'utf8', (err, data) => {
             if (err) {
@@ -119,39 +129,55 @@ module.exports = function(app, passport) {
         });
     });
 
-    app.get('/api/admin/fullGame', isLoggedIn, function(req, res) {
-        if(req.user.admin){
-            fs.readFile(gameConfigPath, 'utf8', (err, data) => {
-                if (err) {
-                    console.log(err);
-                    res.status(400).json(err);
-                } else {
-                    var json = JSON.parse(data);
-                    res.status(200).json(json);
-                }
-            });
-        } else {
-            res.status(401).json({'admin': false});
-        }
+    app.get('/api/admin/fullGame', isLoggedIn, isAdmin, function(req, res) {
+        fs.readFile(gameConfigPath, 'utf8', (err, data) => {
+            if (err) {
+                console.log(err);
+                res.status(400).json(err);
+            } else {
+                var json = JSON.parse(data);
+                res.status(200).json(json);
+            }
+        });
     });
 
-    app.post('/api/admin/fullGame', isLoggedIn, function(req, res) {
-        if(req.user.admin){
-            if(!req.body || !req.body.game) {
-                res.status(400).json({error: 'no game found in post body'});
+    app.get('/api/game/progress', isLoggedIn, isAdmin, function(req, res) {
+        var query = {
+            selector: {
+                _id: { 
+                    $gt: 0
+                }
+            },
+            fields: [
+                "email",
+                "firstName",
+                "lastName",
+                "company",
+                "tasksComplete"
+            ]
+        };
+        usersDB.find(query, function(err, result) {
+            if (err){
+                res.status(400).json(err);
             } else {
-                fs.writeFile(gameConfigPath, JSON.stringify(req.body.game, null, 4), (err) => {
-                    if (err) {
-                        console.error(err);
-                        res.status(400).json(err);
-                    } else {
-                        console.log("Game Settings Updated!");
-                        res.status(200).json({'saved': true});
-                    }
-                });
+                res.status(200).json(result.docs);
             }
+        });
+    });
+
+    app.post('/api/admin/fullGame', isLoggedIn, isAdmin, function(req, res) {
+        if(!req.body || !req.body.game) {
+            res.status(400).json({error: 'no game found in post body'});
         } else {
-            res.status(401).json({'admin': false});
+            fs.writeFile(gameConfigPath, JSON.stringify(req.body.game, null, 4), (err) => {
+                if (err) {
+                    console.error(err);
+                    res.status(400).json(err);
+                } else {
+                    console.log("Game Settings Updated!");
+                    res.status(200).json({'saved': true});
+                }
+            });
         }
     });
 
@@ -290,6 +316,22 @@ function isLoggedIn(req, res, next) {
         return next();
 
     res.status(401).send('unauthenticated');
+}
+
+// route middleware to ensure user is admin
+function isAdmin(req, res, next) {
+    if (req.user.admin){
+        return next();
+    }
+    res.status(401).json({'admin': false});
+}
+
+// route middleware to ensure user is admin
+function isPrivileged(req, res, next) {
+    if (req.user.privileged){
+        return next();
+    }
+    res.status(401).json({'privileged': false});
 }
 
 // function ensureSec(req, res, next){

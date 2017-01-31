@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RoutingModule } from './routing/routing.module';
 import { AuthenticationService } from './authentication.service';
 
-import { CollapseModule, AccordionModule, ModalModule, AlertModule } from 'ng2-bootstrap';
+import { CollapseModule, AccordionModule, ModalModule, AlertModule, ProgressbarModule } from 'ng2-bootstrap';
 import { TaskModule } from './tasks/task.module';
 import { UserModule } from './user/user.module';
 
@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav.component';
 import { HomeComponent } from './home.component';
 import { GameCreatorComponent } from './game-creator.component';
+import { UserProgressComponent } from './user-progress.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { GameCreatorComponent } from './game-creator.component';
     AppComponent,
     NavComponent,
     HomeComponent,
-    GameCreatorComponent
+    GameCreatorComponent,
+    UserProgressComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,8 @@ import { GameCreatorComponent } from './game-creator.component';
     CollapseModule.forRoot(),
     AccordionModule.forRoot(),
     ModalModule.forRoot(),
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    ProgressbarModule.forRoot()
   ],
   providers: [ AuthenticationService ],
   bootstrap: [AppComponent]

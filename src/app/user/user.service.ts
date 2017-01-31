@@ -39,6 +39,12 @@ export class UserService {
       .catch(this.handleError);
   }
 
+  getUserProgress() {
+    return this.http.get('/api/game/progress', <RequestOptionsArgs>{ withCredentials: true })
+      .map((res: Response) => res.json())
+      .catch(this.handleError);
+  }
+
   private handleError(error: Response) {
     console.log('error handled by handleError');
     console.log(error);

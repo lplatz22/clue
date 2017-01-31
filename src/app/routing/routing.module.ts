@@ -8,6 +8,7 @@ import { CluesComponent } from '../user/clues.component';
 import { LoginComponent } from '../user/login.component';
 import { RegisterComponent } from '../user/register.component';
 import { GameCreatorComponent } from '../game-creator.component';
+import { UserProgressComponent } from '../user-progress.component';
 import { RoutingGuard, AdminRoutingGuard } from './router.guard';
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'task/:task_id', component: TaskComponent, canActivate: [RoutingGuard] },
   { path: 'clues', component: CluesComponent, canActivate: [RoutingGuard] },
   { path: 'gamecreator', component: GameCreatorComponent, canActivate: [AdminRoutingGuard]},
+  { path: 'userprogress', component: UserProgressComponent, canActivate: [AdminRoutingGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: '**', redirectTo: '/', pathMatch: 'full' }

@@ -20,6 +20,7 @@
             <li *ngIf="loggedIn"><a [routerLink]="['/clues']">My Clues</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
+            <li *ngIf="isAdmin"><a [routerLink]="['/userprogress']">All Users</a></li>
             <li *ngIf="isAdmin"><a [routerLink]="['/gamecreator']">Game Settings</a></li>
             <li *ngIf="!loggedIn"><a [routerLink]="['/login']">Login</a></li>
             <li *ngIf="loggedIn"><a [routerLink]="['/login']">Logout</a></li>

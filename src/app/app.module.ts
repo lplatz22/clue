@@ -14,6 +14,7 @@ import { NavComponent } from './nav.component';
 import { HomeComponent } from './home.component';
 import { GameCreatorComponent } from './game-creator.component';
 import { UserProgressComponent } from './user-progress.component';
+import { UserFilterPipe } from './user-progress.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { UserProgressComponent } from './user-progress.component';
     NavComponent,
     HomeComponent,
     GameCreatorComponent,
-    UserProgressComponent
+    UserProgressComponent,
+    UserFilterPipe
   ],
   imports: [
     BrowserModule,

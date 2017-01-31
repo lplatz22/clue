@@ -5,13 +5,21 @@
 </div>
 
 <div class="row" *ngIf="users && tasks">
+	<div class="col-xs-6 col-xs-offset-3">
+		<input type="text" class="form-control" placeholder="Search" [(ngModel)]="filterValue">
+		<br>
+	</div>
+	<div class="col-xs-3">
+	</div>
 	<div class="col-xs-12">
 		<!-- <div *ngFor="let user of users">
 			{{user.email}}
 		</div> -->
 		<div class="panel panel-default">
 		  <!-- Default panel contents -->
-		  <div class="panel-heading"><b>All User's Progress</b></div>
+		  <div class="panel-heading">
+		  	<b>All User's Progress</b>
+		  </div>
 		  <!-- Table -->
 		  <table class="table table-bordered table-striped">
 		    <tr>
@@ -21,13 +29,13 @@
 		    	<th width="20%"><a role="button" (click)="sortBy('company')">Company</a></th>
 		    	<th width="20%"><a role="button" (click)="sortBy('progress')">Progress</a></th>
 		    </tr>
-		    <tr *ngFor="let user of users">
+		    <tr *ngFor="let user of users | userFilter:filterValue">
 		    	<td>{{user.email}}</td>
 		    	<td>{{user.firstName}}</td>
 		    	<td>{{user.lastName}}</td>
 		    	<td>{{user.company}}</td>
 		    	<td>
-		    		<progressbar *ngIf="(getNumCompleted(user) > 0)" class="progress-striped active" [value]="(getNumCompleted(user) / tasks.length) * 100">
+		    		<progressbar *ngIf="(getNumCompleted(user) > 0)" class="progress-striped active" [value]="(getNumCompleted(user) / tasks.length) * 100" [type]="getType(user)">
 					  	{{getNumCompleted(user)}} / {{tasks.length}}
 					</progressbar>
 					<div *ngIf="getNumCompleted(user) == 0">Not Started</div>

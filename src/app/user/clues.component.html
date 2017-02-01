@@ -17,36 +17,86 @@
 	<div class="col-sm-4">
 		<div class="panel panel-primary">
 			<div class="panel-heading"><b>Locations</b></div>
-			<ul class="list-group">
-			  <li *ngFor="let location of locations; let i = index; " class="list-group-item" [ngClass]="{'list-group-item-success':!check(location), 'list-group-item-info':check(location)}">
-			  	<s *ngIf="check(location)"><i>{{location}}</i></s>
-			  	<span *ngIf="!check(location)">{{location}}</span>
-			  </li>
-			</ul>
+			<div class="list-group">
+			  <button *ngFor="let location of locations; let i = index; " class="list-group-item" type="button" [ngClass]="{'list-group-item-success':!location.complete, 'list-group-item-info':location.complete}" (click)="viewDetail(location)">
+			  	<div class="media">
+				  <div class="media-left media-middle">
+				  	<img *ngIf="location.icon" class="media-object" src="/assets/{{location.icon}}" [alt]="location.text" onerror="this.src='/assets/location_default.png'" width="64" height="64" style="border-radius: 50%;">
+				  	<img *ngIf="!location.icon && location.image" class="media-object" src="/assets/{{location.image}}" onerror="this.src='/assets/location_default.png'" [alt]="location.text" width="64" height="64" style="border-radius: 50%;">
+				  	<img *ngIf="!location.icon && !location.image" class="media-object" src="/assets/location_default.png" [alt]="location.text" width="64" height="64" style="border-radius: 50%;">
+				  </div>
+				  <div class="media-body">
+				    <h4 class="media-heading">
+				    	<s *ngIf="location.complete"><i>{{location.text}}</i></s>
+			  			<span *ngIf="!location.complete">{{location.text}}</span>
+				    </h4>
+				    {{location.info}}
+				  </div>
+				</div>
+			  </button>
+			</div>
 		</div>
 	</div>
 	<div class="col-sm-4">
 		<div class="panel panel-primary">
 			<div class="panel-heading"><b>Weapons</b></div>
-			<ul class="list-group">
-			  <li *ngFor="let weapon of weapons; let i = index; " class="list-group-item" [ngClass]="{'list-group-item-success':!check(weapon), 'list-group-item-info':check(weapon)}">
-			  	<s *ngIf="check(weapon)"><i>{{weapon}}</i></s>
-			  	<span *ngIf="!check(weapon)">{{weapon}}</span>
-			  </li>
-			</ul>
+			<div class="list-group">
+			  <button *ngFor="let weapon of weapons; let i = index; " class="list-group-item" type="button" [ngClass]="{'list-group-item-success':!weapon.complete, 'list-group-item-info':weapon.complete}" (click)="viewDetail(weapon)">
+			  	<div class="media">
+				  <div class="media-left media-middle">
+				  	<img *ngIf="weapon.icon" class="media-object" src="/assets/{{weapon.icon}}" onerror="this.src='/assets/weapon_default.jpg'" [alt]="weapon.text" width="64" height="64" style="border-radius: 50%;">
+				  	<img *ngIf="!weapon.icon && weapon.image" class="media-object" src="/assets/{{weapon.image}}" onerror="this.src='/assets/weapon_default.jpg'" [alt]="weapon.text" width="64" height="64" style="border-radius: 50%;">
+				  	<img *ngIf="!weapon.icon && !weapon.image" class="media-object" src="/assets/weapon_default.png" [alt]="weapon.text" width="64" height="64" style="border-radius: 50%;">
+				  </div>
+				  <div class="media-body">
+				    <h4 class="media-heading">
+				    	<s *ngIf="weapon.complete"><i>{{weapon.text}}</i></s>
+			  			<span *ngIf="!weapon.complete">{{weapon.text}}</span>
+				    </h4>
+				    {{weapon.info}}
+				  </div>
+				</div>
+			  </button>
+			</div>
 		</div>
 	</div>
 	<div class="col-sm-4">
 		<div class="panel panel-primary">
 			<div class="panel-heading"><b>Suspects</b></div>
-			<ul class="list-group">
-			  <li *ngFor="let suspect of suspects; let i = index; " class="list-group-item" [ngClass]="{'list-group-item-success':!check(suspect), 'list-group-item-info':check(suspect)}">
-			  	<s *ngIf="check(suspect)"><i>{{suspect}}</i></s>
-			  	<span *ngIf="!check(suspect)">{{suspect}}</span>
-			  </li>
-			</ul>
+			<div class="list-group">
+			  <button *ngFor="let suspect of suspects; let i = index; " class="list-group-item" type="button" [ngClass]="{'list-group-item-success':!suspect.complete, 'list-group-item-info':suspect.complete}" (click)="viewDetail(suspect)">
+			  	<div class="media">
+				  <div class="media-left media-middle">
+				  	<img *ngIf="suspect.icon" class="media-object" src="/assets/{{suspect.icon}}" onerror="this.src='/assets/suspect_default.png'" [alt]="suspect.text" width="64" height="64" style="border-radius: 50%;">
+				  	<img *ngIf="!suspect.icon && suspect.image" class="media-object" src="/assets/{{suspect.image}}" onerror="this.src='/assets/suspect_default.png'" [alt]="suspect.text" width="64" height="64" style="border-radius: 50%;">
+				  	<img *ngIf="!suspect.icon && !suspect.image" class="media-object" src="/assets/suspect_default.png" [alt]="suspect.text" width="64" height="64" style="border-radius: 50%;">
+				  </div>
+				  <div class="media-body">
+				    <h4 class="media-heading">
+				    	<s *ngIf="suspect.complete"><i>{{suspect.text}}</i></s>
+			  			<span *ngIf="!suspect.complete">{{suspect.text}}</span>
+				    </h4>
+				    {{suspect.info}}
+				  </div>
+				</div>
+			  </button>
+			</div>
 		</div>
 	</div>
 </div>
 
 
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="thumbnail">
+      <img *ngIf="detailClue.type == 'location'" src="/assets/{{detailClue.image}}" [alt]="detailClue.text" style="width: 100%; height: auto;" onerror="this.src='/assets/location_default.png'">
+      <img *ngIf="detailClue.type == 'suspect'" src="/assets/{{detailClue.image}}" [alt]="detailClue.text" style="width: 100%; height: auto;" onerror="this.src='/assets/suspect_default.png'">
+      <img *ngIf="detailClue.type == 'weapon'" src="/assets/{{detailClue.image}}" [alt]="detailClue.text" style="width: 100%; height: auto;" onerror="this.src='/assets/weapon_default.jpg'">
+      <div class="caption">
+        <h3>{{detailClue.text}}</h3>
+        <p>{{detailClue.info}}</p>
+        <!-- <p><button type="button" class="btn btn-primary" (click)="modal.hide()">Done</button></p> -->
+      </div>
+    </div>
+  </div>
+</div>

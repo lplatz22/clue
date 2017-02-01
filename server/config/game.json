@@ -1,27 +1,83 @@
 {
     "description": "Bankers Toolbox never sleeps on crime.\nWe're starting to learn that someone is running a major crime ring in the area.\nHelp us figure out who it is, and how they're pulling it off - All with the power of Banker's amazing software!",
     "reveal": {
-        "location": "Dogwood",
-        "suspect": "Competing CEO A",
-        "weapon": "Phishing Email"
+        "location_id": "1",
+        "suspect_id": "5",
+        "weapon_id": "9"
     },
-    "locations": [
-        "Dogwood",
-        "Maggie Maes",
-        "Blackheart",
-        "Craft Pride"
-    ],
-    "suspects": [
-        "Competing CEO A",
-        "Competing CEO B",
-        "Competing CEO C"
-    ],
-    "weapons": [
-        "USB Stick",
-        "Phishing Email",
-        "Evil Computer Program A",
-        "Weapon B"
-    ],
+    "clues": {
+        "1": {
+            "text": "Dogwood",
+            "icon": "dogwood_icon.jpg",
+            "image": "dogwood.jpg",
+            "type": "location",
+            "info": "A casual bar on west 6th with a secondary location on Rock Rose - known for its amazing queso and people pretending to still be in college." 
+        },
+        "2": {
+            "text": "Maggie Maes",
+            "icon": "maggie_maes_icon.jpeg",
+            "image": "maggie_maes.jpg",
+            "type": "location",
+            "info": "Rooftop bar located on the dirty 6th. Best at night and amazing for people watching or winding up back home without knowing how you got there." 
+        },
+        "3": {
+            "text": "Blackheart",
+            "icon": "blackheart_icon.jpg",
+            "image": "blackheart.jpg",
+            "type": "location",
+            "info": "Cool, old house turned whisky bar on Rainey Street. Amazing live music and a great place to hang out with friends."
+        },
+        "4": {
+            "text": "Craft Pride",
+            "icon": "craft_pride_icon.jpeg",
+            "image": "craft_pride.jpeg",
+            "type": "location",
+            "info": "Low key, beer house on Rainey with tons of local taps. Great for lunch or dinner at 'VIA 313 Pizza' - a food truck located in the back."
+        },
+        "5": {
+            "text": "Competing CEO A",
+            "image": "ceo_a.jpg",
+            "type": "suspect",
+            "info": "Known for his shady business tactics and multiple, multi-million dollar yachts - CEO A is a prime suspect for obvious reasons."
+        },
+        "6": {
+            "text": "Competing CEO B",
+            "image": "ceo_b.jpeg",
+            "type": "suspect",
+            "info": "Armed with the worst dad jokes around, CEO B is so unsuspicious, that it almost makes him very suspicious, you know?"
+        },
+        "7": {
+            "text": "Competing CEO C",
+            "image": "ceo_c.jpg",
+            "type": "suspect",
+            "info": "CEO C was the best CEO around until she lost her company on 1 hand of blackjack in vegas years ago. She'll do anything to get it back."
+        },
+        "8": {
+            "text": "USB Stick",
+            "image": "usb_stick.png",
+            "type": "weapon",
+            "info": "What!? I didn't know I wasn't supposed to just go sticking USB Sticks that I found on the ground in my coroporate servers."
+        },
+        "9": {
+            "text": "Phishing Email",
+            "image": "phishing.jpg",
+            "type": "weapon",
+            "info": "So if I click on this button, I'll have $1 Million dollars deposited in my account? Sign me up!"
+        },
+        "10": {
+            "text": "Evil Computer Program A",
+            "image": "virus.jpg",
+            "type": "weapon",
+            "info": "Disguised as a hard drive cleaning tool - this program is capable of stealing millions of dollars from bank systems, if it's in the wrong hands of course..."
+        },
+        "11": {
+            "text": "Weapon B",
+            "icon": "weapon_b_icon.jpg",
+            "image": "weapon_b.jpg",
+            "type": "weapon",
+            "info": "Weapon B is another weapon that could have been used. There is nothing witty to say about Weapon B. Avoid Weapon B at all costs."
+        }
+    },
     "tasks": [
         {
             "name": "Task 1",
@@ -39,7 +95,7 @@
                     "answer": "Penguin"
                 }
             ],
-            "clue": "Maggie Maes"
+            "clue_id": "2"
         },
         {
             "name": "Task 2",
@@ -61,7 +117,7 @@
                     "answer": "five"
                 }
             ],
-            "clue": "Competing CEO B"
+            "clue_id": "6"
         },
         {
             "name": "Task 3",
@@ -83,13 +139,13 @@
                     "answer": "ten"
                 }
             ],
-            "clue": "USB Stick"
+            "clue_id": "8"
         },
         {
             "name": "New Task",
             "desc": "New Task Description",
             "video_url": "url here",
-            "clue": "Blackheart",
+            "clue_id": "3",
             "quiz": [
                 {
                     "question": "This is a test question",
@@ -107,7 +163,7 @@
             "name": "Another Task",
             "desc": "Another Task Description",
             "video_url": "url here",
-            "clue": "Weapon B",
+            "clue_id": "11",
             "quiz": [
                 {
                     "question": "Say \"hi\"",
@@ -129,7 +185,7 @@
             "name": "Luke's Task",
             "desc": "Luke's Task Description",
             "video_url": "url here",
-            "clue": "Craft Pride",
+            "clue_id": "4",
             "quiz": [
                 {
                     "question": "Answer 2 is really cool...",
@@ -147,7 +203,7 @@
             "name": "The Newest of Tasks",
             "desc": "Newest of tasks Description",
             "video_url": "url here",
-            "clue": "Competing CEO C",
+            "clue_id": "7",
             "quiz": [
                 {
                     "question": "Does Kathryn want a puppy? (yes/no)",
@@ -159,7 +215,7 @@
             "name": "Final Task",
             "desc": "This is the finale. You must be so excited",
             "video_url": "url here",
-            "clue": "Evil Computer Program A",
+            "clue_id": "10",
             "quiz": [
                 {
                     "question": "Did you enjoy the game?",

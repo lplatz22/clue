@@ -226,6 +226,8 @@ module.exports = function(app, passport) {
 
                 var task = JSON.parse(data).tasks[task_index];
 
+                task.clue = JSON.parse(data).clues[task.clue_id];
+
                 usersDB.get(req.user._id, function(err, user) {
                     if (err) {
                         res.status(500).send(err.message);
@@ -274,23 +276,13 @@ module.exports = function(app, passport) {
                         res.status(500).json(error);
                     } else {
                         var fullGameData = JSON.parse(data);
-                        var clues = [];
+                        var clues = fullGameData.clues;
                         for (var t in user.tasksComplete) {
                             if(user.tasksComplete[t]){
-                                var clueData = {
-                                    clue: fullGameData.tasks[t].clue,
-                                    id: t
-                                };
-                                clues.push(clueData);
+                                clues[fullGameData.tasks[t].clue_id].complete = true;
                             }
                         }
-                        var responseJSON = {
-                            clues: clues,
-                            locations: fullGameData.locations,
-                            suspects: fullGameData.suspects,
-                            weapons: fullGameData.weapons
-                        }
-                        res.status(200).json(responseJSON);
+                        res.status(200).json(clues);
                     }
                 });
             }

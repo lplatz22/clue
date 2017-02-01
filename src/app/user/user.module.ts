@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RoutingModule } from '../routing/routing.module';
-
+import { ModalModule } from 'ng2-bootstrap';
 import { LoginComponent } from './login.component';
 import { RegisterComponent } from './register.component';
 import { CluesComponent } from './clues.component';
@@ -21,7 +21,8 @@ import { UserService } from './user.service';
     FormsModule,
     HttpModule,
     RoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ModalModule.forRoot(),
   ],
   exports: [
   ],

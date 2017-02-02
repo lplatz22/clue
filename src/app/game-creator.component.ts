@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ModalDirective } from 'ng2-bootstrap';
 import { TaskService, TASK_STATUS_CODES } from './tasks/task.service';
 
+
 @Component({
 	moduleId: module.id,
 	selector: 'game-creator',
@@ -19,11 +20,13 @@ export class GameCreatorComponent implements OnInit {
 	private weapons: any = {};
 	private tasks: any[] = [];
 	private clues: any = {};
+	private images: string[] = [];
 	private currentTaskIndex: number;
 	private currentQuestionIndex: number;
 
 	private selected: any = {};
 	private selectedClue: any = {};
+	private selectedImage: any = {};
 	private question: any = {};
 	private reveal: any = {};
 	private description: string;
@@ -34,6 +37,8 @@ export class GameCreatorComponent implements OnInit {
 	@ViewChild('questionModal') private questionModal: ModalDirective;
 	@ViewChild('loadModal') private loadingModal: ModalDirective;
 	@ViewChild('clueModal') private clueModal: ModalDirective;
+	@ViewChild('imageModal') private imageModal: ModalDirective;
+
 
 
 	constructor(private router: Router,
@@ -54,6 +59,13 @@ export class GameCreatorComponent implements OnInit {
 			this.loadingModal.hide();
 		}, error => {
 			this.loadingModal.hide();
+			this.error = TASK_STATUS_CODES[error.status] || TASK_STATUS_CODES[500];
+			console.log(this.error);
+		});
+
+		this.taskService.getAvaliableImages().subscribe(images => {
+			this.images = images;
+		}, error => {
 			this.error = TASK_STATUS_CODES[error.status] || TASK_STATUS_CODES[500];
 			console.log(this.error);
 		});
@@ -86,6 +98,15 @@ export class GameCreatorComponent implements OnInit {
 			this.clues[newID] = this.selectedClue;
 		}
 		this.clueModal.hide();
+	}
+
+	addImage() {
+		this.selectedImage = {};
+		this.imageModal.show();
+	}
+	saveImage(value) {
+		console.log(value);
+		//this.uploader.uploadAll()
 	}
 
 	addQuestion_Answers(task_index) {

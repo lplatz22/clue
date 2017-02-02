@@ -34,6 +34,12 @@ export class TaskService {
       .catch(this.handleError);
   }
 
+  getAvaliableImages() {
+     return this.http.get('/api/admin/allImages', <RequestOptionsArgs>{ withCredentials: true })
+      .map((res: Response) => res.json())
+      .catch(this.handleError);
+  }
+
   getGameDescription() {
     return this.http.get('/api/game/description', <RequestOptionsArgs>{ withCredentials: true })
       .map((res: Response) => res.json())

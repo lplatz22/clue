@@ -52,9 +52,9 @@
 	<div class="col-md-8 col-md-offset-2" *ngIf="task.complete">
 		<h4>You've discoverd its not...</h4>
 		<div class="thumbnail">
-	      <img *ngIf="task.clue.type == 'location'" src="/assets/{{task.clue.image}}" [alt]="task.clue.text" style="width: 100%; height: auto;" onerror="this.src='/assets/location_default.png'">
-	      <img *ngIf="task.clue.type == 'suspect'" src="/assets/{{task.clue.image}}" [alt]="task.clue.text" style="width: 100%; height: auto;" onerror="this.src='/assets/suspect_default.png'">
-	      <img *ngIf="task.clue.type == 'weapon'" src="/assets/{{task.clue.image}}" [alt]="task.clue.text" style="width: 100%; height: auto;" onerror="this.src='/assets/weapon_default.jpg'">
+	      <img *ngIf="task.clue.type == 'location'" src="/assets/clue_images/{{task.clue.image}}" [alt]="task.clue.text" style="width: 100%; height: auto;" onerror="this.src='/assets/location_default.png'">
+	      <img *ngIf="task.clue.type == 'suspect'" src="/assets/clue_images/{{task.clue.image}}" [alt]="task.clue.text" style="width: 100%; height: auto;" onerror="this.src='/assets/suspect_default.png'">
+	      <img *ngIf="task.clue.type == 'weapon'" src="/assets/clue_images/{{task.clue.image}}" [alt]="task.clue.text" style="width: 100%; height: auto;" onerror="this.src='/assets/weapon_default.jpg'">
 	      <div class="caption">
 	        <h3>{{task.clue.text}}</h3>
 	        <p>{{task.clue.info}}</p>

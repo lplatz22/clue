@@ -170,6 +170,27 @@
 	</div>
 </div>
 
+<hr>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<b>Avaliable Images ({{images.length}})</b>
+				<button (click)="addImage()" class="btn btn-info btn-xs pull-right"><span class="glyphicon glyphicon-plus"></span></button>
+			</div>
+			<div class="panel-body">
+				<div class="thumbnail col-md-3 col-sm-4 col-xs-6" *ngFor="let image of images">
+			      <img src="/assets/clue_images/{{image}}" alt="{{image}}" style="width: 120px; height: 120px;">
+			        <p>{{image}}</p>
+			        <p><button type="button" disabled class="btn btn-danger" (click)="remove(image)">Remove</button></p>
+			    </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <div *ngIf="submitError">
 	<br>
 	<alert type="danger">
@@ -187,11 +208,13 @@
       	<label>Name of Clue</label>
         <input class="form-control" type="text" name="text" [(ngModel)]="selectedClue.text">
         <label>Clue Image</label>
-        <!-- this should be a drop down of images -->
-        <input class="form-control" type="text" name="image" [(ngModel)]="selectedClue.image">
+        <select class="form-control" [(ngModel)]="selectedClue.image">
+			<option *ngFor="let image of images" value="{{image}}" >{{image}}</option>
+		</select>
         <label>Clue Icon (optional)</label>
-        <!-- this should be a drop down of images -->
-        <input class="form-control" type="text" name="icon" [(ngModel)]="selectedClue.icon">
+        <select class="form-control" [(ngModel)]="selectedClue.icon">
+			<option *ngFor="let image of images" value="{{image}}">{{image}}</option>
+		</select>
         <label>Clue Type</label>
         <select class="form-control" [(ngModel)]="selectedClue.type">
 			<option value="location">Location</option>
@@ -205,6 +228,27 @@
       	<button class="btn btn-default" type="button" (click)="clueModal.hide()">Cancel</button>
         <button class="btn btn-primary" type="button" (click)="saveClue()">Save</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<div bsModal #imageModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="weaponModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <form #form="ngForm" (ngSubmit)="saveImage(form.value)">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Image Details</h4>
+      </div>
+      <div class="modal-body">
+		  Select an Image: <input type="file" name="file" ngModel required />
+		  <label>Filename (No Spaces, keep file extension!)</label>
+          <input class="form-control" type="text" name="filename" ngModel required>
+      </div>
+      <div class="modal-footer">
+      	<button class="btn btn-default" type="button" (click)="imageModal.hide()">Cancel</button>
+        <button class="btn btn-primary" type="submit" >Save</button>
+      </div>
+      </form>
     </div>
   </div>
 </div>

@@ -21,8 +21,8 @@
 			  <button *ngFor="let location of locations; let i = index; " class="list-group-item" type="button" [ngClass]="{'list-group-item-success':!location.complete, 'list-group-item-info':location.complete}" (click)="viewDetail(location)">
 			  	<div class="media">
 				  <div class="media-left media-middle">
-				  	<img *ngIf="location.icon" class="media-object" src="/assets/{{location.icon}}" [alt]="location.text" onerror="this.src='/assets/location_default.png'" width="64" height="64" style="border-radius: 50%;">
-				  	<img *ngIf="!location.icon && location.image" class="media-object" src="/assets/{{location.image}}" onerror="this.src='/assets/location_default.png'" [alt]="location.text" width="64" height="64" style="border-radius: 50%;">
+				  	<img *ngIf="location.icon" class="media-object" src="/assets/clue_images/{{location.icon}}" [alt]="location.text" onerror="this.src='/assets/location_default.png'" width="64" height="64" style="border-radius: 50%;">
+				  	<img *ngIf="!location.icon && location.image" class="media-object" src="/assets/clue_images/{{location.image}}" onerror="this.src='/assets/location_default.png'" [alt]="location.text" width="64" height="64" style="border-radius: 50%;">
 				  	<img *ngIf="!location.icon && !location.image" class="media-object" src="/assets/location_default.png" [alt]="location.text" width="64" height="64" style="border-radius: 50%;">
 				  </div>
 				  <div class="media-body">
@@ -44,8 +44,8 @@
 			  <button *ngFor="let weapon of weapons; let i = index; " class="list-group-item" type="button" [ngClass]="{'list-group-item-success':!weapon.complete, 'list-group-item-info':weapon.complete}" (click)="viewDetail(weapon)">
 			  	<div class="media">
 				  <div class="media-left media-middle">
-				  	<img *ngIf="weapon.icon" class="media-object" src="/assets/{{weapon.icon}}" onerror="this.src='/assets/weapon_default.jpg'" [alt]="weapon.text" width="64" height="64" style="border-radius: 50%;">
-				  	<img *ngIf="!weapon.icon && weapon.image" class="media-object" src="/assets/{{weapon.image}}" onerror="this.src='/assets/weapon_default.jpg'" [alt]="weapon.text" width="64" height="64" style="border-radius: 50%;">
+				  	<img *ngIf="weapon.icon" class="media-object" src="/assets/clue_images/{{weapon.icon}}" onerror="this.src='/assets/weapon_default.jpg'" [alt]="weapon.text" width="64" height="64" style="border-radius: 50%;">
+				  	<img *ngIf="!weapon.icon && weapon.image" class="media-object" src="/assets/clue_images/{{weapon.image}}" onerror="this.src='/assets/weapon_default.jpg'" [alt]="weapon.text" width="64" height="64" style="border-radius: 50%;">
 				  	<img *ngIf="!weapon.icon && !weapon.image" class="media-object" src="/assets/weapon_default.png" [alt]="weapon.text" width="64" height="64" style="border-radius: 50%;">
 				  </div>
 				  <div class="media-body">
@@ -67,8 +67,8 @@
 			  <button *ngFor="let suspect of suspects; let i = index; " class="list-group-item" type="button" [ngClass]="{'list-group-item-success':!suspect.complete, 'list-group-item-info':suspect.complete}" (click)="viewDetail(suspect)">
 			  	<div class="media">
 				  <div class="media-left media-middle">
-				  	<img *ngIf="suspect.icon" class="media-object" src="/assets/{{suspect.icon}}" onerror="this.src='/assets/suspect_default.png'" [alt]="suspect.text" width="64" height="64" style="border-radius: 50%;">
-				  	<img *ngIf="!suspect.icon && suspect.image" class="media-object" src="/assets/{{suspect.image}}" onerror="this.src='/assets/suspect_default.png'" [alt]="suspect.text" width="64" height="64" style="border-radius: 50%;">
+				  	<img *ngIf="suspect.icon" class="media-object" src="/assets/clue_images/{{suspect.icon}}" onerror="this.src='/assets/suspect_default.png'" [alt]="suspect.text" width="64" height="64" style="border-radius: 50%;">
+				  	<img *ngIf="!suspect.icon && suspect.image" class="media-object" src="/assets/clue_images/{{suspect.image}}" onerror="this.src='/assets/suspect_default.png'" [alt]="suspect.text" width="64" height="64" style="border-radius: 50%;">
 				  	<img *ngIf="!suspect.icon && !suspect.image" class="media-object" src="/assets/suspect_default.png" [alt]="suspect.text" width="64" height="64" style="border-radius: 50%;">
 				  </div>
 				  <div class="media-body">
@@ -89,9 +89,9 @@
 <div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="thumbnail">
-      <img *ngIf="detailClue.type == 'location'" src="/assets/{{detailClue.image}}" [alt]="detailClue.text" style="width: 100%; height: auto;" onerror="this.src='/assets/location_default.png'">
-      <img *ngIf="detailClue.type == 'suspect'" src="/assets/{{detailClue.image}}" [alt]="detailClue.text" style="width: 100%; height: auto;" onerror="this.src='/assets/suspect_default.png'">
-      <img *ngIf="detailClue.type == 'weapon'" src="/assets/{{detailClue.image}}" [alt]="detailClue.text" style="width: 100%; height: auto;" onerror="this.src='/assets/weapon_default.jpg'">
+      <img *ngIf="detailClue.type == 'location'" src="/assets/clue_images/{{detailClue.image}}" [alt]="detailClue.text" style="width: 100%; height: auto;" onerror="this.src='/assets/location_default.png'">
+      <img *ngIf="detailClue.type == 'suspect'" src="/assets/clue_images/{{detailClue.image}}" [alt]="detailClue.text" style="width: 100%; height: auto;" onerror="this.src='/assets/suspect_default.png'">
+      <img *ngIf="detailClue.type == 'weapon'" src="/assets/clue_images/{{detailClue.image}}" [alt]="detailClue.text" style="width: 100%; height: auto;" onerror="this.src='/assets/weapon_default.jpg'">
       <div class="caption">
         <h3>{{detailClue.text}}</h3>
         <p>{{detailClue.info}}</p>

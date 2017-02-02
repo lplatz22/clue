@@ -15,7 +15,8 @@ var usersDB = cloudant.db.use(configDB.db_creds.usersDBName);
 
 const fs = require('fs');
 
-var gameConfigPath = 'server/config/game.json'
+var gameConfigPath = 'server/config/game.json';
+var imagesPath = 'dist/assets/clue_images';
 
 
 module.exports = function(app, passport) {
@@ -137,6 +138,17 @@ module.exports = function(app, passport) {
             } else {
                 var json = JSON.parse(data);
                 res.status(200).json(json);
+            }
+        });
+    });
+
+    app.get('/api/admin/allImages', isLoggedIn, isAdmin, function(req, res) {
+        fs.readdir(imagesPath, (err, files) => {
+            if(err) {
+                console.log(err);
+                res.status(400).json(err);
+            } else {
+                res.status(200).json(files);
             }
         });
     });

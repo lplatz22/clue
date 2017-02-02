@@ -8,6 +8,7 @@ import { LoginComponent } from './login.component';
 import { RegisterComponent } from './register.component';
 import { CluesComponent } from './clues.component';
 import { UserService } from './user.service';
+import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome'
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { UserService } from './user.service';
     RoutingModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
+    Angular2FontawesomeModule
   ],
   exports: [
   ],

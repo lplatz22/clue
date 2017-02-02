@@ -41,6 +41,14 @@ module.exports = function(app, passport) {
         res.status(200).send(response);
     });
 
+    app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect : '/',
+            failureRedirect : '/login'
+        }));
+
     app.post('/api/register', function(req, res) {
     	var errorJson = {};
 
@@ -191,7 +199,6 @@ module.exports = function(app, passport) {
 
 	app.get('/api/tasks', isLoggedIn, (req, res) => {
         var tasks = JSON.parse(JSON.stringify(gameData)).tasks;
-
         usersDB.get(req.user._id, function(err, user) {
             if (err) {
                 res.status(500).send(err.message);

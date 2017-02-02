@@ -8,7 +8,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 	moduleId: module.id,
 	selector: 'login',
 	templateUrl: './login.component.html',
-	styleUrls: ['../app.component.css']
+	styleUrls: ['../app.component.css', './bootstrap-social.css']
 })
 export class LoginComponent implements OnInit {
 	private error: string;

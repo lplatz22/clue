@@ -22,23 +22,31 @@
 			  <div class="form-group" >
 			    <label for="firstName">First Name</label>
 			    <input type="text" class="form-control" placeholder="John" [formControl]="registerForm.controls['firstName']" name="firstName" id="firstName">
-			    <div *ngIf="registerForm.controls['firstName'].hasError('required') && registerForm.controls['firstName'].touched" class="alert alert-danger">You must provide a first Name</div>
+			    <div *ngIf="registerForm.controls['firstName'].hasError('required') && registerForm.controls['firstName'].touched" class="alert alert-danger">You must provide a first name</div>
 			  </div>
 			  <div class="form-group" >
 			    <label for="lastName">Last Name</label>
 			    <input type="text" class="form-control" placeholder="Doe" [formControl]="registerForm.controls['lastName']" name="lastName" id="lastName">
-			    <div *ngIf="registerForm.controls['lastName'].hasError('required') && registerForm.controls['lastName'].touched" class="alert alert-danger">You must provide a last Name</div>
+			    <div *ngIf="registerForm.controls['lastName'].hasError('required') && registerForm.controls['lastName'].touched" class="alert alert-danger">You must provide a last name</div>
 			  </div>
 			  <div class="form-group" >
 			    <label for="company">Company</label>
 			    <input type="text" class="form-control" placeholder="Company" [formControl]="registerForm.controls['company']" name="company" id="company">
-			    <div *ngIf="registerForm.controls['company'].hasError('required') && registerForm.controls['company'].touched" class="alert alert-danger">You must provide a Company Name</div>
+			    <div *ngIf="registerForm.controls['company'].hasError('required') && registerForm.controls['company'].touched" class="alert alert-danger">You must provide a company name</div>
 			  </div>
-			  <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Register</button>
+			  <button type="submit" [disabled]="!registerForm.valid" class="btn btn-info btn-social btn-block">
+			  	<span class="fa fa-user"></span> Register
+			  </button>
+			  <br>
+				<p *ngIf="error" style="color:red; font-size: 16"><i>{{error}}</i></p>
+				<p>Already have an account? <a [routerLink]="['/login']">Login</a></p>
 			</form>
-			<br>
-			<p *ngIf="error" style="color:red; font-size: 16"><i>{{error}}</i></p>
-			<p>Already have an account? <a [routerLink]="['/login']">Login</a></p>
+			<hr>
+			<p style="text-align: center; font-size: 8">
+				Want to skip registration?
+			</p>
+			<a class="btn btn-block btn-social btn-facebook" href="/auth/facebook">
+			    <span class="fa fa-facebook"></span> Sign in with Facebook
+			</a>
   		</div>
-	<br>
 </div>

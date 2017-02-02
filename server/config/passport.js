@@ -1,6 +1,7 @@
 //passport.js
 
 var LocalStrategy    = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 var bcrypt   = require('bcrypt-nodejs');
 
 // load up the user model
@@ -65,4 +66,75 @@ module.exports = function(passport) {
         });
       }
     ));
+
+    passport.use(new FacebookStrategy({
+
+        // pull in our app id and secret from our auth.js file
+        clientID        : configAuth.facebookAuth.clientID,
+        clientSecret    : configAuth.facebookAuth.clientSecret,
+        callbackURL     : configAuth.facebookAuth.callbackURL,
+        profileFields: ['id', 'name', 'email']
+
+    },
+    // facebook will send back the token and profile
+    function(token, refreshToken, profile, done) {
+
+        // asynchronous
+        process.nextTick(function() {
+
+            usersDB.find({selector: {facebookID: profile.id}}, function(err, result) {
+                if (err){
+                    console.log(err);
+                    return done(null, false, { message : "Internal Server Error" } );
+                }
+
+                if(result.docs.length == 0){
+                    console.log('about to insert new facebook user');
+
+                    var userEmail = "";
+                    if(profile.emails.length > 0){
+                        userEmail = profile.emails[0].value;
+                    }
+
+                    var facebookUser = {
+                        email: userEmail,
+                        token: token,
+                        facebookID: profile.id,
+                        firstName: profile.name.givenName,
+                        lastName: profile.name.familyName,
+                        company: "",
+                        tasksComplete: {}
+                    }
+
+                    usersDB.insert(facebookUser, function (er, body, headers) {
+                      if (er) {
+                        console.log('error inserting facebook user');
+                        return done(null, false, { message : "Internal Server Error" } );
+                      } else {
+                        console.log('success inserting facebook user');
+                        usersDB.find({selector: {facebookID: profile.id}}, function(err, result) {
+                            if (err){
+                                console.log(err);
+                                return done(null, false, { message : "Internal Server Error" } );
+                            } else {
+                                if(result.docs.length == 0) {
+                                    return done(null, false, { message : "Internal Server Error - Failed to find user after insert" } );
+                                } else{
+                                    return done(null, result.docs[0]); //return the user
+                                }
+                            }
+                        });
+                      }
+                    });
+                } else {
+                    var user = result.docs[0];
+                    console.log('facebook user already found');
+                    return done(null, user); // all is well, return successful user
+                }
+                
+
+            });
+        });
+
+    }));
 };

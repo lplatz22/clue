@@ -1,10 +1,10 @@
 <div class="row">
   	<div class="col-md-6 col-md-offset-3">
 		<div class="jumbotron">
-  <h1 class="display-3">Please Login</h1>
+  <h1 class="display-3">Login</h1>
   	<form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
 	  <div class="form-group" [ngClass]="{'has-error':!loginForm.controls['email'].valid && loginForm.controls['email'].touched}">
-	    <label for="email">Email address:</label>
+	    <label for="email">Email Address:</label>
 	    <input type="email" class="form-control" placeholder="John.Doe@company.com" name="email" id="email" [formControl]="loginForm.controls['email']">
 	    <div *ngIf="loginForm.controls['email'].hasError('required') && loginForm.controls['email'].touched" class="alert alert-danger">You must provide an email address</div>
 	    <div *ngIf="loginForm.controls['email'].hasError('pattern') && loginForm.controls['email'].touched" class="alert alert-danger">Please use a valid email</div>
@@ -14,12 +14,21 @@
 	    <input type="password" class="form-control" placeholder="password" name="password" id="password" [formControl]="loginForm.controls['password']">
 	    <div *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched" class="alert alert-danger">You must provide password</div>
 	  </div>
-	  <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary">Log In</button>
+	  <button type="submit" [disabled]="!loginForm.valid" class="btn btn-info btn-social btn-block">
+	  	<span class="fa fa-user"></span> Log In
+	  </button>
+	  <br>
+	  <p *ngIf="error" style="color:red;"><i>{{error}}</i></p>
+	  <p style="text-align: center;">Need an account? <a [routerLink]="['/register']">Register</a></p>
 	  <p *ngIf="submitted" style="color:green;"><i>logging in...</i></p>
 	</form>
-	<br>
-	<p *ngIf="error" style="color:red;"><i>{{error}}</i></p>
-	<p>Need an account? <a [routerLink]="['/register']">Register</a></p>
+	<hr>
+	<p style="text-align: center;"><small>
+		Want to skip registration?
+	</small></p>
+	<a class="btn btn-block btn-social btn-facebook" href="/auth/facebook">
+	    <span class="fa fa-facebook"></span> Sign in with Facebook
+	</a>
 </div>
 </div>
 </div>

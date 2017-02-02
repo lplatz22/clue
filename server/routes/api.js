@@ -16,7 +16,8 @@ var usersDB = cloudant.db.use(configDB.db_creds.usersDBName);
 const fs = require('fs');
 
 var gameConfigPath = 'server/config/game.json';
-var imagesPath = 'dist/assets/clue_images';
+var gameData = require('../config/game.json');
+var imagesPath = 'dist/assets/clue_images'; //images must be in src/assets/clue_images folder when deployed
 
 
 module.exports = function(app, passport) {
@@ -118,28 +119,11 @@ module.exports = function(app, passport) {
     });
 
     app.get('/api/game/description', function(req, res) {
-    
-        fs.readFile(gameConfigPath, 'utf8', (err, data) => {
-            if (err) {
-                console.log(err);
-                res.status(400).json(err);
-            } else {
-                var json = JSON.parse(data);
-                res.status(200).json(json.description);
-            }
-        });
+        res.status(200).json(gameData.description);
     });
 
     app.get('/api/admin/fullGame', isLoggedIn, isAdmin, function(req, res) {
-        fs.readFile(gameConfigPath, 'utf8', (err, data) => {
-            if (err) {
-                console.log(err);
-                res.status(400).json(err);
-            } else {
-                var json = JSON.parse(data);
-                res.status(200).json(json);
-            }
-        });
+        res.status(200).json(gameData);
     });
 
     app.get('/api/admin/allImages', isLoggedIn, isAdmin, function(req, res) {
@@ -186,10 +170,13 @@ module.exports = function(app, passport) {
                     console.error(err);
                     res.status(400).json(err);
                 } else {
+                    gameData = JSON.parse(JSON.stringify(req.body.game, null, 4)); // update gameData
                     console.log("Game Settings Updated!");
                     res.status(200).json({'saved': true});
                 }
             });
+
+            //should reset all progress of users so it doesn't break anything
         }
     });
 
@@ -203,23 +190,16 @@ module.exports = function(app, passport) {
 	//========== API Routes Below =============
 
 	app.get('/api/tasks', isLoggedIn, (req, res) => {
-        fs.readFile(gameConfigPath, 'utf8', (err, data) => {
-            if (err) {
-                console.log(err);
-                res.status(500).json(err);
-            } else {
-                var tasks = JSON.parse(data).tasks;
+        var tasks = JSON.parse(JSON.stringify(gameData)).tasks;
 
-                usersDB.get(req.user._id, function(err, user) {
-                    if (err) {
-                        res.status(500).send(err.message);
-                    } else {
-                        for (var i = 0; i < tasks.length; i++) {
-                            tasks[i].complete = user.tasksComplete[i];
-                        }
-                        res.status(200).send(tasks);
-                    }
-                });
+        usersDB.get(req.user._id, function(err, user) {
+            if (err) {
+                res.status(500).send(err.message);
+            } else {
+                for (var i = 0; i < tasks.length; i++) {
+                    tasks[i].complete = user.tasksComplete[i];
+                }
+                res.status(200).send(tasks);
             }
         });
 	});
@@ -229,25 +209,16 @@ module.exports = function(app, passport) {
 		var task_index = req.query.task_id;
 
         //inject req.user info about that task in here
+        var task = JSON.parse(JSON.stringify(gameData)).tasks[task_index];
 
-        fs.readFile(gameConfigPath, 'utf8', (err, data) => {
+        task.clue = JSON.parse(JSON.stringify(gameData)).clues[task.clue_id];
+
+        usersDB.get(req.user._id, function(err, user) {
             if (err) {
-                console.log(err);
-                res.status(500).json(err);
+                res.status(500).send(err.message);
             } else {
-
-                var task = JSON.parse(data).tasks[task_index];
-
-                task.clue = JSON.parse(data).clues[task.clue_id];
-
-                usersDB.get(req.user._id, function(err, user) {
-                    if (err) {
-                        res.status(500).send(err.message);
-                    } else {
-                        task.complete = user.tasksComplete[task_index];
-                        res.status(200).send(task);
-                    }
-                });
+                task.complete = user.tasksComplete[task_index];
+                res.status(200).send(task);
             }
         });
 	});
@@ -282,21 +253,14 @@ module.exports = function(app, passport) {
                 res.status(500).send(err.message);
             } else {
 
-                fs.readFile(gameConfigPath, 'utf8', (error, data) => {
-                    if (error) {
-                        console.log(error);
-                        res.status(500).json(error);
-                    } else {
-                        var fullGameData = JSON.parse(data);
-                        var clues = fullGameData.clues;
-                        for (var t in user.tasksComplete) {
-                            if(user.tasksComplete[t]){
-                                clues[fullGameData.tasks[t].clue_id].complete = true;
-                            }
-                        }
-                        res.status(200).json(clues);
+                var fullGameData = JSON.parse(JSON.stringify(gameData));
+                var clues = fullGameData.clues;
+                for (var t in user.tasksComplete) {
+                    if(user.tasksComplete[t]){
+                        clues[fullGameData.tasks[t].clue_id].complete = true;
                     }
-                });
+                }
+                res.status(200).json(clues);
             }
         });
     });

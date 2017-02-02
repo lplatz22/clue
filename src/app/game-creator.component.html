@@ -211,7 +211,7 @@
         <select class="form-control" [(ngModel)]="selectedClue.image">
 			<option *ngFor="let image of images" value="{{image}}" >{{image}}</option>
 		</select>
-        <label>Clue Icon (optional)</label>
+        <label>Clue Icon</label>
         <select class="form-control" [(ngModel)]="selectedClue.icon">
 			<option *ngFor="let image of images" value="{{image}}">{{image}}</option>
 		</select>
@@ -308,7 +308,7 @@
         <h4 class="modal-title pull-left">Are You Sure?</h4>
       </div>
       <div class="modal-body">
-        <p>Changing the game can break all of the current user's progress.</p>
+        <h2>Changing the game can break all of the current user's progress.</h2>
         <p><b>Make sure you really want to do this!</b></p>
         <p *ngIf="invalid.length != 0 && validated"><i>Issues:</i></p>
         <div *ngIf="invalid.length != 0 && validated">

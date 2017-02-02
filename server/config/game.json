@@ -1,7 +1,7 @@
 {
     "description": "Bankers Toolbox never sleeps on crime.\nWe're starting to learn that someone is running a major crime ring in the area.\nHelp us figure out who it is, and how they're pulling it off - All with the power of Banker's amazing software!",
     "reveal": {
-        "location_id": "1",
+        "location_id": "2",
         "suspect_id": "5",
         "weapon_id": "9"
     },
@@ -11,14 +11,14 @@
             "icon": "dogwood_icon.jpg",
             "image": "dogwood.jpg",
             "type": "location",
-            "info": "A casual bar on west 6th with a secondary location on Rock Rose - known for its amazing queso and people pretending to still be in college." 
+            "info": "A casual bar on west 6th with a secondary location on Rock Rose - known for its amazing queso and people pretending to still be in college."
         },
         "2": {
             "text": "Maggie Maes",
             "icon": "maggie_maes_icon.jpeg",
             "image": "maggie_maes.jpg",
             "type": "location",
-            "info": "Rooftop bar located on the dirty 6th. Best at night and amazing for people watching or winding up back home without knowing how you got there." 
+            "info": "Rooftop bar located on the dirty 6th. Best at night and amazing for people watching or winding up back home without knowing how you got there."
         },
         "3": {
             "text": "Blackheart",
@@ -95,7 +95,7 @@
                     "answer": "Penguin"
                 }
             ],
-            "clue_id": "2"
+            "clue_id": "1"
         },
         {
             "name": "Task 2",

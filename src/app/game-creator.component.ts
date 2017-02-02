@@ -78,7 +78,6 @@ export class GameCreatorComponent implements OnInit {
 		this.clueModal.show();
 	}
 	editClue(clue_id){
-		console.log("edit: " + this.clues[clue_id].text);
 		this.selectedClue = JSON.parse(JSON.stringify(this.clues[clue_id]));
 		this.selectedClue.clue_id = clue_id;
 		this.clueModal.show();
@@ -94,7 +93,6 @@ export class GameCreatorComponent implements OnInit {
 			console.log(this.clues[id]);
 		} else {
 			var newID = Math.max.apply(null, Object.keys(this.clues).map(Number)) + 1;
-			console.log(newID);
 			this.clues[newID] = this.selectedClue;
 		}
 		this.clueModal.hide();
@@ -157,7 +155,6 @@ export class GameCreatorComponent implements OnInit {
 			name: "New Task",
 			desc: "New Task Description",
 			video_url: "url here",
-			clue: "",
 			quiz: []
 		});
 	}
@@ -168,117 +165,113 @@ export class GameCreatorComponent implements OnInit {
 	//******************************************
 
 	submitGame(){
-		console.log('all good! - submitting game');
-		console.log(this.reveal);
-		console.log(this.clues);
-		console.log(this.tasks);
-		// var fullGameJSON = {
-		// 	description: this.description,
-		// 	reveal: this.reveal,
-		// 	locations: this.locations,
-		// 	suspects: this.suspects,
-		// 	weapons: this.weapons,
-		// 	tasks: this.tasks
-		// }
-		// this.loadingModal.show();
-		// this.submitting = true;
-		// this.taskService.writeGame(fullGameJSON).subscribe(response => {
-		// 	this.loadingModal.hide();
-		// 	this.submitting = false;
-		// }, error => {
-		// 	this.loadingModal.hide();
-		// 	this.submitError = TASK_STATUS_CODES[error.status] || TASK_STATUS_CODES[500];
-		// });
+		var fullGameJSON = {
+			description: this.description,
+			reveal: this.reveal,
+			clues: this.clues,
+			tasks: this.tasks
+		}
+		this.loadingModal.show();
+		this.submitting = true;
+		this.taskService.writeGame(fullGameJSON).subscribe(response => {
+			this.loadingModal.hide();
+			this.submitting = false;
+		}, error => {
+			this.loadingModal.hide();
+			this.submitError = TASK_STATUS_CODES[error.status] || TASK_STATUS_CODES[500];
+		});
 	}
 
 	validate() {
 		this.validated = false;
 		this.invalid = [];
 
-		// var clues = {};
+		var takenClues = {};
+		var clueKeys = Object.keys(this.clues);
+		for (var i = 0; i < clueKeys.length; i++) {
+			if (this.clues[clueKeys[i]].text == null || this.clues[clueKeys[i]].text == "") {
+				this.invalid.push("Clue #: " + (i + 1) + " - Clue name is empty or invalid");
+			}
+			if (this.clues[clueKeys[i]].image == null || this.clues[clueKeys[i]].image == "") {
+				this.invalid.push("Clue: " + this.clues[clueKeys[i]].text + " - Clue Image is empty or invalid");
+			}
+			if (this.clues[clueKeys[i]].icon == null || this.clues[clueKeys[i]].icon == "") {
+				//delete this.clues[clueKeys[i]].icon;
+			}
+			if (this.clues[clueKeys[i]].type == null || this.clues[clueKeys[i]].type == "") {
+				this.invalid.push("Clue: " + this.clues[clueKeys[i]].text + " - Clue type is empty or invalid");
+			}
+			if (this.clues[clueKeys[i]].info == null || this.clues[clueKeys[i]].info == "") {
+				this.invalid.push("Clue: " + this.clues[clueKeys[i]].text + " - Clue info is empty or invalid");
+			}
+			takenClues[clueKeys[i]] = false;
+		}
 
-		// for (var i = this.locations.length - 1; i >= 0; i--) {
-		// 	if (this.locations[i] == null || this.locations[i] == ""){
-		// 		this.invalid.push("Location #: "+ (i + 1) + " - Location name is empty or invalid");
-		// 	}
-		// 	clues[this.locations[i]] = false;
-		// }
-		// for (var i = this.weapons.length - 1; i >= 0; i--) {
-		// 	if (this.weapons[i] == null || this.weapons[i] == "") {
-		// 		this.invalid.push("Weapon #: " + (i + 1) + " - Weapon name is empty or invalid");
-		// 	}
-		// 	clues[this.weapons[i]] = false;
-		// }
-		// for (var i = this.suspects.length - 1; i >= 0; i--) {
-		// 	if (this.suspects[i] == null || this.suspects[i] == "") {
-		// 		this.invalid.push("Suspect #: " + (i + 1) + " - Suspect name is empty or invalid");
-		// 	}
-		// 	clues[this.suspects[i]] = false;
-		// }
 
-		// if (this.reveal.location == "" || this.reveal.location == null){
-		// 	this.invalid.push("Reveal Location is invalid");
-		// } else {
-		// 	clues[this.reveal.location] = true;
-		// }
-		// if (this.reveal.suspect == "" || this.reveal.suspect == null) {
-		// 	this.invalid.push("Reveal Suspect is invalid");
-		// } else {
-		// 	clues[this.reveal.suspect] = true;
-		// }
-		// if (this.reveal.weapon == "" || this.reveal.weapon == null) {
-		// 	this.invalid.push("Reveal Weapon is invalid");
-		// } else {
-		// 	clues[this.reveal.weapon] = true;
-		// }
+		if (this.reveal.location_id == "" || this.reveal.location_id == null){
+			this.invalid.push("Reveal Location is invalid");
+		} else {
+			takenClues[this.reveal.location_id] = true;
+		}
+		if (this.reveal.suspect_id == "" || this.reveal.suspect_id == null) {
+			this.invalid.push("Reveal Suspect is invalid");
+		} else {
+			takenClues[this.reveal.suspect_id] = true;
+		}
+		if (this.reveal.weapon_id == "" || this.reveal.weapon_id == null) {
+			this.invalid.push("Reveal Weapon is invalid");
+		} else {
+			takenClues[this.reveal.weapon_id] = true;
+		}
 		
-		// var idealNumTasks = (this.locations.length + this.weapons.length + this.suspects.length) - 3;
-		// if(this.tasks.length != idealNumTasks){
-		// 	this.invalid.push("Due to the current number of Locations, Suspects, and Weapons, There must be exactly " + idealNumTasks + " tasks");
-		// }
+		var idealNumTasks = (clueKeys.length) - 3;
+		if(this.tasks.length != idealNumTasks){
+			this.invalid.push("Due to the current number of Locations, Suspects, and Weapons, There must be exactly " + idealNumTasks + " tasks - you have " + this.tasks.length);
+		}
 
-		// for (var i = 0; i < this.tasks.length; i++) {
-		// 	//check name isnt "" - check video url isnt null - description isnt null
-		// 	if(this.tasks[i].name == null || this.tasks[i].name == "") {
-		// 		this.invalid.push("Task: \"" + this.tasks[i].name + "\" - Name is invalid");
-		// 	}
-		// 	if (this.tasks[i].video_url == null || this.tasks[i].video_url == "") {
-		// 		this.invalid.push("Task: \"" + this.tasks[i].name + "\" - Video_URL is invalid");
-		// 	}
-		// 	if (this.tasks[i].desc == null || this.tasks[i].desc == "") {
-		// 		this.invalid.push("Task: \"" + this.tasks[i].name + "\" - Description is invalid");
-		// 	}
-		// 	if (this.tasks[i].quiz.length == 0) {
-		// 		this.invalid.push("Task: \"" + this.tasks[i].name + "\" - Quiz is empty");
-		// 	}
-		// 	for (var q = 0; q < this.tasks[i].quiz.length; q++){
-		// 		if (this.tasks[i].quiz[q].question == null || this.tasks[i].quiz[q].question == ""){
-		// 			this.invalid.push("Task: \"" + this.tasks[i].name + "\", Question: \""+this.tasks[i].quiz[q].question+"\" - question is invalid");
-		// 		}
-		// 		if (this.tasks[i].quiz[q].answer == null || this.tasks[i].quiz[q].answer == "") {
-		// 			this.invalid.push("Task: \"" + this.tasks[i].name + "\", Question: \"" + this.tasks[i].quiz[q].question + "\" - answer is invalid");
-		// 		}
-		// 		if(this.tasks[i].quiz[q].answers){
-		// 			if (this.tasks[i].quiz[q].answers.length != 4){
-		// 				this.invalid.push("Task: \"" + this.tasks[i].name + "\", Question: \"" + this.tasks[i].quiz[q].question + "\" - Not enough answers are valid");
-		// 			}
-		// 			for (var a = 0; a < this.tasks[i].quiz[q].answers.length; a++){
-		// 				if (this.tasks[i].quiz[q].answers[a] == "" || this.tasks[i].quiz[q].answers[a] == null){
-		// 					this.invalid.push("Task: \"" + this.tasks[i].name + "\", Question: \"" + this.tasks[i].quiz[q].question + "\" - some answers are invalid");
-		// 				}
-		// 			}
-		// 		}
-		// 	}
+		for (var i = 0; i < this.tasks.length; i++) {
+			//check name isnt "" - check video url isnt null - description isnt null
+			if(this.tasks[i].name == null || this.tasks[i].name == "") {
+				this.invalid.push("Task: \"" + this.tasks[i].name + "\" - Name is invalid");
+			}
+			if (this.tasks[i].video_url == null || this.tasks[i].video_url == "") {
+				this.invalid.push("Task: \"" + this.tasks[i].name + "\" - Video_URL is invalid");
+			}
+			if (this.tasks[i].desc == null || this.tasks[i].desc == "") {
+				this.invalid.push("Task: \"" + this.tasks[i].name + "\" - Description is invalid");
+			}
+			if (this.tasks[i].quiz.length == 0) {
+				this.invalid.push("Task: \"" + this.tasks[i].name + "\" - Quiz is empty");
+			}
+			for (var q = 0; q < this.tasks[i].quiz.length; q++){
+				if (this.tasks[i].quiz[q].question == null || this.tasks[i].quiz[q].question == ""){
+					this.invalid.push("Task: \"" + this.tasks[i].name + "\", Question: \""+this.tasks[i].quiz[q].question+"\" - question is invalid");
+				}
+				if (this.tasks[i].quiz[q].answer == null || this.tasks[i].quiz[q].answer == "") {
+					this.invalid.push("Task: \"" + this.tasks[i].name + "\", Question: \"" + this.tasks[i].quiz[q].question + "\" - answer is invalid");
+				}
+				if(this.tasks[i].quiz[q].answers){
+					if (this.tasks[i].quiz[q].answers.length != 4){
+						this.invalid.push("Task: \"" + this.tasks[i].name + "\", Question: \"" + this.tasks[i].quiz[q].question + "\" - Not enough answers are valid");
+					}
+					for (var a = 0; a < this.tasks[i].quiz[q].answers.length; a++){
+						if (this.tasks[i].quiz[q].answers[a] == "" || this.tasks[i].quiz[q].answers[a] == null){
+							this.invalid.push("Task: \"" + this.tasks[i].name + "\", Question: \"" + this.tasks[i].quiz[q].question + "\" - some answers are invalid");
+						}
+					}
+				}
+			}
 
+			if (this.tasks[i].clue_id == null || this.tasks[i].clue_id == "") {
+				this.invalid.push("Task: \"" + this.tasks[i].name + "\" - Clue is invalid");
+			}
+			if(takenClues[this.tasks[i].clue_id]) {
+				this.invalid.push("Task: \""+ this.tasks[i].name + "\" - Clue already taken");
+			} else {
+				takenClues[this.tasks[i].clue_id] = true;
+			}
 
-		// 	//quiz[] > 0
-		// 	if(clues[this.tasks[i].clue]) {
-		// 		this.invalid.push("Task: \""+ this.tasks[i].name + "\" - Clue already taken");
-		// 	} else {
-		// 		clues[this.tasks[i].clue] = true;
-		// 	}
-
-		// }
+		}
 
 		this.validated = true;
 		if(this.invalid.length > 0) {

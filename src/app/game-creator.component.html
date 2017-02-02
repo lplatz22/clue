@@ -17,45 +17,44 @@
 			<div class="row panel-body">
 				<div class="col-sm-4">
 					<label>Location</label>
-					<select class="form-control" [(ngModel)]="reveal.location">
-						<option *ngFor="let location of locations" [ngValue]="location">{{location}}</option>
+					<select class="form-control" [(ngModel)]="reveal.location_id">
+						<option *ngFor="let clue of clues | keys | clueFilter:'location'" [value]="clue.key">{{clue.value.text}}</option>
 					</select>
 				</div>
 				<div class="col-sm-4">
 					<label>Weapon</label>
-					<select class="form-control" [(ngModel)]="reveal.weapon">
-						<option *ngFor="let weapon of weapons" [ngValue]="weapon">{{weapon}}</option>
+					<select class="form-control" [(ngModel)]="reveal.weapon_id">
+						<option *ngFor="let clue of clues | keys | clueFilter:'weapon'" [value]="clue.key">{{clue.value.text}}</option>
 					</select>
 				</div>
 				<div class="col-sm-4">
 					<label>Suspect</label>
-					<select class="form-control" [(ngModel)]="reveal.suspect">
-						<option *ngFor="let suspect of suspects" [ngValue]="suspect">{{suspect}}</option>
+					<select class="form-control" [(ngModel)]="reveal.suspect_id">
+						<option *ngFor="let clue of clues | keys | clueFilter:'suspect'" [value]="clue.key">{{clue.value.text}}</option>
 					</select>
 				</div>
 			</div>
 			<div class="row panel-body">
 				<div class="col-sm-12">
 					<label>Description</label>
-					<p><b>Hint:</b> use '**' to use the current user's company name, if desired</p>
+					<!-- <p><b>Hint:</b> use '**' to use the current user's company name, if desired</p> -->
 					<textarea class="form-control" rows=3 [(ngModel)]='description'></textarea>
-					<p><i><b>Example:</b> 'Isn't ** is a great company?' -> 'Isn't Bankers Toolbox is a great company?'</i></p>
+					<!-- <p><i><b>Example:</b> 'Isn't ** is a great company?' -> 'Isn't Bankers Toolbox is a great company?'</i></p> -->
 				</div>
 			</div>
-			
 		</div>
 	</div>
 	<div class="col-sm-4">
 		<div class="panel panel-default">
-			<div class="panel-heading"><b>Locations ({{locations.length}})</b>
-			<button (click)="addLocation()" class="btn btn-info btn-xs pull-right"><span class="glyphicon glyphicon-plus"></span></button>
+			<div class="panel-heading"><b>Locations</b>
+			<button (click)="addClue('location')" class="btn btn-info btn-xs pull-right"><span class="glyphicon glyphicon-plus"></span></button>
 			</div>
 			<ul class="list-group">
-			  <li *ngFor="let location of locations; let i = index; " class="list-group-item hoverable">
-			  	{{location}}
+			  <li *ngFor="let clue of clues | keys | clueFilter:'location'" class="list-group-item hoverable">
+			  	{{clue.value.text}}
 			  	<span class="pull-right button-group edit">
-	                <button (click)="editLocation(i)" class="btn btn-primary btn-xs" type="button"><span class="glyphicon glyphicon-edit"></span></button> 
-	                <button (click)="removeLocation(i)" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
+	                <button (click)="editClue(clue.key)" class="btn btn-primary btn-xs" type="button"><span class="glyphicon glyphicon-edit"></span></button> 
+	                <button (click)="removeClue(clue.key)" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
 	            </span>
 			  </li>
 			</ul>
@@ -63,14 +62,14 @@
 	</div>
 	<div class="col-sm-4">
 		<div class="panel panel-default">
-			<div class="panel-heading"><b>Suspects ({{suspects.length}})</b>
-			<button (click)="addSuspect()" class="btn btn-info btn-xs pull-right"><span class="glyphicon glyphicon-plus"></span></button></div>
+			<div class="panel-heading"><b>Suspects</b>
+			<button (click)="addClue('suspect')" class="btn btn-info btn-xs pull-right"><span class="glyphicon glyphicon-plus"></span></button></div>
 			<ul class="list-group">
-			  <li *ngFor="let suspect of suspects; let i = index; " class="list-group-item hoverable">
-			  	{{suspect}}
+			  <li *ngFor="let clue of clues | keys | clueFilter:'suspect'" class="list-group-item hoverable">
+			  	{{clue.value.text}}
 			  	<span class="pull-right button-group edit">
-	                <button (click)="editSuspect(i)" class="btn btn-primary btn-xs" type="button"><span class="glyphicon glyphicon-edit"></span></button> 
-	                <button (click)="removeSuspect(i)" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
+	                <button (click)="editClue(clue.key)" class="btn btn-primary btn-xs" type="button"><span class="glyphicon glyphicon-edit"></span></button> 
+	                <button (click)="removeClue(clue.key)" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
 	            </span>
 			  </li>
 			</ul>
@@ -78,14 +77,14 @@
 	</div>
 	<div class="col-sm-4">
 		<div class="panel panel-default">
-			<div class="panel-heading"><b>Weapons ({{weapons.length}})</b>
-			<button (click)="addWeapon()" class="btn btn-info btn-xs pull-right"><span class="glyphicon glyphicon-plus"></span></button></div>
+			<div class="panel-heading"><b>Weapons</b>
+			<button (click)="addClue('weapon')" class="btn btn-info btn-xs pull-right"><span class="glyphicon glyphicon-plus"></span></button></div>
 			<ul class="list-group">
-			  <li *ngFor="let weapon of weapons; let i = index; " class="list-group-item hoverable">
-			  	{{weapon}}
+			  <li *ngFor="let clue of clues | keys | clueFilter:'weapon'" class="list-group-item hoverable">
+			  	{{clue.value.text}}
 			  	<span class="pull-right button-group edit">
-	                <button (click)="editWeapon(i)" class="btn btn-primary btn-xs" type="button"><span class="glyphicon glyphicon-edit"></span></button> 
-	                <button (click)="removeWeapon(i)" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
+	                <button (click)="editClue(clue.key)" class="btn btn-primary btn-xs" type="button"><span class="glyphicon glyphicon-edit"></span></button> 
+	                <button (click)="removeClue(clue.key)" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
 	            </span>
 			  </li>
 			</ul>	
@@ -117,15 +116,15 @@
 				    	</div>
 				    	<div class="col-sm-4">
 				    		<label>Clue</label>
-						    <select class="form-control" [(ngModel)]="task.clue">
+						    <select class="form-control" [(ngModel)]="task.clue_id">
 						    	<optgroup label="Locations">
-									<option *ngFor="let location of locations" [ngValue]="location">{{location}}</option>
+									<option *ngFor="let clue of clues | keys | clueFilter:'location'" [value]="clue.key">{{clue.value.text}}</option>
 								</optgroup>
 								<optgroup label="Weapons">
-									<option *ngFor="let weapon of weapons" [ngValue]="weapon">{{weapon}}</option>
+									<option *ngFor="let clue of clues | keys | clueFilter:'weapon'" [value]="clue.key">{{clue.value.text}}</option>
 								</optgroup>
 								<optgroup label="Suspects">
-									<option *ngFor="let suspect of suspects" [ngValue]="suspect">{{suspect}}</option>
+									<option *ngFor="let clue of clues | keys | clueFilter:'suspect'" [value]="clue.key">{{clue.value.text}}</option>
 								</optgroup>
 							</select>
 				    	</div>
@@ -178,51 +177,33 @@
 	</alert>
 </div>
 
-
-<div bsModal #locationModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="locationModalLabel" aria-hidden="true">
+<div bsModal #clueModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="weaponModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title pull-left">Location</h4>
+        <h4 class="modal-title pull-left">Clue Details</h4>
       </div>
       <div class="modal-body">
-        <input class="form-control" type="text" name="thing" [(ngModel)]="selected.name">
+      	<label>Name of Clue</label>
+        <input class="form-control" type="text" name="text" [(ngModel)]="selectedClue.text">
+        <label>Clue Image</label>
+        <!-- this should be a drop down of images -->
+        <input class="form-control" type="text" name="image" [(ngModel)]="selectedClue.image">
+        <label>Clue Icon (optional)</label>
+        <!-- this should be a drop down of images -->
+        <input class="form-control" type="text" name="icon" [(ngModel)]="selectedClue.icon">
+        <label>Clue Type</label>
+        <select class="form-control" [(ngModel)]="selectedClue.type">
+			<option value="location">Location</option>
+			<option value="weapon">Weapon</option>
+			<option value="suspect">Suspect</option>
+		</select>
+        <label>Clue Information</label>
+        <textarea class="form-control" rows=3 [(ngModel)]='selectedClue.info'></textarea>
       </div>
       <div class="modal-footer">
-      	<button class="btn btn-default" type="button" (click)="locationModal.hide()">Cancel</button>
-        <button class="btn btn-primary" type="button" (click)="saveLocation()">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div bsModal #suspectModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="suspectModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title pull-left">Suspect</h4>
-      </div>
-      <div class="modal-body">
-        <input class="form-control" type="text" name="thing" [(ngModel)]="selected.name">
-      </div>
-      <div class="modal-footer">
-      	<button class="btn btn-default" type="button" (click)="suspectModal.hide()">Cancel</button>
-        <button class="btn btn-primary" type="button" (click)="saveSuspect()">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div bsModal #weaponModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="weaponModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title pull-left">Weapon</h4>
-      </div>
-      <div class="modal-body">
-        <input class="form-control" type="text" name="thing" [(ngModel)]="selected.name">
-      </div>
-      <div class="modal-footer">
-      	<button class="btn btn-default" type="button" (click)="weaponModal.hide()">Cancel</button>
-        <button class="btn btn-primary" type="button" (click)="saveWeapon()">Save</button>
+      	<button class="btn btn-default" type="button" (click)="clueModal.hide()">Cancel</button>
+        <button class="btn btn-primary" type="button" (click)="saveClue()">Save</button>
       </div>
     </div>
   </div>
@@ -263,7 +244,7 @@
   </div>
 </div>
 
-<div bsModal #loadModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="loadModalLabel" aria-hidden="true" [config]="{backdrop: 'static'}">
+<div bsModal #loadModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="loadModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">

@@ -12,7 +12,7 @@ import { UserModule } from './user/user.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav.component';
 import { HomeComponent } from './home.component';
-import { GameCreatorComponent } from './game-creator.component';
+import { GameCreatorComponent, KeysPipe, ClueFilterPipe } from './game-creator.component';
 import { UserProgressComponent } from './user-progress.component';
 import { UserFilterPipe } from './user-progress.component';
 
@@ -24,7 +24,9 @@ import { UserFilterPipe } from './user-progress.component';
     HomeComponent,
     GameCreatorComponent,
     UserProgressComponent,
-    UserFilterPipe
+    UserFilterPipe,
+    KeysPipe,
+    ClueFilterPipe
   ],
   imports: [
     BrowserModule,

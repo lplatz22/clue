@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Pipe, PipeTransform, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalDirective } from 'ng2-bootstrap';
 import { TaskService, TASK_STATUS_CODES } from './tasks/task.service';
@@ -14,14 +14,16 @@ export class GameCreatorComponent implements OnInit {
 	private submitError: string;
 	private submitting: boolean = false;
 
-	private locations: string[] = [];
-	private suspects: string[] = [];
-	private weapons: string[] = [];
+	private locations: any = {};
+	private suspects: any = {};
+	private weapons: any = {};
 	private tasks: any[] = [];
+	private clues: any = {};
 	private currentTaskIndex: number;
 	private currentQuestionIndex: number;
 
 	private selected: any = {};
+	private selectedClue: any = {};
 	private question: any = {};
 	private reveal: any = {};
 	private description: string;
@@ -29,13 +31,9 @@ export class GameCreatorComponent implements OnInit {
 	private invalid: string[] = [];
 	private validated: boolean = false;
 
-
-	@ViewChild('locationModal') private locationModal: ModalDirective;
-	@ViewChild('weaponModal') private weaponModal: ModalDirective;
-	@ViewChild('suspectModal') private suspectModal: ModalDirective;
 	@ViewChild('questionModal') private questionModal: ModalDirective;
 	@ViewChild('loadModal') private loadingModal: ModalDirective;
-
+	@ViewChild('clueModal') private clueModal: ModalDirective;
 
 
 	constructor(private router: Router,
@@ -50,9 +48,7 @@ export class GameCreatorComponent implements OnInit {
 		this.loadingModal.show();
 		this.taskService.getFullGame().subscribe(response => {
 			this.tasks = response.tasks;
-			this.locations = response.locations;
-			this.weapons = response.weapons;
-			this.suspects = response.suspects;
+			this.clues = response.clues;
 			this.reveal = response.reveal;
 			this.description = response.description;
 			this.loadingModal.hide();
@@ -63,74 +59,34 @@ export class GameCreatorComponent implements OnInit {
 		});
 	}
 
-	// ********** Clue Game Elements ***********
-	addLocation() {
-		this.selected.name = "";
-		this.selected.index = -1;
-		this.locationModal.show();
+	addClue(type){
+		this.selectedClue = {
+			type: type
+		};
+		this.clueModal.show();
 	}
-	editLocation(index) {
-		this.selected.name = this.locations[index];
-		this.selected.index = index;
-		this.locationModal.show();
+	editClue(clue_id){
+		console.log("edit: " + this.clues[clue_id].text);
+		this.selectedClue = JSON.parse(JSON.stringify(this.clues[clue_id]));
+		this.selectedClue.clue_id = clue_id;
+		this.clueModal.show();
 	}
-	removeLocation(index) {
-		this.locations.splice(index, 1);
-		//WHEN REMOVING - VALIDATE YOU CAN REMOVE IT FROM TASKS FIRST - MAKE SURE ITS NOT USED IN A TASK
+	removeClue(clue_id){
+		delete this.clues[clue_id];
 	}
-	saveLocation(){
-		this.locationModal.hide();
-		if(this.selected.index >= 0){
-			this.locations[this.selected.index] = this.selected.name;
+	saveClue(){
+		if(this.selectedClue.clue_id){
+			var id = this.selectedClue.clue_id;
+			delete this.selectedClue.clue_id;
+			this.clues[id] = this.selectedClue;
+			console.log(this.clues[id]);
 		} else {
-			this.locations.push(this.selected.name);
+			var newID = Math.max.apply(null, Object.keys(this.clues).map(Number)) + 1;
+			console.log(newID);
+			this.clues[newID] = this.selectedClue;
 		}
+		this.clueModal.hide();
 	}
-
-	addSuspect() {
-		this.selected.name = "";
-		this.selected.index = -1;
-		this.suspectModal.show();
-	}
-	editSuspect(index) {
-		this.selected.name = this.suspects[index];
-		this.selected.index = index;
-		this.suspectModal.show();
-	}
-	removeSuspect(index) {
-		this.suspects.splice(index, 1);
-	}
-	saveSuspect() {
-		this.suspectModal.hide();
-		if (this.selected.index >= 0) {
-			this.suspects[this.selected.index] = this.selected.name;
-		} else {
-			this.suspects.push(this.selected.name);
-		}
-	}
-
-	addWeapon() {
-		this.selected.name = "";
-		this.selected.index = -1;
-		this.weaponModal.show();
-	}
-	editWeapon(index) {
-		this.selected.name = this.weapons[index];
-		this.selected.index = index;
-		this.weaponModal.show();
-	}
-	removeWeapon(index) {
-		this.weapons.splice(index, 1);
-	}
-	saveWeapon() {
-		this.weaponModal.hide();
-		if (this.selected.index >= 0) {
-			this.weapons[this.selected.index] = this.selected.name;
-		} else {
-			this.weapons.push(this.selected.name);
-		}
-	}
-	// *****************************************
 
 	addQuestion_Answers(task_index) {
 		this.currentTaskIndex = task_index;
@@ -192,113 +148,116 @@ export class GameCreatorComponent implements OnInit {
 
 	submitGame(){
 		console.log('all good! - submitting game');
-		var fullGameJSON = {
-			description: this.description,
-			reveal: this.reveal,
-			locations: this.locations,
-			suspects: this.suspects,
-			weapons: this.weapons,
-			tasks: this.tasks
-		}
-		this.loadingModal.show();
-		this.submitting = true;
-		this.taskService.writeGame(fullGameJSON).subscribe(response => {
-			this.loadingModal.hide();
-			this.submitting = false;
-		}, error => {
-			this.loadingModal.hide();
-			this.submitError = TASK_STATUS_CODES[error.status] || TASK_STATUS_CODES[500];
-		});
+		console.log(this.reveal);
+		console.log(this.clues);
+		console.log(this.tasks);
+		// var fullGameJSON = {
+		// 	description: this.description,
+		// 	reveal: this.reveal,
+		// 	locations: this.locations,
+		// 	suspects: this.suspects,
+		// 	weapons: this.weapons,
+		// 	tasks: this.tasks
+		// }
+		// this.loadingModal.show();
+		// this.submitting = true;
+		// this.taskService.writeGame(fullGameJSON).subscribe(response => {
+		// 	this.loadingModal.hide();
+		// 	this.submitting = false;
+		// }, error => {
+		// 	this.loadingModal.hide();
+		// 	this.submitError = TASK_STATUS_CODES[error.status] || TASK_STATUS_CODES[500];
+		// });
 	}
 
 	validate() {
 		this.validated = false;
 		this.invalid = [];
 
-		var clues = {};
+		// var clues = {};
 
-		for (var i = this.locations.length - 1; i >= 0; i--) {
-			if (this.locations[i] == null || this.locations[i] == ""){
-				this.invalid.push("Location #: "+ (i + 1) + " - Location name is empty or invalid");
-			}
-			clues[this.locations[i]] = false;
-		}
-		for (var i = this.weapons.length - 1; i >= 0; i--) {
-			if (this.weapons[i] == null || this.weapons[i] == "") {
-				this.invalid.push("Weapon #: " + (i + 1) + " - Weapon name is empty or invalid");
-			}
-			clues[this.weapons[i]] = false;
-		}
-		for (var i = this.suspects.length - 1; i >= 0; i--) {
-			if (this.suspects[i] == null || this.suspects[i] == "") {
-				this.invalid.push("Suspect #: " + (i + 1) + " - Suspect name is empty or invalid");
-			}
-			clues[this.suspects[i]] = false;
-		}
+		// for (var i = this.locations.length - 1; i >= 0; i--) {
+		// 	if (this.locations[i] == null || this.locations[i] == ""){
+		// 		this.invalid.push("Location #: "+ (i + 1) + " - Location name is empty or invalid");
+		// 	}
+		// 	clues[this.locations[i]] = false;
+		// }
+		// for (var i = this.weapons.length - 1; i >= 0; i--) {
+		// 	if (this.weapons[i] == null || this.weapons[i] == "") {
+		// 		this.invalid.push("Weapon #: " + (i + 1) + " - Weapon name is empty or invalid");
+		// 	}
+		// 	clues[this.weapons[i]] = false;
+		// }
+		// for (var i = this.suspects.length - 1; i >= 0; i--) {
+		// 	if (this.suspects[i] == null || this.suspects[i] == "") {
+		// 		this.invalid.push("Suspect #: " + (i + 1) + " - Suspect name is empty or invalid");
+		// 	}
+		// 	clues[this.suspects[i]] = false;
+		// }
 
-		if (this.reveal.location == "" || this.reveal.location == null){
-			this.invalid.push("Reveal Location is invalid");
-		} else {
-			clues[this.reveal.location] = true;
-		}
-		if (this.reveal.suspect == "" || this.reveal.suspect == null) {
-			this.invalid.push("Reveal Suspect is invalid");
-		} else {
-			clues[this.reveal.suspect] = true;
-		}
-		if (this.reveal.weapon == "" || this.reveal.weapon == null) {
-			this.invalid.push("Reveal Weapon is invalid");
-		} else {
-			clues[this.reveal.weapon] = true;
-		}
+		// if (this.reveal.location == "" || this.reveal.location == null){
+		// 	this.invalid.push("Reveal Location is invalid");
+		// } else {
+		// 	clues[this.reveal.location] = true;
+		// }
+		// if (this.reveal.suspect == "" || this.reveal.suspect == null) {
+		// 	this.invalid.push("Reveal Suspect is invalid");
+		// } else {
+		// 	clues[this.reveal.suspect] = true;
+		// }
+		// if (this.reveal.weapon == "" || this.reveal.weapon == null) {
+		// 	this.invalid.push("Reveal Weapon is invalid");
+		// } else {
+		// 	clues[this.reveal.weapon] = true;
+		// }
 		
-		var idealNumTasks = (this.locations.length + this.weapons.length + this.suspects.length) - 3;
-		if(this.tasks.length != idealNumTasks){
-			this.invalid.push("Due to the current number of Locations, Suspects, and Weapons, There must be exactly " + idealNumTasks + " tasks");
-		}
+		// var idealNumTasks = (this.locations.length + this.weapons.length + this.suspects.length) - 3;
+		// if(this.tasks.length != idealNumTasks){
+		// 	this.invalid.push("Due to the current number of Locations, Suspects, and Weapons, There must be exactly " + idealNumTasks + " tasks");
+		// }
 
-		for (var i = 0; i < this.tasks.length; i++) {
-			//check name isnt "" - check video url isnt null - description isnt null
-			if(this.tasks[i].name == null || this.tasks[i].name == "") {
-				this.invalid.push("Task: \"" + this.tasks[i].name + "\" - Name is invalid");
-			}
-			if (this.tasks[i].video_url == null || this.tasks[i].video_url == "") {
-				this.invalid.push("Task: \"" + this.tasks[i].name + "\" - Video_URL is invalid");
-			}
-			if (this.tasks[i].desc == null || this.tasks[i].desc == "") {
-				this.invalid.push("Task: \"" + this.tasks[i].name + "\" - Description is invalid");
-			}
-			if (this.tasks[i].quiz.length == 0) {
-				this.invalid.push("Task: \"" + this.tasks[i].name + "\" - Quiz is empty");
-			}
-			for (var q = 0; q < this.tasks[i].quiz.length; q++){
-				if (this.tasks[i].quiz[q].question == null || this.tasks[i].quiz[q].question == ""){
-					this.invalid.push("Task: \"" + this.tasks[i].name + "\", Question: \""+this.tasks[i].quiz[q].question+"\" - question is invalid");
-				}
-				if (this.tasks[i].quiz[q].answer == null || this.tasks[i].quiz[q].answer == "") {
-					this.invalid.push("Task: \"" + this.tasks[i].name + "\", Question: \"" + this.tasks[i].quiz[q].question + "\" - answer is invalid");
-				}
-				if(this.tasks[i].quiz[q].answers){
-					if (this.tasks[i].quiz[q].answers.length != 4){
-						this.invalid.push("Task: \"" + this.tasks[i].name + "\", Question: \"" + this.tasks[i].quiz[q].question + "\" - Not enough answers are valid");
-					}
-					for (var a = 0; a < this.tasks[i].quiz[q].answers.length; a++){
-						if (this.tasks[i].quiz[q].answers[a] == "" || this.tasks[i].quiz[q].answers[a] == null){
-							this.invalid.push("Task: \"" + this.tasks[i].name + "\", Question: \"" + this.tasks[i].quiz[q].question + "\" - some answers are invalid");
-						}
-					}
-				}
-			}
+		// for (var i = 0; i < this.tasks.length; i++) {
+		// 	//check name isnt "" - check video url isnt null - description isnt null
+		// 	if(this.tasks[i].name == null || this.tasks[i].name == "") {
+		// 		this.invalid.push("Task: \"" + this.tasks[i].name + "\" - Name is invalid");
+		// 	}
+		// 	if (this.tasks[i].video_url == null || this.tasks[i].video_url == "") {
+		// 		this.invalid.push("Task: \"" + this.tasks[i].name + "\" - Video_URL is invalid");
+		// 	}
+		// 	if (this.tasks[i].desc == null || this.tasks[i].desc == "") {
+		// 		this.invalid.push("Task: \"" + this.tasks[i].name + "\" - Description is invalid");
+		// 	}
+		// 	if (this.tasks[i].quiz.length == 0) {
+		// 		this.invalid.push("Task: \"" + this.tasks[i].name + "\" - Quiz is empty");
+		// 	}
+		// 	for (var q = 0; q < this.tasks[i].quiz.length; q++){
+		// 		if (this.tasks[i].quiz[q].question == null || this.tasks[i].quiz[q].question == ""){
+		// 			this.invalid.push("Task: \"" + this.tasks[i].name + "\", Question: \""+this.tasks[i].quiz[q].question+"\" - question is invalid");
+		// 		}
+		// 		if (this.tasks[i].quiz[q].answer == null || this.tasks[i].quiz[q].answer == "") {
+		// 			this.invalid.push("Task: \"" + this.tasks[i].name + "\", Question: \"" + this.tasks[i].quiz[q].question + "\" - answer is invalid");
+		// 		}
+		// 		if(this.tasks[i].quiz[q].answers){
+		// 			if (this.tasks[i].quiz[q].answers.length != 4){
+		// 				this.invalid.push("Task: \"" + this.tasks[i].name + "\", Question: \"" + this.tasks[i].quiz[q].question + "\" - Not enough answers are valid");
+		// 			}
+		// 			for (var a = 0; a < this.tasks[i].quiz[q].answers.length; a++){
+		// 				if (this.tasks[i].quiz[q].answers[a] == "" || this.tasks[i].quiz[q].answers[a] == null){
+		// 					this.invalid.push("Task: \"" + this.tasks[i].name + "\", Question: \"" + this.tasks[i].quiz[q].question + "\" - some answers are invalid");
+		// 				}
+		// 			}
+		// 		}
+		// 	}
 
 
-			//quiz[] > 0
-			if(clues[this.tasks[i].clue]) {
-				this.invalid.push("Task: \""+ this.tasks[i].name + "\" - Clue already taken");
-			} else {
-				clues[this.tasks[i].clue] = true;
-			}
+		// 	//quiz[] > 0
+		// 	if(clues[this.tasks[i].clue]) {
+		// 		this.invalid.push("Task: \""+ this.tasks[i].name + "\" - Clue already taken");
+		// 	} else {
+		// 		clues[this.tasks[i].clue] = true;
+		// 	}
 
-		}
+		// }
 
 		this.validated = true;
 		if(this.invalid.length > 0) {
@@ -306,5 +265,35 @@ export class GameCreatorComponent implements OnInit {
 		} else {
 			return true;
 		}
+	}
+}
+
+@Pipe({ name: 'keys', pure: false })
+@Injectable()
+export class KeysPipe implements PipeTransform {
+	transform(value, args: string[]): any {
+		let keys = [];
+		for (let key in value) {
+			keys.push({ key: key, value: value[key] });
+		}
+		return keys;
+	}
+}
+
+
+@Pipe({
+	name: 'clueFilter',
+	pure: false
+})
+@Injectable()
+export class ClueFilterPipe implements PipeTransform {
+	transform(clues: any[], term: string): any {
+		// filter items array, items which match and return true will be kept, false will be filtered out
+		return clues.filter(clue => {
+			if (clue.value.type == term) {
+				return true;
+			} 
+			return false;
+		});
 	}
 }

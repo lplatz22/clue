@@ -8,53 +8,53 @@
     "clues": {
         "1": {
             "text": "Casino",
-            "icon": "casino_icon.tif",
-            "image": "casino.jpeg",
+            "icon": "dogwood_icon.jpg",
+            "image": "dogwood.jpg",
             "type": "location",
             "info": "The Casino. A classic place for a heist. Assuming of course that you don't willingly hand them all of your money first. "
         },
         "2": {
             "text": "Gas Station",
-            "icon": "gas_icon.jpeg",
-            "image": "Gas_Station.jpeg",
+            "icon": "maggie_maes_icon.jpeg",
+            "image": "maggie_maes.jpg",
             "type": "location",
             "info": "Some are dirty, some are nice, better watch out for that faulty card reader - or it'll take your money twice."
         },
         "3": {
             "text": "Online Shopping",
-            "icon": "online_shopping.jpeg",
-            "image": "online_shopping.jpeg",
+            "icon": "blackheart_icon.jpg",
+            "image": "blackheart.jpg",
             "type": "location",
             "info": "If the website says you can get 100% authentic UGGS 99% off and you end up ordering every pair twice - you might be vulnerable to online shopping scams."
         },
         "4": {
             "text": "Car Wash",
-            "icon": "car_wash_icon.png",
-            "image": "car_wash.png",
+            "icon": "craft_pride_icon.jpeg",
+            "image": "craft_pride.jpeg",
             "type": "location",
             "info": "Come dirty - leave clean! Or, as an anonymous High School teacher in New Mexico puts it: \"Have an A1 Day!\""
         },
         "5": {
             "text": "Web Hacker Will",
-            "image": "hacker.jpg",
+            "image": "ceo_a.jpg",
             "type": "suspect",
             "info": "Web Hacker extraordinaire. He has the power to cripple your home network or steal every cent from your bank account. But he mostly spends his time on the finer things in life. Those cat memes don't create themselves!"
         },
         "6": {
             "text": "Liz Law Breaker",
-            "image": "liz.jpg",
+            "image": "ceo_b.jpeg",
             "type": "suspect",
             "info": "\"She's so obviously guilty, like, OMG... we can stop looking because we found her\" - Sara Scammer"
         },
         "7": {
             "text": "Mobster Martin",
-            "image": "mobster.jpg",
+            "image": "ceo_c.jpg",
             "type": "suspect",
             "info": "Definitely a member of the mob, according to Will R. who found 100 pirated copies of The Godfather on his hard drive. Why? Will lost interest before finding out."
         },
         "8": {
             "text": "Dirty Money",
-            "image": "dirty_money.jpg",
+            "image": "usb_stick.png",
             "type": "weapon",
             "info": "I'm sorry - but we can't accept your money due to the fact it's covered in... mud? We'll go with mud. Please launder this money before paying with it"
         },
@@ -66,55 +66,55 @@
         },
         "10": {
             "text": "Counter Fit Check",
-            "image": "fake_check.jpg",
+            "image": "virus.jpg",
             "type": "weapon",
             "info": "If you could hold off depositing that $1.4B check I gave you until tomorrow, that'd be great."
         },
         "11": {
             "text": "Micro Structuring",
-            "icon": "micro_Structure_icon.jpg",
-            "image": "micro_structure.gif",
+            "icon": "weapon_b_icon.jpg",
+            "image": "weapon_b.jpg",
             "type": "weapon",
             "info": "What is this? A Micro Structure for Ants!?!? The Micro Structure has to be at least... 3 times bigger than this!"
         },
         "12": {
             "type": "location",
             "text": "Nail Salon",
-            "image": "nail_salon.jpeg",
-            "icon": "nail_salon.jpeg",
+            "image": "blackheart.jpg",
+            "icon": "blackheart_icon.jpg",
             "info": "They'll polish your nails and your money. No matter how cracked and broken - the Nail Salon will fix you('re money) up right!"
         },
         "13": {
             "type": "location",
             "text": "The Dark Web",
-            "image": "dark_web.jpg",
-            "icon": "dark_web.jpg",
+            "image": "virus.jpg",
+            "icon": "virus.jpg",
             "info": "Hello!?... Hello!?!? I can't see anyone - this web is too dark ¯\\_(ツ)_/¯"
         },
         "14": {
             "type": "weapon",
             "text": "Skimming",
-            "image": "skimming.jpg",
+            "image": "phishing.jpg",
             "info": "When that credit card swipe feels soooo smooth, it has to be illegal."
         },
         "15": {
             "type": "weapon",
             "text": "Crypto Currency",
-            "image": "crypto_currency.jpg",
-            "icon": "crypto_currency.jpg",
+            "image": "weapon_b.jpg",
+            "icon": "weapon_b_icon.jpg",
             "info": "\"I'll give you $11001000 for that lawn furniture.\"\n\n\"No way! It's worth at least $0x1F4\""
         },
         "16": {
             "type": "suspect",
             "text": "Sara Scammer",
-            "image": "sara.jpg",
+            "image": "ceo_c.jpg",
             "info": "\"Sara's great! A real nice person, she's so great to have around the office.... Can you tell me when she stops listening in on this convo to hear what I'm saying about her?\" - Martin"
         },
         "17": {
             "type": "suspect",
             "info": "Michelle and her husband just bought a car wash in New Mexico! They're so proud. I hear its doing so well they might open another! Good for them.",
             "text": "Money Michelle ",
-            "image": "michelle.jpg"
+            "image": "ceo_c.jpg"
         },
         "18": {
             "type": "suspect",

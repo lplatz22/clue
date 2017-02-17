@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const MemoryStore = require('session-memory-store')(session);
+const RedisStore = require('connect-redis')(session);
 const flash    = require('connect-flash');
 
 const app = express();
@@ -22,8 +22,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ 
 	name: 'JSESSION',
 	secret: '321sessionverysecretsecret123', 
-	store: new MemoryStore()
-})); // session secret
+	store: new RedisStore({
+		url: 'redis://admin:LAMAUQKXGZTAVZBN@sl-us-dal-9-portal.4.dblayer.com:19895',
+		logErrors: true
+	})
+}));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session

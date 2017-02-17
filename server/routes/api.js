@@ -191,7 +191,9 @@ module.exports = function(app, passport) {
     // LOGOUT ==============================
     app.get('/api/logout', function(req, res) {
         req.logout();
-        res.status(200).send({loggedOut: true});
+        req.session.destroy(function (err) {
+            res.status(200).send({loggedOut: true});
+        });
     });
 
 

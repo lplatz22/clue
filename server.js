@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const MemoryStore = require('session-memory-store')(session);
 const flash    = require('connect-flash');
 
 const app = express();
@@ -18,7 +19,11 @@ app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-app.use(session({ secret: '321sessionverysecretsecret123' })); // session secret
+app.use(session({ 
+	name: 'JSESSION',
+	secret: '321sessionverysecretsecret123', 
+	store: new MemoryStore()
+})); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session

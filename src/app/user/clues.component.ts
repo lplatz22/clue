@@ -12,6 +12,9 @@ import { UserService, USER_STATUS_CODES } from '../user/user.service';
 export class CluesComponent implements OnInit {
 	private clues: any = [];
 	private locations: any = [];
+	private num_locations_complete = 0;
+	private num_weapons_complete = 0;
+	private num_suspects_complete = 0;
 	private weapons: any = [];
 	private suspects: any = [];
 	private clueNames: any = [];
@@ -23,6 +26,7 @@ export class CluesComponent implements OnInit {
 	private error: string;
 
 	@ViewChild('modal') public modal: ModalDirective;
+	@ViewChild('completeModal') public completeModal: ModalDirective;
 
 	constructor(private router: Router,
 		private route: ActivatedRoute,
@@ -38,6 +42,7 @@ export class CluesComponent implements OnInit {
 			this.loading = false;
 			this.clues = clues;
 			this.filterClues();
+			this.checkComplete();
 		}, error => {
 			this.loading = false;
 			this.error = USER_STATUS_CODES[error.status] || USER_STATUS_CODES[500];
@@ -55,17 +60,37 @@ export class CluesComponent implements OnInit {
 			switch (currentClue.type) {
 				case "location":
 					this.locations.push(currentClue);
+					if(currentClue.complete){
+						this.num_locations_complete++;
+					}
 					break;
 				case "weapon":
 					this.weapons.push(currentClue);
+					if (currentClue.complete) {
+						this.num_weapons_complete++;
+					}
 					break;
 				case "suspect":
 					this.suspects.push(currentClue);
+					if (currentClue.complete) {
+						this.num_suspects_complete++;
+					}
 					break;
 				default:
 					console.log('invalid clue type');
 					break;
 			}
+		}
+	}
+
+	checkComplete() {
+		if(this.num_locations_complete != this.locations.length - 1 ||
+		   this.num_weapons_complete != this.weapons.length - 1 || 
+		   this.num_suspects_complete != this.suspects.length - 1) {
+			this.complete = false;
+		} else {
+			this.complete = true;
+			this.completeModal.show();
 		}
 	}
 }

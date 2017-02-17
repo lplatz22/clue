@@ -1,7 +1,7 @@
 <div class="jumbotron">
   <h1 class="display-3">My Clues</h1>
   <p class="lead">Here are all of your discovered clues!</p>
-  <p class="lead">Complete more tasks to unlock new ones</p>
+  <p *ngIf="!complete" class="lead">Complete more tasks to unlock new ones</p>
   <button class="btn btn-warning" type="button" [routerLink]="['/tasks']">Task List</button>
 </div>
 
@@ -14,6 +14,14 @@
 </div>
 
 <div class="row">
+	<div class="col-sm-12" *ngIf="complete">
+		<div class="panel panel-success">
+			<div class="panel-heading"><h4>You Did it!!</h4></div>
+			<p style="text-align: center;"><b>You've completed all the tasks and solved the mystery!</b></p>
+			<p style="text-align: center;">You have successfully been entered in a drawing for _____</p>
+			<p style="text-align: center;"><small>If you enjoyed this game, great! Please take a survey about it here: [survey link]</small></p>
+		</div>
+	</div>
 	<div class="col-sm-4">
 		<div class="panel panel-primary">
 			<div class="panel-heading"><b>Locations</b></div>
@@ -85,6 +93,23 @@
 	</div>
 </div>
 
+<div bsModal #completeModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="completeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">You Did it!</h4>
+      </div>
+      <div class="modal-body">
+        <p>Thanks for helping Banker's Toolbox solve the mystery!</p>
+        <p>You have successfully been entered in a drawing for _____</p>
+		<small>If you enjoyed this game, great! Please take a survey about it here: [survey link]</small>
+      </div>
+      <div class="modal-footer">
+      	<button class="btn btn-success" type="button" (click)="completeModal.hide()">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">

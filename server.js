@@ -21,7 +21,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(session({ 
 	name: 'JSESSION',
-	secret: '321sessionverysecretsecret123', 
+	secret: '321sessionverysecretsecret123',
+	resave: false,
+  	saveUninitialized: false,
 	store: new RedisStore({
 		url: 'redis://admin:LAMAUQKXGZTAVZBN@sl-us-dal-9-portal.4.dblayer.com:19895',
 		logErrors: true

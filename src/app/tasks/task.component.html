@@ -25,7 +25,21 @@
 				<div class="col-xs-10 col-xs-offset-1" *ngFor="let question of task.quiz; let i = index; ">
 					<div class="form-group" *ngIf="!question.answers">
 						<span><label for="{{i}}">{{question.question}}</label>
-						<input required type="text"  class="form-control" ngModel name="{{i}}"></span>
+						<input *ngIf="question.answerType == 'text'" required type="text"  class="form-control" ngModel name="{{i}}">
+						<input *ngIf="question.answerType == 'number'" required type="number"  class="form-control" ngModel name="{{i}}">
+						<input *ngIf="question.answerType == 'date'" required type="date"  class="form-control" ngModel name="{{i}}">
+						<span *ngIf="question.answerType == 'multi'">
+							<br>
+							<small>{{question.multiQuestion}}</small>
+							<select class="form-control" ngModel name="{{i}}_question">
+								<option *ngFor="let subAnswer of question.multiAnswers" [value]="subAnswer.question" >{{subAnswer.question}}</option>
+							</select>
+							<br>
+							<input *ngIf="question.multiType == 'date'" required type="date"  class="form-control" ngModel name="{{i}}_answer">
+							<input *ngIf="question.multiType == 'text'" required type="text"  class="form-control" ngModel name="{{i}}_answer">
+							<input *ngIf="question.multiType == 'number'" required type="number"  class="form-control" ngModel name="{{i}}_answer">
+						</span>
+						</span>
 					</div>
 					<div class="form-group" *ngIf="question.answers">
 						<label for="{{i}}">{{question.question}}</label>
@@ -58,7 +72,10 @@
 	      <div class="caption">
 	        <h3>{{task.clue.text}}</h3>
 	        <p>{{task.clue.info}}</p>
-	        <p><button class="btn btn-info" type="button" [routerLink]="['/clues']">My Clues</button></p>
+	        <p>
+	        <button class="btn btn-warning" type="button" [routerLink]="['/tasks']">Task List</button>
+	        <button class="btn btn-info pull-right" type="button" [routerLink]="['/clues']">My Clues</button>
+	        </p>
 	      </div>
 	    </div>		
 	</div>

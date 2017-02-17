@@ -131,7 +131,8 @@
             "quiz": [
                 {
                     "question": "What did one consultant say to the other? (A: \"Hi\")",
-                    "answer": "Hi"
+                    "answer": "Hi",
+                    "answerType": "text"
                 }
             ],
             "clue_id": "2"
@@ -142,8 +143,25 @@
             "video_url": "nothing",
             "quiz": [
                 {
-                    "question": "When was your AM born? (A: 02/09/1982)",
-                    "answer": "02/09/1982"
+                    "question": "When was your AM born?",
+                    "answer": "[user dependant]",
+                    "answerType": "multi",
+                    "multiType": "date",
+                    "multiQuestion": "Who is your AM?",
+                    "multiAnswers": [
+                        {
+                            "question": "Luke (03/13/1994)",
+                            "answer": "1994-03-13"
+                        },
+                        {
+                            "question": "Kathryn (02/09/1994)",
+                            "answer": "1994-02-09"
+                        },
+                        {
+                            "question": "Mark (10/23/1983)",
+                            "answer": "1983-10-23"
+                        }
+                    ]
                 }
             ],
             "clue_id": "6"
@@ -155,7 +173,8 @@
             "quiz": [
                 {
                     "question": "How many members were in band? (A: 5)",
-                    "answer": "5"
+                    "answer": "5",
+                    "answerType": "number"
                 }
             ],
             "clue_id": "8"
@@ -168,7 +187,8 @@
             "quiz": [
                 {
                     "question": "When is DDM available? (A: 10/23/2017)",
-                    "answer": "10/23/2017"
+                    "answer": "2017-10-23",
+                    "answerType": "date"
                 }
             ]
         },
@@ -215,8 +235,9 @@
             "clue_id": "7",
             "quiz": [
                 {
-                    "question": "What month is your user Conference in? (A: March)",
-                    "answer": "March"
+                    "question": "What month is the user Conference in? (A: April)",
+                    "answer": "April",
+                    "answerType": "text"
                 }
             ]
         },
@@ -245,7 +266,8 @@
             "quiz": [
                 {
                     "question": "Who has the best conference ever to be held at Hotel Van Zandt? (A: BTB)",
-                    "answer": "BTB"
+                    "answer": "BTB",
+                    "answerType": "text"
                 }
             ],
             "clue_id": "13"
@@ -257,7 +279,8 @@
             "quiz": [
                 {
                     "question": "What did your RM say when you told them your goal for the year? (A: Cool)",
-                    "answer": "Cool"
+                    "answer": "Cool",
+                    "answerType": "text"
                 }
             ],
             "clue_id": "15"
@@ -287,7 +310,8 @@
             "quiz": [
                 {
                     "question": "What did Allison Say? (A: Stop asking me what I said)",
-                    "answer": "Stop asking me what I said"
+                    "answer": "Stop asking me what I said",
+                    "answerType": "text"
                 }
             ],
             "clue_id": "18"
@@ -317,7 +341,8 @@
             "quiz": [
                 {
                     "question": "How did the blog describe Banker's Toolbox? (A: Sweet)",
-                    "answer": "Sweet"
+                    "answer": "Sweet",
+                    "answerType": "text"
                 }
             ],
             "clue_id": "5"

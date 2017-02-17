@@ -65,9 +65,34 @@ export class TaskComponent implements OnInit {
 		for (var i = 0; i < this.task.quiz.length; ++i) {
 			var question = this.task.quiz[i];
 			var answer = values[i];
-			if(question.answer.toLowerCase().trim() != answer.toLowerCase().trim()) {
+			if(question.answers && question.answer.toLowerCase().trim() != answer.toLowerCase().trim()){
+				console.log('mult choice compare failed');
 				pass = false;
 				break;
+			}else if(question.answerType == 'text' && question.answer.toLowerCase().trim() != answer.toLowerCase().trim()) {
+				pass = false;
+				console.log('string compare failed');
+				break;
+			} else if(question.answerType == 'number' && question.answer != answer){
+				pass = false;
+				console.log('number compare failed');
+				break;
+			} else if(question.answerType == 'date' && question.answer != answer){
+				pass = false;
+				console.log('date compare failed');
+				break;
+			} else if(question.answerType == 'multi'){
+				var correctAnswer = "";
+				for(var j = 0; j < question.multiAnswers.length; j ++){
+					if(question.multiAnswers[j].question == values[i+'_question']) {
+						correctAnswer = question.multiAnswers[j].answer;
+						break;
+					}
+				}
+				if(correctAnswer != values[i+'_answer']) {
+					pass = false;
+					break;
+				}
 			}
 		}
 		if(pass) {

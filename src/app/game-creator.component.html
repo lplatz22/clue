@@ -277,7 +277,41 @@
 		  	</div>
 		  	<div *ngIf="!question.answers">
 			  	<label>Answer</label>
-			  	<input class="form-control" type="text" name="answer" [(ngModel)]="question.answer">
+			  	<p><small>What type of answer is this?</small></p>
+			  	<select class="form-control" [(ngModel)]="question.answerType">
+					<option value="text">Text</option>
+					<option value="number">Number</option>
+					<option value="date">Date</option>
+					<option value="multi">Multiple</option>
+				</select>
+				<br>
+			  	<input *ngIf="question.answerType == 'text'" class="form-control" type="text" name="answer" [(ngModel)]="question.answer">
+			  	<input *ngIf="question.answerType == 'number'" class="form-control" type="number" name="answer" [(ngModel)]="question.answer">
+			  	<input *ngIf="question.answerType == 'date'" class="form-control" type="date" name="answer" [(ngModel)]="question.answer">
+			  	<span *ngIf="question.answerType == 'multi'">
+			  		<p><small>What type of answers are there?</small></p>
+				  	<select class="form-control" [(ngModel)]="question.multiType">
+						<option value="text">Text</option>
+						<option value="number">Number</option>
+						<option value="date">Date</option>
+					</select>
+					<br>
+					<small>What is the specifying question?</small>
+					<input class="form-control" type="text" name="multiQuestion" [(ngModel)]="question.multiQuestion">
+					<button type="button" (click)="newMultiAnswer(question)" class="btn btn-small btn-info">New Answer</button>
+					<div class="row" *ngFor="let multQuestion of question.multiAnswers">
+						<div class="col-sm-6">
+							<label>Multi Question Answer</label>
+							<input class="form-control" type="text" name="multQuestion" [(ngModel)]="multQuestion.question">
+						</div>
+						<div class="col-sm-6">
+							<label>Cooresponding Answer</label>
+							<input *ngIf="question.multiType == 'text'" class="form-control" type="text" name="multAnswer" [(ngModel)]="multQuestion.question.answer">
+							<input *ngIf="question.multiType == 'number'" class="form-control" type="number" name="multAnswer" [(ngModel)]="multQuestion.question.answer">
+							<input *ngIf="question.multiType == 'date'" class="form-control" type="date" name="multAnswer" [(ngModel)]="multQuestion.question.answer">
+						</div>
+					</div>
+			  	</span>
 		  	</div>
       </div>
       <div class="modal-footer">

@@ -140,6 +140,12 @@ export class GameCreatorComponent implements OnInit {
 		this.tasks[task_index].quiz.splice(q_index, 1);
 	}
 	saveQuestion() {
+		if(this.question.answerType == 'multi'){
+			this.question.answer = '[user dependant]';
+			// for(var i = 0; i < this.question.multiAnswers.length; i++){
+			// 	this.question.answer += this.question.multiAnswers[i].question + ":" + this.question.multiAnswers[i].answer + "|";
+			// }
+		}
 		if(this.currentQuestionIndex >= 0) {
 			this.tasks[this.currentTaskIndex].quiz[this.currentQuestionIndex] = this.question;
 		} else {
@@ -180,6 +186,13 @@ export class GameCreatorComponent implements OnInit {
 			this.loadingModal.hide();
 			this.submitError = TASK_STATUS_CODES[error.status] || TASK_STATUS_CODES[500];
 		});
+	}
+
+	newMultiAnswer(question){
+		if(!question.multiAnswers){
+			question.multiAnswers = [];
+		}
+		question.multiAnswers.push({});
 	}
 
 	validate() {

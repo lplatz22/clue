@@ -86,7 +86,7 @@
         },
         "13": {
             "type": "location",
-            "text": "The Dark Web",
+            "text": "Dark Web",
             "image": "dark_web.jpg",
             "icon": "dark_web.jpg",
             "info": "Hello!?... Hello!?!? I can't see anyone - this web is too dark ¯\\_(ツ)_/¯"
@@ -99,7 +99,7 @@
         },
         "15": {
             "type": "weapon",
-            "text": "Crypto Currency",
+            "text": "Cryptocurrency",
             "image": "crypto_currency.jpg",
             "icon": "crypto_currency.jpg",
             "info": "\"I'll give you $11001000 for that lawn furniture.\"\n\n\"No way! It's worth at least $0x1F4\""
@@ -121,6 +121,13 @@
             "text": "Con Artist Christina",
             "image": "ceo_c.jpg",
             "info": "Yelp reviewer by day, con artist by night"
+        },
+        "19": {
+            "type": "suspect",
+            "text": "Money Grubbin' Martha",
+            "image": "virus.jpg",
+            "icon": "virus.jpg",
+            "info": "Martha's favorite grub is money. No, really, she literally consumes it, its very strange.."
         }
     },
     "tasks": [
@@ -364,6 +371,24 @@
                 }
             ],
             "clue_id": "14"
+        },
+        {
+            "name": "Integra-TE!",
+            "desc": "Integration is fun with Integra!",
+            "video_url": "n/a",
+            "quiz": [
+                {
+                    "question": "Which of the following is true about Integra Systems? (A: D)",
+                    "answers": [
+                        "Bankers Toolbox acquired the company in February 2017",
+                        "Their product suite includes IQ AutoScan",
+                        "IQ AutoScan is an OFAC scanning software",
+                        "All of the Above"
+                    ],
+                    "answer": "All of the Above"
+                }
+            ],
+            "clue_id": "19"
         }
     ]
 }

@@ -8,29 +8,29 @@
     "clues": {
         "1": {
             "text": "Casino",
-            "icon": "casino_icon.tif",
-            "image": "casino.jpeg",
+            "icon": "The Casino.png",
+            "image": "The Casino.png",
             "type": "location",
             "info": "The Casino. A classic place for a heist. Assuming of course that you don't willingly hand them all of your money first. "
         },
         "2": {
             "text": "Gas Station",
             "icon": "gas_icon.jpeg",
-            "image": "Gas_Station.jpeg",
+            "image": "Gas Station.png",
             "type": "location",
             "info": "Some are dirty, some are nice, better watch out for that faulty card reader - or it'll take your money twice."
         },
         "3": {
             "text": "Online Shopping",
             "icon": "online_shopping.jpeg",
-            "image": "online_shopping.jpeg",
+            "image": "Online Shopping.png",
             "type": "location",
             "info": "If the website says you can get 100% authentic UGGS 99% off and you end up ordering every pair twice - you might be vulnerable to online shopping scams."
         },
         "4": {
             "text": "Car Wash",
             "icon": "car_wash_icon.png",
-            "image": "car_wash.png",
+            "image": "car wash.png",
             "type": "location",
             "info": "Come dirty - leave clean! Or, as an anonymous High School teacher in New Mexico puts it: \"Have an A1 Day!\""
         },
@@ -54,53 +54,53 @@
         },
         "8": {
             "text": "Dirty Money",
-            "image": "dirty_money.jpg",
+            "image": "Dirty Money.png",
             "type": "weapon",
             "info": "I'm sorry - but we can't accept your money due to the fact it's covered in... mud? We'll go with mud. Please launder this money before paying with it"
         },
         "9": {
             "text": "Phishing Scam",
-            "image": "phishing.jpg",
+            "image": "Phishing.png",
             "type": "weapon",
             "info": "So if I click on this button, I'll have $1 Million dollars deposited in my account? Sign me up!"
         },
         "10": {
             "text": "Counter Fit Check",
-            "image": "fake_check.jpg",
+            "image": "Counterfeit Check.png",
             "type": "weapon",
             "info": "If you could hold off depositing that $1.4B check I gave you until tomorrow, that'd be great."
         },
         "11": {
             "text": "Micro Structuring",
             "icon": "micro_Structure_icon.jpg",
-            "image": "micro_structure.gif",
+            "image": "Structuring.png",
             "type": "weapon",
             "info": "What is this? A Micro Structure for Ants!?!? The Micro Structure has to be at least... 3 times bigger than this!"
         },
         "12": {
             "type": "location",
             "text": "Nail Salon",
-            "image": "nail_salon.jpeg",
+            "image": "nail salon.png",
             "icon": "nail_salon.jpeg",
             "info": "They'll polish your nails and your money. No matter how cracked and broken - the Nail Salon will fix you('re money) up right!"
         },
         "13": {
             "type": "location",
             "text": "Dark Web",
-            "image": "dark_web.jpg",
+            "image": "Dark Web.png",
             "icon": "dark_web.jpg",
             "info": "Hello!?... Hello!?!? I can't see anyone - this web is too dark ¯\\_(ツ)_/¯"
         },
         "14": {
             "type": "weapon",
             "text": "Skimming",
-            "image": "skimming.jpg",
+            "image": "Skimming.png",
             "info": "When that credit card swipe feels soooo smooth, it has to be illegal."
         },
         "15": {
             "type": "weapon",
             "text": "Cryptocurrency",
-            "image": "crypto_currency.jpg",
+            "image": "Cryptocurrency.png",
             "icon": "crypto_currency.jpg",
             "info": "\"I'll give you $11001000 for that lawn furniture.\"\n\n\"No way! It's worth at least $0x1F4\""
         },

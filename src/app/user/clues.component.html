@@ -112,7 +112,7 @@
 </div>
 
 <div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-lg" style="max-width: 500px;">
     <div class="thumbnail">
       <img *ngIf="detailClue.type == 'location'" src="/assets/clue_images/{{detailClue.image}}" [alt]="detailClue.text" style="width: 100%; height: auto;" onerror="this.src='/assets/location_default.png'">
       <img *ngIf="detailClue.type == 'suspect'" src="/assets/clue_images/{{detailClue.image}}" [alt]="detailClue.text" style="width: 100%; height: auto;" onerror="this.src='/assets/suspect_default.png'">

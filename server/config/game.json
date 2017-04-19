@@ -1,5 +1,5 @@
 {
-    "description": "Bankers Toolbox never sleeps on crime.\nWe're starting to learn that someone is running a major crime ring in the area.\nHelp us figure out who it is, and how they're pulling it off - All with the power of Banker's amazing software!",
+    "description": "Bankers Toolbox never sleeps on crime.\nWe're starting to learn that someone is running a major crime ring in the area.\nHelp us figure out who it is, how they're pulling it off, and where they're doing it - All with the power of BAM+ Clue!",
     "reveal": {
         "location_id": "1",
         "suspect_id": "16",
@@ -11,7 +11,7 @@
             "icon": "The Casino.png",
             "image": "The Casino.png",
             "type": "location",
-            "info": "The Casino. A classic place for a heist. Assuming of course that you don't willingly hand them all of your money first. "
+            "info": "Rumor has it Martin has been spending a lot of time at the Casino lately.. He says him and his crew have been winning big! "
         },
         "2": {
             "text": "Gas Station",
@@ -25,51 +25,51 @@
             "icon": "Online Shopping Icon.jpeg",
             "image": "Online Shopping.png",
             "type": "location",
-            "info": "If the website says you can get 100% authentic UGGS 99% off and you end up ordering every pair twice - you might be vulnerable to online shopping scams."
+            "info": "OMG! Did you know there are websites were you can buy designer labels for 75% off?! The only catch is there isn't one of those little \"lock\" icons in the URL. "
         },
         "4": {
             "text": "Car Wash",
             "icon": "car wash icon.jpg",
             "image": "car wash.png",
             "type": "location",
-            "info": "Come dirty - leave clean! Or, as an anonymous High School teacher in New Mexico puts it: \"Have an A1 Day!\""
+            "info": "\"Come dirty - leave clean\" is their motto. Liz says she frequently visits the car wash after a long Sunday drive. "
         },
         "5": {
             "text": "Web Hacker Will",
             "image": "hacker.jpg",
             "type": "suspect",
-            "info": "Web Hacker extraordinaire. He has the power to cripple your home network or steal every cent from your bank account. But he mostly spends his time on the finer things in life. Those cat memes don't create themselves!"
+            "info": "Will always pays very close attention when John and Michelle talk about the Dark Web.. Almost too close.  "
         },
         "6": {
             "text": "Liz Law Breaker",
             "image": "liz.jpg",
             "type": "suspect",
-            "info": "\"She's so obviously guilty, like, OMG... we can stop looking because we found her\" - Sara Scammer"
+            "info": "Liz is always jumpy when we talk about rules and regulations.. And she never says a word about her personal life, other than she loves driving with the windows down so she can feel the wind run through her hair. "
         },
         "7": {
             "text": "Mobster Martin",
             "image": "mobster.jpg",
             "type": "suspect",
-            "info": "Definitely a member of the mob, according to Will R. who found 100 pirated copies of The Godfather on his hard drive. Why? Will lost interest before finding out."
+            "info": "Desk mate Christina B. reports Martin receives a lot of calls.. and usually speaks in hushed tones while rushing out of the room."
         },
         "8": {
             "text": "Dirty Money",
             "image": "Dirty Money.png",
             "type": "weapon",
-            "info": "I'm sorry - but we can't accept your money due to the fact it's covered in... mud? We'll go with mud. Please launder this money before paying with it"
+            "info": "This money smells a little funky.. And it was carried into the Casino in a duffle bag. "
         },
         "9": {
             "text": "Phishing Scam",
             "image": "Phishing.png",
             "type": "weapon",
-            "info": "So if I click on this button, I'll have $1 Million dollars deposited in my account? Sign me up!",
+            "info": "Oh man.. Wayne is on vacation and needs a $12,000 wire transfer right now. ",
             "icon": "Phishing Icon.jpg"
         },
         "10": {
-            "text": "Counter Fit Check",
+            "text": "Counter Feit Check",
             "image": "Counterfeit Check.png",
             "type": "weapon",
-            "info": "If you could hold off depositing that $1.4B check I gave you until tomorrow, that'd be great.",
+            "info": "Seems like all of Sara's checks have been rerouted through the wrong treasury lately.. ",
             "icon": "Counterfeit Check Icon.jpg"
         },
         "11": {
@@ -77,21 +77,21 @@
             "icon": "Structuring Icon.jpg",
             "image": "Structuring.png",
             "type": "weapon",
-            "info": "What is this? A Micro Structure for Ants!?!? The Micro Structure has to be at least... 3 times bigger than this!"
+            "info": "Hmm.. Martha deposits 3 checks a week.. all just under $10,000. "
         },
         "12": {
             "type": "location",
             "text": "Nail Salon",
             "image": "nail salon.png",
             "icon": "nail salon icon.jpg",
-            "info": "They'll polish your nails and your money. No matter how cracked and broken - the Nail Salon will fix you('re money) up right!"
+            "info": "Open 24 hours a day, this Nail Salon is always willing to give you a hand!"
         },
         "13": {
             "type": "location",
             "text": "Dark Web",
             "image": "Dark Web.png",
             "icon": "Dark Web Icon.jpg",
-            "info": "Hello!?... Hello!?!? I can't see anyone - this web is too dark ¯\\_(ツ)_/¯"
+            "info": "Need a social security card? Drugs? Bank accounts? Credit cards? A hit man? We've got it all. "
         },
         "14": {
             "type": "weapon",
@@ -105,38 +105,38 @@
             "text": "Cryptocurrency",
             "image": "Cryptocurrency.png",
             "icon": "Cryptocurrency icon.jpg",
-            "info": "\"I'll give you $11001000 for that lawn furniture.\"\n\n\"No way! It's worth at least $0x1F4\""
+            "info": "The only way to buy anything on the Dark Web. "
         },
         "16": {
             "type": "suspect",
             "text": "Sara Scammer",
             "image": "sara.jpg",
-            "info": "\"Sara's great! A real nice person, she's so great to have around the office.... Can you tell me when she stops listening in on this convo to hear what I'm saying about her?\" - Martin"
+            "info": "Seems like this year Sara's kids have a different fundraiser every week.. $7 seems a bit high for a box of Girl Scout Cookies."
         },
         "17": {
             "type": "suspect",
-            "info": "Michelle and her husband just bought a car wash in New Mexico! They're so proud. I hear its doing so well they might open another! Good for them.",
-            "text": "Money Michelle ",
+            "info": "Michelle has a passion for fashion! Specifically she likes talking about her 24-hour nail salon, which reports the highest volume of cash flow at 3 AM... ",
+            "text": "Money Launderin' Michelle ",
             "image": "michelle.jpg"
         },
         "18": {
             "type": "suspect",
             "text": "Con Artist Christina",
             "image": "ceo_c.jpg",
-            "info": "Yelp reviewer by day, con artist by night"
+            "info": "Christina uses her innocence to her advantage.. Sara and Will always seem to be waiting on her hand and foot. "
         },
         "19": {
             "type": "suspect",
-            "text": "Money Grubbin' Martha",
+            "text": "Miss Mortgage Owner Martha",
             "image": "virus.jpg",
             "icon": "virus.jpg",
-            "info": "Martha's favorite grub is money. No, really, she literally consumes it, its very strange.."
+            "info": "Martha's is the newest addition to the RM team. Her constant chatter about \"how to make a quick buck\" through mortgage purchasing have us questioning this Southern Belle. "
         }
     },
     "tasks": [
         {
-            "name": "The Magical Land of Consulting",
-            "desc": "Come and try out the great thrill ride that is consulting - only $187.55 / Hour after signing a 6 month contract!",
+            "name": "Stop by Professional Services  ",
+            "desc": "Visit the Professional Services table to pick up your secret message",
             "video_url": "nothing",
             "quiz": [
                 {
@@ -148,8 +148,8 @@
             "clue_id": "2"
         },
         {
-            "name": "Getting Personal",
-            "desc": "Get to know your AM a little better!",
+            "name": "Who is your Account Manager?",
+            "desc": "Banker's Toolbox started a new position this year, Account Manager. Your Account Manager is there to help you with any and all of your technical difficulties. ",
             "video_url": "nothing",
             "quiz": [
                 {
@@ -178,33 +178,33 @@
         },
         {
             "name": "Rock and Roll",
-            "desc": "Take a trip down memory lane",
+            "desc": "Rotel and the Hot Tomatoes will be jamming at the Customer Appreciation Dinner. Take special note of their first song. ",
             "video_url": "https://www.youtube.com/embed/plJe0uDszaY",
             "quiz": [
                 {
-                    "question": "How many members were in band? (A: 5)",
-                    "answer": "5",
-                    "answerType": "number"
+                    "question": "What decade was Rotel and the Hot Tomatoes first song from on Wednesday night? (A: 30's)",
+                    "answer": "60's",
+                    "answerType": "text"
                 }
             ],
             "clue_id": "8"
         },
         {
-            "name": "DDM Rocks!",
-            "desc": "You've been dreaming about it forever - come learn about it!",
+            "name": "Beneficial Ownership Ruling ",
+            "desc": "We have been talking about CDD/Beneficial Ownership a lot during BUG.. Now how can Banker's Toolbox help you prepare? ",
             "video_url": "nothing",
             "clue_id": "3",
             "quiz": [
                 {
-                    "question": "When is DDM available? (A: 10/23/2017)",
-                    "answer": "2017-10-23",
-                    "answerType": "date"
+                    "question": "When is Due Diligence Manager available? (A: February 2020)",
+                    "answer": "June 2017",
+                    "answerType": "text"
                 }
             ]
         },
         {
-            "name": "Wonderful Webinars",
-            "desc": "You know them, you love them, learn more about them!",
+            "name": "Thought Leadership Webinars",
+            "desc": "The best way to get your continuing education credits! ",
             "video_url": "url here",
             "clue_id": "11",
             "quiz": [
@@ -221,17 +221,17 @@
             ]
         },
         {
-            "name": "Rel M. - What is it?",
-            "desc": "I'm not sure at all what this is",
+            "name": "Banker's Toolbox has a new product! ",
+            "desc": "Recently Banker's Toolbox released Relationship Manager, a software to bring Business Intelligence to Banking. ",
             "video_url": "url here",
             "clue_id": "4",
             "quiz": [
                 {
-                    "question": "What is Rel M.? Really, I'm not sure",
+                    "question": "What functionalities does Relationship Manager have? ",
                     "answers": [
-                        "Thing 1",
-                        "Thing 2",
-                        "Thing 3",
+                        "Integrates with BAM+",
+                        "Helps predict when a customer will close an account ",
+                        "Helps front line staff know what and when to cross sell to customers",
                         "All of the Above"
                     ],
                     "answer": "All of the Above"
@@ -239,8 +239,8 @@
             ]
         },
         {
-            "name": "Come Together, Right Now, Over Me",
-            "desc": "User group conferences are the best! Are you attending yours?",
+            "name": "Regional User Group",
+            "desc": "Regional User Groups are a great way to stay involved all year! Have you signed up for yours? ",
             "video_url": "url here",
             "clue_id": "7",
             "quiz": [
@@ -345,8 +345,8 @@
             "clue_id": "17"
         },
         {
-            "name": "Blogging",
-            "desc": "Blogging is a great way to stay up to date. check ours out!",
+            "name": "BKTB Blog ",
+            "desc": "Blogging is a great way to stay up to date on Banker's Toolbox Happenings. Let's test your knowledge! ",
             "video_url": "url here",
             "quiz": [
                 {
@@ -358,30 +358,30 @@
             "clue_id": "5"
         },
         {
-            "name": "There's Something about Wayne",
-            "desc": "Wayne is awesome. go find out why!",
+            "name": "Meet the CEO ",
+            "desc": "Who is Wayne? ",
             "video_url": "url here",
             "quiz": [
                 {
-                    "question": "What is Wayne's favorite Sesame Street Character? (A: Big Bird - Obviously)",
+                    "question": "What is Wayne's favorite TV Show? ",
                     "answers": [
-                        "Big Bird",
-                        "Oscar the Grouch",
-                        "The Count",
-                        "Elmo"
+                        "The Office",
+                        "Breaking Bad",
+                        "Game of Thrones ",
+                        "Better Call Saul"
                     ],
-                    "answer": "Big Bird"
+                    "answer": "Breaking Bad"
                 }
             ],
             "clue_id": "14"
         },
         {
-            "name": "Integra-TE!",
-            "desc": "Integration is fun with Integra!",
+            "name": "Banker's Toolbox is expanding! ",
+            "desc": "This year, Banker's Toolbox acquired Integra Systems. Test your knowledge about our new product suite. ",
             "video_url": "n/a",
             "quiz": [
                 {
-                    "question": "Which of the following is true about Integra Systems? (A: D)",
+                    "question": "Which of the following is true about Integra Systems?",
                     "answers": [
                         "Bankers Toolbox acquired the company in February 2017",
                         "Their product suite includes IQ AutoScan",

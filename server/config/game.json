@@ -15,21 +15,21 @@
         },
         "2": {
             "text": "Gas Station",
-            "icon": "gas_icon.jpeg",
+            "icon": "Gas Station Icon.jpg",
             "image": "Gas Station.png",
             "type": "location",
             "info": "Some are dirty, some are nice, better watch out for that faulty card reader - or it'll take your money twice."
         },
         "3": {
             "text": "Online Shopping",
-            "icon": "online_shopping.jpeg",
+            "icon": "Online Shopping Icon.jpeg",
             "image": "Online Shopping.png",
             "type": "location",
             "info": "If the website says you can get 100% authentic UGGS 99% off and you end up ordering every pair twice - you might be vulnerable to online shopping scams."
         },
         "4": {
             "text": "Car Wash",
-            "icon": "car_wash_icon.png",
+            "icon": "car wash icon.jpg",
             "image": "car wash.png",
             "type": "location",
             "info": "Come dirty - leave clean! Or, as an anonymous High School teacher in New Mexico puts it: \"Have an A1 Day!\""
@@ -62,17 +62,19 @@
             "text": "Phishing Scam",
             "image": "Phishing.png",
             "type": "weapon",
-            "info": "So if I click on this button, I'll have $1 Million dollars deposited in my account? Sign me up!"
+            "info": "So if I click on this button, I'll have $1 Million dollars deposited in my account? Sign me up!",
+            "icon": "Phishing Icon.jpg"
         },
         "10": {
             "text": "Counter Fit Check",
             "image": "Counterfeit Check.png",
             "type": "weapon",
-            "info": "If you could hold off depositing that $1.4B check I gave you until tomorrow, that'd be great."
+            "info": "If you could hold off depositing that $1.4B check I gave you until tomorrow, that'd be great.",
+            "icon": "Counterfeit Check Icon.jpg"
         },
         "11": {
             "text": "Micro Structuring",
-            "icon": "micro_Structure_icon.jpg",
+            "icon": "Structuring Icon.jpg",
             "image": "Structuring.png",
             "type": "weapon",
             "info": "What is this? A Micro Structure for Ants!?!? The Micro Structure has to be at least... 3 times bigger than this!"
@@ -81,27 +83,28 @@
             "type": "location",
             "text": "Nail Salon",
             "image": "nail salon.png",
-            "icon": "nail_salon.jpeg",
+            "icon": "nail salon icon.jpg",
             "info": "They'll polish your nails and your money. No matter how cracked and broken - the Nail Salon will fix you('re money) up right!"
         },
         "13": {
             "type": "location",
             "text": "Dark Web",
             "image": "Dark Web.png",
-            "icon": "dark_web.jpg",
+            "icon": "Dark Web Icon.jpg",
             "info": "Hello!?... Hello!?!? I can't see anyone - this web is too dark ¯\\_(ツ)_/¯"
         },
         "14": {
             "type": "weapon",
             "text": "Skimming",
             "image": "Skimming.png",
-            "info": "When that credit card swipe feels soooo smooth, it has to be illegal."
+            "info": "When that credit card swipe feels soooo smooth, it has to be illegal.",
+            "icon": "Skimming icon.jpg"
         },
         "15": {
             "type": "weapon",
             "text": "Cryptocurrency",
             "image": "Cryptocurrency.png",
-            "icon": "crypto_currency.jpg",
+            "icon": "Cryptocurrency icon.jpg",
             "info": "\"I'll give you $11001000 for that lawn furniture.\"\n\n\"No way! It's worth at least $0x1F4\""
         },
         "16": {

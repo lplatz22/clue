@@ -36,21 +36,24 @@
         },
         "5": {
             "text": "Web Hacker Will",
-            "image": "hacker.jpg",
+            "image": "web hacker will.png",
             "type": "suspect",
-            "info": "Will always pays very close attention when John and Michelle talk about the Dark Web.. Almost too close.  "
+            "info": "Will always pays very close attention when John and Michelle talk about the Dark Web.. Almost too close.  ",
+            "icon": "web hacker will icon.jpg"
         },
         "6": {
             "text": "Liz Law Breaker",
-            "image": "liz.jpg",
+            "image": "Law Breaker Liz.png",
             "type": "suspect",
-            "info": "Liz is always jumpy when we talk about rules and regulations.. And she never says a word about her personal life, other than she loves driving with the windows down so she can feel the wind run through her hair. "
+            "info": "Liz is always jumpy when we talk about rules and regulations.. And she never says a word about her personal life, other than she loves driving with the windows down so she can feel the wind run through her hair. ",
+            "icon": "Law Breaker Liz Icon.jpg"
         },
         "7": {
             "text": "Mobster Martin",
-            "image": "mobster.jpg",
+            "image": "mobster martin.png",
             "type": "suspect",
-            "info": "Desk mate Christina B. reports Martin receives a lot of calls.. and usually speaks in hushed tones while rushing out of the room."
+            "info": "Desk mate Christina B. reports Martin receives a lot of calls.. and usually speaks in hushed tones while rushing out of the room.",
+            "icon": "mobster martin icon.png"
         },
         "8": {
             "text": "Dirty Money",
@@ -110,25 +113,28 @@
         "16": {
             "type": "suspect",
             "text": "Sara Scammer",
-            "image": "sara.jpg",
-            "info": "Seems like this year Sara's kids have a different fundraiser every week.. $7 seems a bit high for a box of Girl Scout Cookies."
+            "image": "Sara Scammer.png",
+            "info": "Seems like this year Sara's kids have a different fundraiser every week.. $7 seems a bit high for a box of Girl Scout Cookies.",
+            "icon": "Sara Scammer Icon.png"
         },
         "17": {
             "type": "suspect",
             "info": "Michelle has a passion for fashion! Specifically she likes talking about her 24-hour nail salon, which reports the highest volume of cash flow at 3 AM... ",
             "text": "Money Launderin' Michelle ",
-            "image": "michelle.jpg"
+            "image": "Money Launderer Michelle.png",
+            "icon": "Money Launderer Michelle Icon.jpg"
         },
         "18": {
             "type": "suspect",
             "text": "Con Artist Christina",
             "image": "ceo_c.jpg",
-            "info": "Christina uses her innocence to her advantage.. Sara and Will always seem to be waiting on her hand and foot. "
+            "info": "Christina uses her innocence to her advantage.. Sara and Will always seem to be waiting on her hand and foot. ",
+            "icon": "christina.jpg"
         },
         "19": {
             "type": "suspect",
             "text": "Miss Mortgage Owner Martha",
-            "image": "virus.jpg",
+            "image": "Mortgage Frauster Martha.png",
             "icon": "virus.jpg",
             "info": "Martha's is the newest addition to the RM team. Her constant chatter about \"how to make a quick buck\" through mortgage purchasing have us questioning this Southern Belle. "
         }

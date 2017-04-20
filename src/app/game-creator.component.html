@@ -306,9 +306,9 @@
 						</div>
 						<div class="col-sm-6">
 							<label>Cooresponding Answer</label>
-							<input *ngIf="question.multiType == 'text'" class="form-control" type="text" name="multAnswer" [(ngModel)]="multQuestion.question.answer">
-							<input *ngIf="question.multiType == 'number'" class="form-control" type="number" name="multAnswer" [(ngModel)]="multQuestion.question.answer">
-							<input *ngIf="question.multiType == 'date'" class="form-control" type="date" name="multAnswer" [(ngModel)]="multQuestion.question.answer">
+							<input *ngIf="question.multiType == 'text'" class="form-control" type="text" name="multAnswer" [(ngModel)]="multQuestion.answer">
+							<input *ngIf="question.multiType == 'number'" class="form-control" type="number" name="multAnswer" [(ngModel)]="multQuestion.answer">
+							<input *ngIf="question.multiType == 'date'" class="form-control" type="date" name="multAnswer" [(ngModel)]="multQuestion.answer">
 						</div>
 					</div>
 			  	</span>

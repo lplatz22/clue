@@ -159,23 +159,23 @@
             "video_url": "nothing",
             "quiz": [
                 {
-                    "question": "When was your AM born?",
+                    "question": "What is your account managers favorite wine?",
                     "answer": "[user dependant]",
                     "answerType": "multi",
-                    "multiType": "date",
-                    "multiQuestion": "Who is your AM?",
+                    "multiType": "text",
+                    "multiQuestion": "Who is your Account Manager?",
                     "multiAnswers": [
                         {
-                            "question": "Luke (03/13/1994)",
-                            "answer": "1994-03-13"
+                            "question": "Jessica (Pinot Noir)",
+                            "answer": "Pinot Noir"
                         },
                         {
-                            "question": "Kathryn (02/09/1994)",
-                            "answer": "1994-02-09"
+                            "question": "Traci (Pinot Noir)",
+                            "answer": "Pinot Noir"
                         },
                         {
-                            "question": "Mark (10/23/1983)",
-                            "answer": "1983-10-23"
+                            "question": "Emily (Pinot Noir)",
+                            "answer": "Pinot Noir"
                         }
                     ]
                 }
@@ -294,9 +294,45 @@
             "video_url": "url here",
             "quiz": [
                 {
-                    "question": "What did your RM say when you told them your goal for the year? (A: Cool)",
-                    "answer": "Cool",
-                    "answerType": "text"
+                    "question": "What is your Relationship Manager's favorite food?",
+                    "answer": "[user dependant]",
+                    "answerType": "multi",
+                    "multiType": "text",
+                    "multiQuestion": "Who is your Relationship Manager?",
+                    "multiAnswers": [
+                        {
+                            "question": "Christina (A: Sandwiches)",
+                            "answer": "Sandwiches"
+                        },
+                        {
+                            "question": "Martin (A: Cheeseburgers)",
+                            "answer": "Cheeseburgers"
+                        },
+                        {
+                            "question": "Liz (A: Dessert)",
+                            "answer": "Dessert"
+                        },
+                        {
+                            "question": "Will (A: BBQ)",
+                            "answer": "BBQ"
+                        },
+                        {
+                            "question": "Bob (A: Whatevers next)",
+                            "answer": "Whatevers next"
+                        },
+                        {
+                            "question": "Sara (A: Seafood)",
+                            "answer": "Seafood"
+                        },
+                        {
+                            "question": "Michelle (A: Dessert)",
+                            "answer": "Dessert"
+                        },
+                        {
+                            "question": "Martha (A: Mexican)",
+                            "answer": "Mexican"
+                        }
+                    ]
                 }
             ],
             "clue_id": "15"

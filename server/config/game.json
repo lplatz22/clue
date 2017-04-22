@@ -8,7 +8,7 @@
     "clues": {
         "1": {
             "text": "Casino",
-            "icon": "The Casino.png",
+            "icon": "The Casino Icon.jpg",
             "image": "The Casino.png",
             "type": "location",
             "info": "Rumor has it Martin has been spending a lot of time at the Casino lately.. He says him and his crew have been winning big! "
@@ -59,7 +59,8 @@
             "text": "Dirty Money",
             "image": "Dirty Money.png",
             "type": "weapon",
-            "info": "This money smells a little funky.. And it was carried into the Casino in a duffle bag. "
+            "info": "This money smells a little funky.. And it was carried into the Casino in a duffle bag. ",
+            "icon": "Dirty Money Icon.png"
         },
         "9": {
             "text": "Phishing Scam",
@@ -127,7 +128,7 @@
         "18": {
             "type": "suspect",
             "text": "Con Artist Christina",
-            "image": "ceo_c.jpg",
+            "image": "Con Artist Christina Icon.png",
             "info": "Christina uses her innocence to her advantage.. Sara and Will always seem to be waiting on her hand and foot. ",
             "icon": "christina.jpg"
         },

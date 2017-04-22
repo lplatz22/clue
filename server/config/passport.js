@@ -48,7 +48,7 @@ module.exports = function(passport) {
     },
       function(req, email, password, done) {
         email = email.toLowerCase();
-        usersDB.find({selector: {email: email}}, function(err, result) {
+        usersDB.find({selector: {email: email, password: { $exists: true}}}, function(err, result) {
             if (err){
                 return done(null, false, { message : "Internal Server Error" } );
             } else if (result.docs.length == 0){

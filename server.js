@@ -25,7 +25,7 @@ app.use(session({
 	resave: false,
   	saveUninitialized: false,
 	store: new RedisStore({
-		url: 'redis://admin:LAMAUQKXGZTAVZBN@sl-us-dal-9-portal.4.dblayer.com:19895',
+		url: 'redis://admin:TXXSHUVNWDHNRSXW@sl-us-dal-9-portal.6.dblayer.com:23460',
 		logErrors: true
 	})
 }));

@@ -11,7 +11,7 @@
             "icon": "The Casino Icon.jpg",
             "image": "The Casino.png",
             "type": "location",
-            "info": "Rumor has it Martin has been spending a lot of time at the Casino lately.. He says him and his crew have been winning big! "
+            "info": "Rumor has it Martin has been spending a lot of time at the Casino lately.. He says he and his crew have been winning big! "
         },
         "2": {
             "text": "Gas Station",
@@ -38,7 +38,7 @@
             "text": "Web Hacker Will",
             "image": "web hacker will.png",
             "type": "suspect",
-            "info": "Will always pays very close attention when John and Michelle talk about the Dark Web.. Almost too close.  ",
+            "info": "Will always pays very close attention when people talk about the Dark Web.. Almost too close.  ",
             "icon": "web hacker will icon.jpg"
         },
         "6": {
@@ -66,11 +66,11 @@
             "text": "Phishing Scam",
             "image": "Phishing.png",
             "type": "weapon",
-            "info": "Oh man.. Wayne is on vacation and needs a $12,000 wire transfer right now. ",
+            "info": "Oh man.. Your boss is on vacation and needs a $12,000 wire transfer right now. ",
             "icon": "Phishing Icon.jpg"
         },
         "10": {
-            "text": "Counter Feit Check",
+            "text": "Counterfeit Check",
             "image": "Counterfeit Check.png",
             "type": "weapon",
             "info": "Seems like all of Sara's checks have been rerouted through the wrong treasury lately.. ",
@@ -88,7 +88,7 @@
             "text": "Nail Salon",
             "image": "nail salon.png",
             "icon": "nail salon icon.jpg",
-            "info": "Open 24 hours a day, this Nail Salon is always willing to give you a hand!"
+            "info": "Their manicure equipment may be clean, but they may be hiding dirty money. Give yourself a hand if you can cross this one off the list.. "
         },
         "13": {
             "type": "location",
@@ -101,7 +101,7 @@
             "type": "weapon",
             "text": "Skimming",
             "image": "Skimming.png",
-            "info": "When that credit card swipe feels soooo smooth, it has to be illegal.",
+            "info": "You were low on cash and had to use that sketchy looking ATM.. you've got your money, but now they've got your info!",
             "icon": "Skimming icon.jpg"
         },
         "15": {
@@ -115,7 +115,7 @@
             "type": "suspect",
             "text": "Sara Scammer",
             "image": "Sara Scammer.png",
-            "info": "Seems like this year Sara's kids have a different fundraiser every week.. $7 seems a bit high for a box of Girl Scout Cookies.",
+            "info": "Seems like this year Sara's kids have a different fundraiser every week.. $20 seems a bit high for a box of Girl Scout Cookies.",
             "icon": "Sara Scammer Icon.png"
         },
         "17": {
@@ -134,29 +134,34 @@
         },
         "19": {
             "type": "suspect",
-            "text": "Miss Mortgage Owner Martha",
+            "text": "Mortgage Fraudster Martha",
             "image": "Mortgage Frauster Martha.png",
             "icon": "Mortgage Frauster Martha icon.jpg",
-            "info": "Martha's is the newest addition to the RM team. Her constant chatter about \"how to make a quick buck\" through mortgage purchasing have us questioning this Southern Belle. "
+            "info": "Martha is the newest addition to the RM team. Her constant chatter about \"how to make a quick buck\" through mortgage purchasing have us questioning this Southern Belle. "
         }
     },
     "tasks": [
         {
             "name": "Stop by Professional Services  ",
-            "desc": "Visit the Professional Services table to pick up your secret message",
+            "desc": "Visit the Professional Services table to pick up your secret message.",
             "video_url": "nothing",
             "quiz": [
                 {
-                    "question": "What did one consultant say to the other? (A: \"Hi\")",
-                    "answer": "Hi",
-                    "answerType": "text"
+                    "question": "What secret image is on the document you received from the Professional Services Table? ",
+                    "answers": [
+                        "Pipe",
+                        "Gas Pump",
+                        "Money Sign ",
+                        "BKTB Logo "
+                    ],
+                    "answer": "Gas Pump"
                 }
             ],
             "clue_id": "2"
         },
         {
             "name": "Who is your Account Manager?",
-            "desc": "Banker's Toolbox started a new position this year, Account Manager. Your Account Manager is there to help you with any and all of your technical difficulties. ",
+            "desc": "Banker's Toolbox started a new position this year, Account Manager. Your Account Manager is your advocate within the support function of Banker's Toolbox. You'll need to find them to get the answer to your next clue...",
             "video_url": "nothing",
             "quiz": [
                 {
@@ -167,15 +172,15 @@
                     "multiQuestion": "Who is your Account Manager?",
                     "multiAnswers": [
                         {
-                            "question": "Jessica (Pinot Noir)",
+                            "question": "Jessica ",
                             "answer": "Pinot Noir"
                         },
                         {
-                            "question": "Traci (Pinot Noir)",
+                            "question": "Traci ",
                             "answer": "Pinot Noir"
                         },
                         {
-                            "question": "Emily (Pinot Noir)",
+                            "question": "Emily ",
                             "answer": "Pinot Noir"
                         }
                     ]
@@ -185,11 +190,11 @@
         },
         {
             "name": "Rock and Roll",
-            "desc": "Rotel and the Hot Tomatoes will be jamming at the Customer Appreciation Dinner. Take special note of their first song. ",
+            "desc": "Rotel and the Hot Tomatoes will be jamming at the Customer Appreciation Dinner. Take special note of their first song. You'll need it to unveil your next clue!",
             "video_url": "https://www.youtube.com/embed/plJe0uDszaY",
             "quiz": [
                 {
-                    "question": "What decade was Rotel and the Hot Tomatoes first song from on Wednesday night? (A: 30's)",
+                    "question": "What decade was Rotel and the Hot Tomatoes first song from on Wednesday night? (Answer in the form of ##'s)",
                     "answer": "60's",
                     "answerType": "text"
                 }
@@ -198,12 +203,12 @@
         },
         {
             "name": "Beneficial Ownership Ruling ",
-            "desc": "We have been talking about CDD/Beneficial Ownership a lot during BUG.. Now how can Banker's Toolbox help you prepare? ",
+            "desc": "We have been talking about CDD/Beneficial Ownership a lot during BUG.. Now let's review how can Banker's Toolbox help you prepare.",
             "video_url": "nothing",
             "clue_id": "3",
             "quiz": [
                 {
-                    "question": "When is Due Diligence Manager available? (A: February 2020)",
+                    "question": "When is Due Diligence Manager available? (Answer in the form of: Month Year)",
                     "answer": "June 2017",
                     "answerType": "text"
                 }
@@ -211,25 +216,25 @@
         },
         {
             "name": "Thought Leadership Webinars",
-            "desc": "The best way to get your continuing education credits! ",
+            "desc": "These free monthly webinars are an easy way to earn your continuing education credits!",
             "video_url": "url here",
             "clue_id": "11",
             "quiz": [
                 {
                     "question": "Which of these is a webinar Banker's HAS NOT done?",
                     "answers": [
-                        "Card Skimming",
-                        "Wire Transfers",
-                        "Spaceship Maintenance Repair",
-                        "Bitcoin"
+                        "Banking Marijuana Related Businesses ",
+                        "Preparing for your Examiners",
+                        "CDD Spaceship Maintenance Repair",
+                        "Human Trafficking "
                     ],
-                    "answer": "Spaceship Maintenance Repair"
+                    "answer": "CDD Spaceship Maintenance Repair"
                 }
             ]
         },
         {
             "name": "Banker's Toolbox has a new product! ",
-            "desc": "Recently Banker's Toolbox released Relationship Manager, a software to bring Business Intelligence to Banking. ",
+            "desc": "Recently Banker's Toolbox released a tool called Relationship Manager, which brings business intelligence to Banking. ",
             "video_url": "url here",
             "clue_id": "4",
             "quiz": [
@@ -252,27 +257,35 @@
             "clue_id": "7",
             "quiz": [
                 {
-                    "question": "What month is the user Conference in? (A: April)",
-                    "answer": "April",
-                    "answerType": "text"
+                    "question": "What Regional User Group are you a part of?",
+                    "answer": "[user dependant]",
+                    "answerType": "multi",
+                    "multiQuestion": "What month does your Regional User Group Meet? ",
+                    "multiType": "text",
+                    "multiAnswers": [
+                        {
+                            "question": "XX",
+                            "answer": "XX"
+                        }
+                    ]
                 }
             ]
         },
         {
-            "name": "CRM",
-            "desc": "CRM is life",
+            "name": "Survey Says... ",
+            "desc": "Banker's Toolbox values your opinion. Think back to this year's survey for the next clue. ",
             "video_url": "url here",
             "clue_id": "12",
             "quiz": [
                 {
-                    "question": "If you get this wrong.. I can't even.",
+                    "question": "Banker's Toolbox sends a customer satisfaction survey twice a year. What is the only question within that survey?",
                     "answers": [
-                        "No",
-                        "No",
-                        "Yes",
-                        "No"
+                        "On a scale of 1-10 how likely are you to recommend Banker's Toolbox to a colleague or friend? ",
+                        "What is your favorite Banker's Toolbox product?",
+                        "How long have you been a Banker's Toolbox customer? ",
+                        "Who is your favorite Banker's Toolbox employee? "
                     ],
-                    "answer": "Yes"
+                    "answer": "On a scale of 1-10 how likely are you to recommend Banker's Toolbox to a colleague or friend? "
                 }
             ]
         },
@@ -291,7 +304,7 @@
         },
         {
             "name": "RM Meet & Greet",
-            "desc": "Your RM should be your best friend!",
+            "desc": "Your Relationship Manager is your strategic partner in your (and your financial institution's) success. Get to know them a little better to uncover this next clue. ",
             "video_url": "url here",
             "quiz": [
                 {
@@ -339,8 +352,8 @@
             "clue_id": "15"
         },
         {
-            "name": "The Great John Meyer",
-            "desc": "What an interesting guy, no?",
+            "name": "Stopping Fraud in its Tracks ",
+            "desc": "Watch this brief video on Banker' Toolbox fraud solutions for this next clue! ",
             "video_url": "url here",
             "quiz": [
                 {
@@ -358,12 +371,12 @@
         },
         {
             "name": "Loose Lips Sink Ships",
-            "desc": "Allison has a secret. and she's telling EVERYONE.",
+            "desc": "Achieving the Impossible ",
             "video_url": "url here",
             "quiz": [
                 {
-                    "question": "What did Allison Say? (A: Stop asking me what I said)",
-                    "answer": "Stop asking me what I said",
+                    "question": "Who sponsored the first women's expedition to Mount Everest? ",
+                    "answer": "Ford",
                     "answerType": "text"
                 }
             ],
@@ -375,27 +388,32 @@
             "video_url": "url here",
             "quiz": [
                 {
-                    "question": "What does ACH stand for?",
+                    "question": "What is another word for ACH fraud?",
                     "answers": [
-                        "All Cool Houses",
-                        "A Colorful Hut",
-                        "A Correct Haiku (This one)",
-                        "Atomic Collision Hydration"
+                        "Anti Credit Housing ",
+                        "Debit Card Fraud ",
+                        "Kiting ",
+                        "Accumulating CDD Hours"
                     ],
-                    "answer": "A Correct Haiku (This one)"
+                    "answer": "Debit Card Fraud "
                 }
             ],
             "clue_id": "17"
         },
         {
-            "name": "BKTB Blog ",
-            "desc": "Blogging is a great way to stay up to date on Banker's Toolbox Happenings. Let's test your knowledge! ",
+            "name": "Banker's Toolbox Blog ",
+            "desc": "Reading the Banker's Toolbox blog is a great way to stay up-to-date industry news and more. Have you been keeping up?",
             "video_url": "url here",
             "quiz": [
                 {
-                    "question": "How did the blog describe Banker's Toolbox? (A: Sweet)",
-                    "answer": "Sweet",
-                    "answerType": "text"
+                    "question": "What is the most recent blog post on our website?",
+                    "answers": [
+                        "It's Community Banking Month!",
+                        "Meet our SARS -- Support, Account Managers, Relationship Managers ",
+                        "Business Intelligence Through Transaction Monitoring ",
+                        "Four Tips for Delivering a Dynamic Training "
+                    ],
+                    "answer": "It's Community Banking Month!"
                 }
             ],
             "clue_id": "5"
@@ -428,7 +446,7 @@
                     "answers": [
                         "Bankers Toolbox acquired the company in February 2017",
                         "Their product suite includes IQ AutoScan",
-                        "IQ AutoScan is an OFAC scanning software",
+                        "IQ AutoScan is a file scanning software",
                         "All of the Above"
                     ],
                     "answer": "All of the Above"

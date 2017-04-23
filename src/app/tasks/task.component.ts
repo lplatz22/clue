@@ -89,7 +89,7 @@ export class TaskComponent implements OnInit {
 						break;
 					}
 				}
-				if(correctAnswer != values[i+'_answer']) {
+				if(correctAnswer.toLowerCase().trim() != values[i+'_answer'].toLowerCase().trim()) {
 					pass = false;
 					break;
 				}

@@ -208,9 +208,14 @@
             "clue_id": "3",
             "quiz": [
                 {
-                    "question": "When is Due Diligence Manager available? (Answer in the form of: Month Year)",
-                    "answer": "June 2017",
-                    "answerType": "text"
+                    "question": "Which of the following is true about Due Diligence Manager? ",
+                    "answers": [
+                        "Allows you to compare expected vs actual transaction history ",
+                        "Integrates with Financial Institutions' current account opening programs and procedures ",
+                        "Compliant with FinCEN's new CDD Rule ",
+                        "All of the above "
+                    ],
+                    "answer": "All of the above "
                 }
             ]
         },
@@ -257,15 +262,39 @@
             "clue_id": "7",
             "quiz": [
                 {
-                    "question": "What Regional User Group are you a part of?",
+                    "question": "What Regional User Group are you a part of? (If you are not active in your Regional User Group, please pick the Regional User Group you are most likely to attend.)",
                     "answer": "[user dependant]",
                     "answerType": "multi",
-                    "multiQuestion": "What month does your Regional User Group Meet? ",
+                    "multiQuestion": "What city does your Regional User Group meet? ",
                     "multiType": "text",
                     "multiAnswers": [
                         {
-                            "question": "XX",
-                            "answer": "XX"
+                            "question": "Mid-Atlantic User Group",
+                            "answer": "Richmond"
+                        },
+                        {
+                            "question": "Midwest User Group",
+                            "answer": "Chicago "
+                        },
+                        {
+                            "question": "New York User Group",
+                            "answer": "New York City "
+                        },
+                        {
+                            "question": "Northeast User Group ",
+                            "answer": "Boston "
+                        },
+                        {
+                            "question": "Southern User Group",
+                            "answer": "Baton Rouge "
+                        },
+                        {
+                            "question": "Texas User Group",
+                            "answer": "Houston "
+                        },
+                        {
+                            "question": "West Coast User Group ",
+                            "answer": "Las Vegas "
                         }
                     ]
                 }
@@ -291,13 +320,18 @@
         },
         {
             "name": "Hotel Mystery",
-            "desc": "The Hotel Van Zandt is haunted from conferences past. Oh no!",
+            "desc": "Kimpton Hotels pride themselves in customizing each hotel to match the culture of the city that  they reside in. For this next clue, you will need to dig deep into Rainey Street's history...",
             "video_url": "url here",
             "quiz": [
                 {
-                    "question": "Who has the best conference ever to be held at Hotel Van Zandt? (A: BTB)",
-                    "answer": "BTB",
-                    "answerType": "text"
+                    "question": "What animal is Geraldine's, the restaurant in Hotel Van Zandt, named after? ",
+                    "answers": [
+                        "A Turkey ",
+                        "A Pheasant ",
+                        "A Guinea Fowl ",
+                        "A Peacock "
+                    ],
+                    "answer": "A Guinea Fowl "
                 }
             ],
             "clue_id": "13"
@@ -370,8 +404,8 @@
             "clue_id": "9"
         },
         {
-            "name": "Loose Lips Sink Ships",
-            "desc": "Achieving the Impossible ",
+            "name": "Achieving the Impossible ",
+            "desc": "Motivational Speaker, Alison Levine will help you uncover this next clue on Friday morning.",
             "video_url": "url here",
             "quiz": [
                 {

@@ -337,7 +337,7 @@
             "clue_id": "13"
         },
         {
-            "name": "RM Meet & Greet",
+            "name": "Connect with your RM",
             "desc": "Your Relationship Manager is your strategic partner in your (and your financial institution's) success. Get to know them a little better to uncover this next clue. ",
             "video_url": "url here",
             "quiz": [
@@ -349,35 +349,35 @@
                     "multiQuestion": "Who is your Relationship Manager?",
                     "multiAnswers": [
                         {
-                            "question": "Christina (A: Sandwiches)",
+                            "question": "Christina",
                             "answer": "Sandwiches"
                         },
                         {
-                            "question": "Martin (A: Cheeseburgers)",
+                            "question": "Martin",
                             "answer": "Cheeseburgers"
                         },
                         {
-                            "question": "Liz (A: Dessert)",
+                            "question": "Liz ",
                             "answer": "Dessert"
                         },
                         {
-                            "question": "Will (A: BBQ)",
+                            "question": "Will ",
                             "answer": "BBQ"
                         },
                         {
-                            "question": "Bob (A: Whatevers next)",
+                            "question": "Bob ",
                             "answer": "Whatevers next"
                         },
                         {
-                            "question": "Sara (A: Seafood)",
+                            "question": "Sara ",
                             "answer": "Seafood"
                         },
                         {
-                            "question": "Michelle (A: Dessert)",
+                            "question": "Michelle ",
                             "answer": "Dessert"
                         },
                         {
-                            "question": "Martha (A: Mexican)",
+                            "question": "Martha ",
                             "answer": "Mexican"
                         }
                     ]
@@ -387,18 +387,18 @@
         },
         {
             "name": "Stopping Fraud in its Tracks ",
-            "desc": "Watch this brief video on Banker' Toolbox fraud solutions for this next clue! ",
-            "video_url": "url here",
+            "desc": "Watch this brief video on Banker's Toolbox fraud solutions for this next clue! ",
+            "video_url": "sdfd",
             "quiz": [
                 {
-                    "question": "What color is his shirt? (It has palm trees on it)",
+                    "question": "How much money did bankers lose last year in ACH, wire, and debit card fraud? (Hint: watch the fraud video on the Banker's Toolbox website (http://www.bankerstoolbox.com/solutions/fraud/)",
                     "answers": [
-                        "Grey",
-                        "Blue",
-                        "Hawaiian",
-                        "Purple"
+                        "$1.9 Million ",
+                        "$5,000",
+                        "$0",
+                        "$1.9 Billion"
                     ],
-                    "answer": "Hawaiian"
+                    "answer": "$1.9 Billion"
                 }
             ],
             "clue_id": "9"

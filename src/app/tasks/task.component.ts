@@ -99,7 +99,7 @@ export class TaskComponent implements OnInit {
 			this.taskComplete();
 			this.failedQuiz = null;
 		} else {
-			this.failedQuiz = "Sorry, thats not right";
+			this.failedQuiz = "Sorry, that's not the correct answer.";
 		}
 		this.modal.show();
 	}

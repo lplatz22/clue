@@ -64,7 +64,7 @@
 
 	
 	<div class="col-md-8 col-md-offset-2" *ngIf="task.complete">
-		<h4>You've discoverd its not...</h4>
+		<h4>You've discoverd it's not...</h4>
 		<div class="thumbnail">
 	      <img *ngIf="task.clue.type == 'location'" src="/assets/clue_images/{{task.clue.image}}" [alt]="task.clue.text" style="width: 100%; height: auto;" onerror="this.src='/assets/location_default.png'">
 	      <img *ngIf="task.clue.type == 'suspect'" src="/assets/clue_images/{{task.clue.image}}" [alt]="task.clue.text" style="width: 100%; height: auto;" onerror="this.src='/assets/suspect_default.png'">
@@ -94,7 +94,7 @@
       </div>
       <div class="modal-body">
         <p *ngIf="failedQuiz">{{failedQuiz}}</p>
-        <p *ngIf="!failedQuiz">YAY! You passed! Now claim your clue!</p>
+        <p *ngIf="!failedQuiz">Congrats! You've answered correctly, click below to claim your next clue.</p>
       </div>
       <div class="modal-footer">
       	<button *ngIf="!failedQuiz" type="button" class="btn btn-success pull-right" (click)="modal.hide()">

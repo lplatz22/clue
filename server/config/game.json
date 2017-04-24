@@ -391,7 +391,7 @@
             "video_url": "sdfd",
             "quiz": [
                 {
-                    "question": "How much money did bankers lose last year in ACH, wire, and debit card fraud? (Hint: watch the fraud video on the Banker's Toolbox website (http://www.bankerstoolbox.com/solutions/fraud/)",
+                    "question": "How much money did bankers lose last year in ACH, wire, and debit card fraud? (Hint: watch the fraud video on the Banker's Toolbox website)",
                     "answers": [
                         "$1.9 Million ",
                         "$5,000",
@@ -454,7 +454,7 @@
         },
         {
             "name": "Meet the CEO ",
-            "desc": "Who is Wayne? ",
+            "desc": "Wayne Roberts joined Banker's Toolbox as CEO in July 2016. Get to know him a little better to unveil this clue!",
             "video_url": "url here",
             "quiz": [
                 {

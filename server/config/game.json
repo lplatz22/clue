@@ -194,9 +194,14 @@
             "video_url": "https://www.youtube.com/embed/plJe0uDszaY",
             "quiz": [
                 {
-                    "question": "What decade was Rotel and the Hot Tomatoes first song from on Wednesday night? (Answer in the form of ##'s)",
-                    "answer": "60's",
-                    "answerType": "text"
+                    "question": "What decade was Rotel and the Hot Tomatoes first song from on Wednesday night? ",
+                    "answers": [
+                        "1920's",
+                        "1960's",
+                        "1970's",
+                        "2000's"
+                    ],
+                    "answer": "1960's"
                 }
             ],
             "clue_id": "8"
@@ -278,7 +283,7 @@
                         },
                         {
                             "question": "New York User Group",
-                            "answer": "New York City "
+                            "answer": "New York "
                         },
                         {
                             "question": "Northeast User Group ",
@@ -442,12 +447,12 @@
                 {
                     "question": "What is the most recent blog post on our website?",
                     "answers": [
-                        "It's Community Banking Month!",
+                        "A Family Gathering",
                         "Meet our SARS -- Support, Account Managers, Relationship Managers ",
                         "Business Intelligence Through Transaction Monitoring ",
                         "Four Tips for Delivering a Dynamic Training "
                     ],
-                    "answer": "It's Community Banking Month!"
+                    "answer": "A Family Gathering"
                 }
             ],
             "clue_id": "5"
@@ -459,12 +464,7 @@
             "quiz": [
                 {
                     "question": "What is Wayne's favorite TV Show? ",
-                    "answers": [
-                        "The Office",
-                        "Breaking Bad",
-                        "Game of Thrones ",
-                        "Better Call Saul"
-                    ],
+                    "answerType": "text",
                     "answer": "Breaking Bad"
                 }
             ],

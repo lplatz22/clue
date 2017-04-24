@@ -43,6 +43,7 @@
 					</div>
 					<div class="form-group" *ngIf="question.answers">
 						<label for="{{i}}">{{question.question}}</label>
+						<p *ngIf="task.clue_id == 9"><a href="http://www.bankerstoolbox.com/solutions/fraud/" target="_blank">Banker's Toolbox Fraud Video</a></p>
 						<div class="radio" *ngFor="let answer of question.answers">
 					        <label>
 					        	<input type="radio" name="{{i}}" value="{{answer}}" ngModel required>

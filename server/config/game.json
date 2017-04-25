@@ -208,7 +208,7 @@
         },
         {
             "name": "Beneficial Ownership Ruling ",
-            "desc": "We have been talking about CDD/Beneficial Ownership a lot during BUG.. Now let's review how can Banker's Toolbox help you prepare.",
+            "desc": "We have been talking about CDD/Beneficial Ownership a lot during BUG.. Now let's review how Banker's Toolbox can help you prepare.",
             "video_url": "nothing",
             "clue_id": "3",
             "quiz": [
@@ -231,7 +231,7 @@
             "clue_id": "11",
             "quiz": [
                 {
-                    "question": "Which of these is a webinar Banker's HAS NOT done?",
+                    "question": "Which of these is a webinar Banker's Toolbox HAS NOT done?",
                     "answers": [
                         "Banking Marijuana Related Businesses ",
                         "Preparing for your Examiners",
@@ -371,7 +371,7 @@
                         },
                         {
                             "question": "Bob ",
-                            "answer": "Whatevers next"
+                            "answer": "Whatever's next"
                         },
                         {
                             "question": "Sara ",
@@ -414,7 +414,7 @@
             "video_url": "url here",
             "quiz": [
                 {
-                    "question": "Who sponsored the first women's expedition to Mount Everest? ",
+                    "question": "Who sponsored the first women's expedition to Mount Everest? (Hint, it's just one word!)",
                     "answer": "Ford",
                     "answerType": "text"
                 }

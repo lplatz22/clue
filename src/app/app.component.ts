@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  version = "0.0.1";
+  version = "1.0.0";
   title = 'app works!';
 }

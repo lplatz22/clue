@@ -1,0 +1,24 @@
+<div class="row">
+  	<div class="col-md-6 col-md-offset-3">
+		<div class="jumbotron">
+  <h1 class="display-3">Forgot Password</h1>
+  	<form [formGroup]="forgotForm" (ngSubmit)="forgot(forgotForm.value)">
+	  <div class="form-group" [ngClass]="{'has-error':!forgotForm.controls['email'].valid && forgotForm.controls['email'].touched}">
+	    <label for="email">Email Address:</label>
+	    <input type="email" class="form-control" placeholder="John.Doe@company.com" name="email" id="email" [formControl]="forgotForm.controls['email']">
+	    <div *ngIf="forgotForm.controls['email'].hasError('required') && forgotForm.controls['email'].touched" class="alert alert-danger">You must provide an email address</div>
+	    <div *ngIf="forgotForm.controls['email'].hasError('pattern') && forgotForm.controls['email'].touched" class="alert alert-danger">Please use a valid email</div>
+	  </div>
+	  <button type="submit" [disabled]="!forgotForm.valid" class="btn btn-info btn-social btn-block">
+	  	<span class="fa fa-user"></span> Forgot Password
+	  </button>
+	  <br>
+	  <p *ngIf="error" style="color:red;"><i>{{error}}</i></p>
+	  <p *ngIf="emailSent != ''" style="color:green;"><i>An email has been sent to {{emailSent}}<br>(check your spam/junk folder!)</i></p>
+	  <!-- <p style="text-align: center;">Need an account? <a [routerLink]="['/register']">Register</a></p> -->
+	  <p style="text-align: center;"><a [routerLink]="['/login']">Log In</a></p>
+	  <p *ngIf="submitted" style="color:green;"><i>validating...</i></p>
+	</form>
+</div>
+</div>
+</div>

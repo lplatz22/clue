@@ -8,6 +8,8 @@ import { LoginComponent } from './login.component';
 import { RegisterComponent } from './register.component';
 import { CluesComponent } from './clues.component';
 import { UserService } from './user.service';
+import { ForgotComponent } from './forgot.component';
+import { ResetComponent } from './reset.component';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome'
 
 
@@ -15,7 +17,9 @@ import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawe
   declarations: [
     LoginComponent,
     RegisterComponent,
-    CluesComponent
+    CluesComponent,
+    ForgotComponent,
+    ResetComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,8 @@ var configDB = require('../config/database');
 // Load the Cloudant library.
 var Cloudant = require('cloudant');
 var bcrypt   = require('bcrypt-nodejs');
+var async = require('async');
+var crypto = require('crypto');
 
 // Initialize Cloudant with settings from .env
 var username = configDB.db_creds.username;
@@ -39,6 +41,113 @@ module.exports = function(app, passport) {
             privileged: isPriv
         }
         res.status(200).send(response);
+    });
+
+    app.post('/api/forgot', function(req, res) {
+        var emailToSendTo = req.body.email;
+
+        async.waterfall([
+            function(done) {
+                console.log('generating crypto')
+              crypto.randomBytes(20, function(err, buf) {
+                var token = buf.toString('hex');
+                done(err, token);
+              });
+            },
+            function(token, done) {
+                console.log('getting user')
+                usersDB.find({selector: {email: emailToSendTo, password: { $exists: true}}}, function(err, result) {
+                    if (err){
+                        return res.status(400).send("No account with that email exists");
+                    } else {
+                        if(result.docs.length <= 0){
+                            return res.status(400).send("No account with that email exists");
+                        } else {
+                            var user = result.docs[0];
+
+                            user.resetPasswordToken = token;
+                            user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+                            console.log('updating user')
+
+                            usersDB.insert(user, function (er, body, headers) {
+                              if (er) {
+                                return res.status(500).send("Failed to update user with password reset");
+                              } else {
+                                done(er, token, user);
+                              }
+                            });
+                        }
+                    }
+                });
+            },
+            function(token, user, done) {
+                console.log('sending email')
+                // using SendGrid's v3 Node.js Library
+                // https://github.com/sendgrid/sendgrid-nodejs
+                var helper = require('sendgrid').mail;
+                var fromEmail = new helper.Email('clue@bankersToolbox.com');
+                var toEmail = new helper.Email(emailToSendTo);
+                var subject = 'Clue Password Reset';
+                var resetLink = 'https://clue.mybluemix.net/reset/' + token;
+                var htmlMessage = "<p>Hi There!</p><p>Here is your password reset link for Banker's Toolbox Clue!</p><br><a href="+resetLink+">Reset Password</a><br><p>If you didn't initiate this, please ignore this email.</p><br><p>- Luke @ BringIt Clue!</p>"
+                var content = new helper.Content('text/html', htmlMessage);
+                var mail = new helper.Mail(fromEmail, subject, toEmail, content);
+
+                var sg = require('sendgrid')('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');
+                var request = sg.emptyRequest({
+                  method: 'POST',
+                  path: '/v3/mail/send',
+                  body: mail.toJSON()
+                });
+
+                sg.API(request, function (error, response) {
+                  if (error) {
+                    console.log('Error response received');
+                    return res.status(500).send(error);
+                  }
+                  console.log('sending reset email to', req.body.email);
+                  // console.log(response.statusCode);
+                  // console.log(response.body);
+                  // console.log(response.headers);
+                  return res.status(200).send({sent: 'ok', email: emailToSendTo});
+                });
+              
+            }
+          ], function(err) {
+            console.log('something went wrong');
+            if (err) return next(err);
+            return res.status(400).send({sent: 'no', error: 'something went wrong'});
+          });
+        
+    });
+
+    app.post('/api/resetPassword', function(req, res) {
+        usersDB.find({selector: {resetPasswordToken: req.body.token, resetPasswordExpires: { $gt: Date.now() }}}, function(err, result) {
+            if (err){
+                return res.status(400).send("Password reset has expired, or not been initiated yet - please reset your password again");
+            } else {
+                if(result.docs.length <= 0){
+                    return res.status(400).send("Password reset has expired, or not been initiated yet - please reset your password again");
+                } else {
+                    var user = result.docs[0];
+
+                    delete user.resetPasswordToken;
+                    delete user.resetPasswordExpires; // 1 hour
+
+                    user.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null);
+
+                    console.log('updating user password');
+
+                    usersDB.insert(user, function (er, body, headers) {
+                      if (er) {
+                        return res.status(500).send("Failed to update user with new password");
+                      } else {
+                        return res.status(200).send("Password Reset!");
+                      }
+                    });
+                }
+            }
+        });
     });
 
     app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));

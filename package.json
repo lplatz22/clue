@@ -28,6 +28,7 @@
     "@angular/platform-browser-dynamic": "^2.3.1",
     "@angular/router": "^3.3.1",
     "angular2-fontawesome": "^0.8.0",
+    "async": "^2.3.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.16.0",
     "bootstrap": "^3.3.7",
@@ -37,6 +38,7 @@
     "connect-redis": "^3.2.0",
     "cookie-parser": "^1.4.3",
     "core-js": "^2.4.1",
+    "crypto": "0.0.3",
     "express": "^4.14.0",
     "express-session": "^1.14.2",
     "font-awesome": "^4.7.0",
@@ -47,6 +49,7 @@
     "passport-facebook": "^2.1.1",
     "passport-local": "^1.0.0",
     "rxjs": "^5.0.1",
+    "sendgrid": "^5.0.1",
     "ts-helpers": "^1.1.1",
     "zone.js": "^0.7.2"
   },

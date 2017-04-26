@@ -6,6 +6,8 @@ import { TaskListComponent } from '../tasks/task-list.component';
 import { TaskComponent } from '../tasks/task.component';
 import { CluesComponent } from '../user/clues.component';
 import { LoginComponent } from '../user/login.component';
+import { ForgotComponent } from '../user/forgot.component';
+import { ResetComponent } from '../user/reset.component';
 import { RegisterComponent } from '../user/register.component';
 import { GameCreatorComponent } from '../game-creator.component';
 import { UserProgressComponent } from '../user-progress.component';
@@ -19,7 +21,9 @@ const routes: Routes = [
   { path: 'gamecreator', component: GameCreatorComponent, canActivate: [AdminRoutingGuard]},
   { path: 'userprogress', component: UserProgressComponent, canActivate: [AdminRoutingGuard] },
   { path: 'login', component: LoginComponent },
+  { path: 'forgot', component: ForgotComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'reset/:token', component: ResetComponent },
   { path: '**', redirectTo: '/', pathMatch: 'full' }
 ]
 

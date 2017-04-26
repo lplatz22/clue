@@ -29,6 +29,24 @@ export class AuthenticationService {
 			.catch(this.handleError);
 	}
 
+	forgot(user) {
+		let body = JSON.stringify(user);
+		let headers = new Headers();
+		headers.append('Content-Type', 'application/json');
+		return this.http.post('/api/forgot', body, <RequestOptionsArgs>{ headers: headers, withCredentials: true })
+			.map((res: Response) => res)
+			.catch(this.handleError);
+	}
+
+	resetPassword(user) {
+		let body = JSON.stringify(user);
+		let headers = new Headers();
+		headers.append('Content-Type', 'application/json');
+		return this.http.post('/api/resetPassword', body, <RequestOptionsArgs>{ headers: headers, withCredentials: true })
+			.map((res: Response) => res)
+			.catch(this.handleError);
+	}
+
 	authenticated() {
 		return this.http.get('/api/authenticated', <RequestOptionsArgs>{ withCredentials: true })
 			.map((res: Response) => res.json())

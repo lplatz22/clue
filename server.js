@@ -71,3 +71,8 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 server.listen(port, () => console.log(`Running on localhost:${port}`));
+
+
+process.on('uncaughtException', function(err) {
+	console.error(err);
+});

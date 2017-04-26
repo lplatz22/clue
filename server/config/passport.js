@@ -91,8 +91,8 @@ module.exports = function(passport) {
                 if(result.docs.length == 0){
                     console.log('about to insert new facebook user');
 
-                    var userEmail = "";
-                    if(profile.emails.length > 0){
+                    var userEmail = "facebook_email";
+                    if(profile.emails && profile.emails.length > 0){
                         userEmail = profile.emails[0].value;
                     }
 
